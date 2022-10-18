@@ -5,6 +5,11 @@ import { pageLimit } from '../utils/constants';
 import { getData } from '../utils/methods';
 import { Pagination } from '../components/pagination';
 import imageIcon from '../materials/img/icons/image/icons8-image-48.png';
+import { Placeholder } from 'react-bootstrap';
+
+const StyledProducts = styled.div`
+	width: 100%;
+`;
 
 const StyledUl = styled.ul`
   list-style: none;
@@ -13,6 +18,7 @@ const StyledUl = styled.ul`
   flex-direction: column;
   flex-wrap: wrap;
   gap: 10px;
+  width: 100%;
 `;
 
 const StyledProductCard = styled.li`
@@ -45,7 +51,7 @@ const Products = () => {
 
 	useEffect(() => {
 		setIsLoading(true);
-		getData(Number(page - 1) * pageLimit, pageLimit)
+		getData((Number(page) - 1) * pageLimit, pageLimit)
 			.then(data => setData(data))
 			.finally(() => setIsLoading(false));
 	}, [page]);
@@ -58,11 +64,37 @@ const Products = () => {
 	}, [data]);
 
 	return (
-		<>
+		<StyledProducts>
 			<h1>Products</h1>
+			<>
+				<h3>Filter</h3>
+				<label>
+					<input type={'checkbox'} />
+					option one
+				</label>
+				<label>
+					<input type={'checkbox'} />
+					option two
+				</label>
+				<label>
+					<input type={'checkbox'} />
+					option three
+				</label>
+				<button>Filter!</button>
+			</>
 			<StyledUl>
 				{
-					isLoading && (data === null) ? <p>...</p> :
+					isLoading && (data === null) ? (
+						<>
+							{
+								[...Array(6)].map(() => (
+									<Placeholder as="p" animation="wave">
+										<Placeholder xs={12} />
+									</Placeholder>
+								))
+							}
+						</>
+					) : (
 						<>
 							{data.products.map(item => (
 								<StyledProductCard key={item.id}>
@@ -72,14 +104,12 @@ const Products = () => {
 								</StyledProductCard>
 							))
 							}
-							<Pagination
-								pagesAmount={pagesAmount}
-							/>
+							<Pagination pagesAmount={pagesAmount} />
 						</>
+					)
 				}
-
 			</StyledUl>
-		</>
+		</StyledProducts>
 	);
 }
 

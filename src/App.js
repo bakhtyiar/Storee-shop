@@ -6,7 +6,9 @@ import { routes } from './utils/constants';
 import News from './routes/news';
 import Products from './routes/products';
 import Users from './routes/users';
+import NotFound from './routes/notFound';
 import { ErrorBoundary } from 'react-error-boundary'
+import Product from './routes/product';
 
 const StyledLayout = styled.div`
   display: flex;
@@ -71,10 +73,10 @@ function App() {
         <HeaderBranding to={routes.home}><StyledImg src={logo} alt="Logotype" />Baobab</HeaderBranding>
         <nav>
           <StyledUl>
-            <li><StyledNavLink to={routes.home}>Home</StyledNavLink></li>
-            <li><StyledNavLink to={routes.products}>Products</StyledNavLink></li>
-            <li><StyledNavLink to={routes.users}>Users</StyledNavLink></li>
-            <li><StyledNavLink to={routes.news}>News</StyledNavLink></li>
+            <li><StyledNavLink to={routes.home.path}>Home</StyledNavLink></li>
+            <li><StyledNavLink to={routes.products.path}>Products</StyledNavLink></li>
+            <li><StyledNavLink to={routes.users.path}>Users</StyledNavLink></li>
+            <li><StyledNavLink to={routes.news.path}>News</StyledNavLink></li>
           </StyledUl>
         </nav>
       </StyledHeader>
@@ -86,13 +88,15 @@ function App() {
           }}
         >
           <Routes>
-            <Route path={routes.home} element={<Home />} />
-            <Route>
-              <Route path={routes.products} element={<Navigate to="/products/1"/>} />
-              <Route path={routes.products_page} element={<Products/>} />
-            </Route>
-            <Route path={routes.users} element={<Users />} />
-            <Route path={routes.news} element={<News />} />
+            <Route path={routes.home.path} element={<Home />} />
+            <Route path={routes.products.path} element={<Navigate to={routes.products.path + "/1"}/>}/>
+            <Route path={routes.products.path + "/:page"} element={<Products/>}/>
+            <Route path={routes.product.path} element={<Navigate to=""/>}/>
+            <Route path={routes.product.path + "/:id"} element={<Product/>}/>
+            <Route path={routes.users.path} element={<Users />} />
+            <Route path={routes.news.path} element={<News />} />
+            <Route path="*" element={<Navigate to={routes.notFound.path}/>}/>
+            <Route path={routes.notFound.path} element={<NotFound/>}/>
           </Routes>
         </ErrorBoundary>
       </StyledRightColumn>
