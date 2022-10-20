@@ -1,12 +1,51 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Breadcrumb, Spinner } from 'react-bootstrap';
+import { Link, useParams } from 'react-router-dom';
+import { routes } from '../utils/constants';
+import { getProduct } from '../utils/methods';
 
 const Product = () => {
-	const {id} = useParams();
+	const [isLoading, setIsLoading] = useState(true);
+	const [data, setData] = useState(null);
+	const { id } = useParams();
+
+	useEffect(() => {
+		setIsLoading(true);
+		getProduct(id)
+			.then(data => setData(data))
+			.finally(() => setIsLoading(false));
+		console.log(data);
+	}, [id]);
+
 	return (
-		<div>
-			Product {id}
-		</div>
+		<>
+			<Breadcrumb>
+				<Breadcrumb.Item ><Link  to={routes.home.path}>Home</Link></Breadcrumb.Item>
+				<Breadcrumb.Item><Link to={routes.products.path}>Products</Link></Breadcrumb.Item>
+				<Breadcrumb.Item active>{isLoading && (data === null) ? (<>...</>) : (<>{id}</>)}</Breadcrumb.Item>
+			</Breadcrumb>
+			{
+				isLoading && (data === null) ? (
+					<>
+						<Spinner animation="border" role="status">
+							<span className="visually-hidden">Loading...</span>
+						</Spinner>
+					</>
+				) : (
+					<div>
+						<h1>{data.title}</h1>
+						<h2>{data.description}</h2>
+						<h3>Price: ${data.price} Discount: {data.discountPercentage}%</h3>
+						<p>Rating: {data.rating}</p>
+						<p>Stock: {data.stock}</p>
+						<p>Brand: {data.brand}</p>
+						<p>Category: {data.category}</p>
+						<img src={data.thumbnail} alt="Thumbnail" />
+						{data.images.map((item) => <img key={item} src={item} alt="Carousel Item" />)}
+					</div>
+				)
+			}
+		</>
 	);
 }
 

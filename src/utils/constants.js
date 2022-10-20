@@ -1,4 +1,4 @@
-export const dummyjsonURL = `https://dummyjson.com/products`;
+export const dummyjsonURL = `https://dummyjson.com`;
 export const pageLimit = 30;
 export const routes = {
 	home: { path: "/" },

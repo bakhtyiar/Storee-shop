@@ -1,42 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
-import { pageLimit } from '../utils/constants';
+import { Link, useParams } from 'react-router-dom';
+import { pageLimit, routes } from '../utils/constants';
 import { getData } from '../utils/methods';
 import { Pagination } from '../components/pagination';
-import imageIcon from '../materials/img/icons/image/icons8-image-48.png';
-import { Placeholder } from 'react-bootstrap';
+import ProductCard from '../components/productCard';
+import { Breadcrumb, Placeholder, Spinner } from 'react-bootstrap';
 
-const StyledProducts = styled.div`
-	width: 100%;
-`;
-
-const StyledUl = styled.ul`
-  list-style: none;
-  padding-left: 0;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  gap: 10px;
-  width: 100%;
-`;
-
-const StyledProductCard = styled.li`
-	padding: 12px 8px;
-	border-radius: 8px;
-	border: 1px solid #cecece;
-	display: flex;
-	align-items: center;
-	& * {
-		margin: 0;
-	}
-`;
-
-const StyledImg = styled.img`
-	align-self: center;
-	max-width: 100%;
-	max-height: 200px;
-`;
 
 const Products = () => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -64,52 +33,52 @@ const Products = () => {
 	}, [data]);
 
 	return (
-		<StyledProducts>
+		<div>
 			<h1>Products</h1>
-			<>
+			<Breadcrumb>
+				<Breadcrumb.Item><Link  to={routes.home.path}>Home</Link></Breadcrumb.Item>
+				<Breadcrumb.Item active>Products</Breadcrumb.Item>
+			</Breadcrumb>
+			<div>
 				<h3>Filter</h3>
-				<label>
-					<input type={'checkbox'} />
-					option one
-				</label>
-				<label>
-					<input type={'checkbox'} />
-					option two
-				</label>
-				<label>
-					<input type={'checkbox'} />
-					option three
-				</label>
+				<div>
+					<label>
+						<input type={'checkbox'} />
+						option one
+					</label>
+					<label>
+						<input type={'checkbox'} />
+						option two
+					</label>
+					<label>
+						<input type={'checkbox'} />
+						option three
+					</label>
+				</div>
 				<button>Filter!</button>
-			</>
-			<StyledUl>
+			</div>
+			<div>
 				{
 					isLoading && (data === null) ? (
 						<>
-							{
-								[...Array(6)].map(() => (
-									<Placeholder as="p" animation="wave">
-										<Placeholder xs={12} />
-									</Placeholder>
-								))
-							}
+							{[...Array(6)].map(() => (
+								<Placeholder as="p" animation="wave">
+									<Placeholder xs={12} />
+								</Placeholder>
+							))}
+							<Spinner animation="border" role="status">
+								<span className="visually-hidden">Loading...</span>
+							</Spinner>
 						</>
 					) : (
 						<>
-							{data.products.map(item => (
-								<StyledProductCard key={item.id}>
-									<StyledImg src={imageIcon} alt="image icon" />
-									<h6>{item.title}</h6>
-									<p>Price: ${item.price}</p>
-								</StyledProductCard>
-							))
-							}
+							{data.products.map(item => <ProductCard item={item} />)}
 							<Pagination pagesAmount={pagesAmount} />
 						</>
 					)
 				}
-			</StyledUl>
-		</StyledProducts>
+			</div>
+		</div>
 	);
 }
 
