@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-import { NavLink, Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from './routes/home';
 import { routes } from './utils/constants';
 import News from './routes/news';
