@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Breadcrumb, Spinner } from 'react-bootstrap';
+import { Badge, Breadcrumb, Carousel, Spinner } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
+import styled from 'styled-components';
 import { routes } from '../utils/constants';
 import { getProduct } from '../utils/methods';
+
+const StyledCarousel = styled(Carousel)`
+	width: fit-content;
+`;
 
 const Product = () => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +25,7 @@ const Product = () => {
 	return (
 		<>
 			<Breadcrumb>
-				<Breadcrumb.Item ><Link  to={routes.home.path}>Home</Link></Breadcrumb.Item>
+				<Breadcrumb.Item ><Link to={routes.home.path}>Home</Link></Breadcrumb.Item>
 				<Breadcrumb.Item><Link to={routes.products.path}>Products</Link></Breadcrumb.Item>
 				<Breadcrumb.Item active>{isLoading && (data === null) ? (<>...</>) : (<>{id}</>)}</Breadcrumb.Item>
 			</Breadcrumb>
@@ -35,13 +40,18 @@ const Product = () => {
 					<div>
 						<h1>{data.title}</h1>
 						<h2>{data.description}</h2>
-						<h3>Price: ${data.price} Discount: {data.discountPercentage}%</h3>
+						<h3>Price: ${data.price} Discount:  <Badge bg="warning" text="dark">{data.discountPercentage}%</Badge></h3>
 						<p>Rating: {data.rating}</p>
 						<p>Stock: {data.stock}</p>
 						<p>Brand: {data.brand}</p>
 						<p>Category: {data.category}</p>
-						<img src={data.thumbnail} alt="Thumbnail" />
-						{data.images.map((item) => <img key={item} src={item} alt="Carousel Item" />)}
+						<StyledCarousel>
+							{data.images.map((item, index) => (
+								<Carousel.Item>
+									<img key={item} src={item} alt={`Carousel item ${index} slide`} />
+								</Carousel.Item>
+							))}
+						</StyledCarousel>
 					</div>
 				)
 			}
