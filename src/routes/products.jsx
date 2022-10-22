@@ -4,8 +4,16 @@ import { pageLimit, routes } from '../utils/constants';
 import { getData } from '../utils/methods';
 import { Pagination } from '../components/pagination';
 import ProductCard from '../components/productCard';
-import { Breadcrumb, Placeholder, Spinner } from 'react-bootstrap';
+import { Breadcrumb, Button, Container, Form, Placeholder, Spinner } from 'react-bootstrap';
+import styled from 'styled-components';
 
+const StyledContainer = styled(Container)`
+	padding-top: 16px;
+`;
+
+const StyledForm = styled(Form)`
+	margin-bottom: 16px;
+`;
 
 const Products = () => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -33,30 +41,39 @@ const Products = () => {
 	}, [data]);
 
 	return (
-		<div>
+		<StyledContainer>
 			<h1>Products</h1>
 			<Breadcrumb>
-				<Breadcrumb.Item><Link  to={routes.home.path}>Home</Link></Breadcrumb.Item>
+				<Breadcrumb.Item><Link to={routes.home.path}>Home</Link></Breadcrumb.Item>
 				<Breadcrumb.Item active>Products</Breadcrumb.Item>
 			</Breadcrumb>
-			<div>
+			<StyledForm>
 				<h3>Filter</h3>
-				<div>
-					<label>
-						<input type={'checkbox'} />
-						option one
-					</label>
-					<label>
-						<input type={'checkbox'} />
-						option two
-					</label>
-					<label>
-						<input type={'checkbox'} />
-						option three
-					</label>
-				</div>
-				<button>Filter!</button>
-			</div>
+				<Form.Check
+					inline
+					label="Laptops"
+					name="group1"
+					type="checkbox"
+					id={`inline-checkbox-1`}
+				/>
+				<Form.Check
+					inline
+					label="SmartPhones"
+					name="group1"
+					type="checkbox"
+					id={`inline-checkbox-2`}
+				/>
+				<Form.Check
+					inline
+					label="Other"
+					name="group1"
+					type="checkbox"
+					id={`inline-checkbox-3`}
+				/>
+				<Button variant="primary" type="submit">
+					Filter
+				</Button>
+			</StyledForm>
 			<div>
 				{
 					isLoading && (data === null) ? (
@@ -78,7 +95,7 @@ const Products = () => {
 					)
 				}
 			</div>
-		</div>
+		</StyledContainer>
 	);
 }
 
