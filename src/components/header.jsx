@@ -12,7 +12,7 @@ const StyledImg = styled.img`
 
 const Header = () => {
 	return (
-		<Navbar bg="dark" variant="dark">
+		<Navbar bg="dark" variant="dark" sticky="top">
         <Container>
           <Navbar.Brand as={Link} to={routes.home.path}>
             <StyledImg
