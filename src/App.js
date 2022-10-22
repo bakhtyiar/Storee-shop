@@ -32,7 +32,7 @@ function App() {
         >
           <Routes>
             <Route path={routes.home.path} element={<Home />} />
-            <Route path={routes.products.path} element={<Navigate to={routes.products.path + "/1"}/>}/>
+            <Route path={routes.products.path} element={<Navigate to={routes.products.path + "/1"} replace={true}/>}/>
             <Route path={routes.products.path + "/:page"} element={<Products/>}/>
             <Route path={routes.product.path} element={<Navigate to=""/>}/>
             <Route path={routes.product.path + "/:id"} element={<Product/>}/>
