@@ -10,7 +10,21 @@ const StyledContainer = styled(Container)`
 `;
 
 const StyledCarousel = styled(Carousel)`
-	width: fit-content;
+	width: 640px;
+	height: 360px;
+	overflow: hidden;
+	background-color: rgba(0,0,0,0.1);
+`;
+
+const StyledCarouselItem = styled(Carousel.Item)`
+	width: 640px;
+	height: 360px;
+`;
+
+const StyledImg = styled.img`
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
 `;
 
 const Product = () => {
@@ -52,11 +66,11 @@ const Product = () => {
 							<p>Category: {data.category}</p>
 						</Col>
 						<Col>
-							<StyledCarousel>
+							<StyledCarousel fade="true" variant="dark">
 								{data.images.map((item, index) => (
-									<Carousel.Item>
-										<img key={item} src={item} alt={`Carousel item ${index} slide`} />
-									</Carousel.Item>
+									<StyledCarouselItem>
+										<StyledImg key={item} src={item} alt={`Carousel item ${index} slide`} />
+									</StyledCarouselItem>
 								))}
 							</StyledCarousel>
 						</Col>
