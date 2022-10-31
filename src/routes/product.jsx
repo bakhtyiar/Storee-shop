@@ -37,7 +37,6 @@ const Product = () => {
 		getProduct(id)
 			.then(data => setData(data))
 			.finally(() => setIsLoading(false));
-		console.log(data);
 	}, [id]);
 
 	return (
@@ -48,7 +47,7 @@ const Product = () => {
 				<Breadcrumb.Item active>{isLoading && (data === null) ? (<>...</>) : (<>{id}</>)}</Breadcrumb.Item>
 			</Breadcrumb>
 			{
-				isLoading && (data === null) ? (
+				isLoading && data === null ? (
 					<>
 						<Spinner animation="border" role="status">
 							<span className="visually-hidden">Loading...</span>
