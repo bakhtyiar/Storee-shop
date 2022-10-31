@@ -13,7 +13,7 @@ export default function News() {
 		fetch(`https://jsonplaceholder.typicode.com/posts?_start=${pageNumber}&_limit=${pageNumber + 5}`)
 			.then(response => response.json())
 			.then(data => setNewsData(data))
-			.finally(data => setIsLoading(false));
+			.finally(() => setIsLoading(false));
 	}
 
 	return (
