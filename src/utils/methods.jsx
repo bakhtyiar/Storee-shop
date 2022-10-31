@@ -5,7 +5,6 @@ export const getData = async (skip = 0, limit = pageLimit, url = dummyjsonURL) =
 	.catch(e => console.log(e))
 	.then(response => response.json())
 	.then(data => {
-		console.log(data);
 		return data;
 	}))
 };
