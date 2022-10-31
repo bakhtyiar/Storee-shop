@@ -1,4 +1,4 @@
-import { Button, InputGroup, Form } from 'react-bootstrap';
+import {Button, InputGroup, Form, Container} from 'react-bootstrap';
 import React, { useState } from 'react'
 import styled from 'styled-components';
 
@@ -13,7 +13,7 @@ export default function Home() {
 	};
 
 	return (
-		<>
+		<Container>
 			<h1>Home</h1>
 				<InputGroup className="mb-3">
 					<Form.Control
@@ -36,6 +36,6 @@ export default function Home() {
 						Find
 					</Button>
 				</InputGroup>
-		</>
+		</Container>
 	)
 }
