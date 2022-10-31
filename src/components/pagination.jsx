@@ -28,7 +28,7 @@ export const Pagination = ({ pagesAmount }) => {
 						{number}
 					</BPagination.Item>
 				))}
-			{(Number(page) != pagesAmount) && <>
+			{(Number(page) !== Number(pagesAmount)) && <>
 				<BPagination.Next onClick={() => handleClick(Number(page) + 1)} />
 				<BPagination.Last onClick={() => handleClick(pagesAmount)} />
 			</>}
