@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import {Container} from "react-bootstrap";
 
 export default function News() {
 	const [pageNumber, setPageNumber] = useState(0);
@@ -17,7 +18,7 @@ export default function News() {
 	}
 
 	return (
-		<>
+		<Container>
 			<h1>News</h1>
 			{isLoading ? "News is loading..." : newsData.map((post) => (
 				<Fragment key={post.id}>
@@ -26,6 +27,6 @@ export default function News() {
 					<i>Posted by: {post.userId}. Date: {post.id}</i>
 				</Fragment>
 			))}
-		</>
+		</Container>
 	)
 }
