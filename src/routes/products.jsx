@@ -4,15 +4,12 @@ import { pageLimit, routes } from '../utils/constants';
 import { getData } from '../utils/methods';
 import { Pagination } from '../components/pagination';
 import ProductCard from '../components/productCard';
-import { Breadcrumb, Button, Container, Form, Placeholder, Spinner } from 'react-bootstrap';
+import { Breadcrumb, Container, Placeholder, Spinner } from 'react-bootstrap';
 import styled from 'styled-components';
+import ProductsFilter from "../components/productsFilter";
 
 const StyledContainer = styled(Container)`
 	padding-top: 16px;
-`;
-
-const StyledForm = styled(Form)`
-	margin-bottom: 16px;
 `;
 
 const Products = () => {
@@ -24,7 +21,7 @@ const Products = () => {
 
 	function calcPagesAmount(total, pageLimit) {
 		return (Math.floor(total / pageLimit) + (total % pageLimit > 0 ? 1 : 0));
-	};
+	}
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -47,40 +44,14 @@ const Products = () => {
 				<Breadcrumb.Item><Link to={routes.home.path}>Home</Link></Breadcrumb.Item>
 				<Breadcrumb.Item active>Products</Breadcrumb.Item>
 			</Breadcrumb>
-			<StyledForm>
-				<h3>Filter</h3>
-				<Form.Check
-					inline
-					label="Laptops"
-					name="group1"
-					type="checkbox"
-					id={`inline-checkbox-1`}
-				/>
-				<Form.Check
-					inline
-					label="SmartPhones"
-					name="group1"
-					type="checkbox"
-					id={`inline-checkbox-2`}
-				/>
-				<Form.Check
-					inline
-					label="Other"
-					name="group1"
-					type="checkbox"
-					id={`inline-checkbox-3`}
-				/>
-				<Button variant="primary" type="submit">
-					Filter
-				</Button>
-			</StyledForm>
+			<ProductsFilter/>
 			<div>
 				{
 					isLoading && (data === null) ? (
 						<>
 							{[...Array(6)].map(() => (
 								<Placeholder as="p" animation="wave">
-									<Placeholder xs={12} />
+									<Placeholder xs={12}/>
 								</Placeholder>
 							))}
 							<Spinner animation="border" role="status">
@@ -89,8 +60,8 @@ const Products = () => {
 						</>
 					) : (
 						<>
-							{data.products.map(item => <ProductCard item={item} />)}
-							<Pagination pagesAmount={pagesAmount} />
+							{data.products.map(item => <ProductCard item={item}/>)}
+							<Pagination pagesAmount={pagesAmount}/>
 						</>
 					)
 				}
