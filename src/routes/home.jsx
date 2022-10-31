@@ -1,11 +1,12 @@
 import {Button, InputGroup, Form, Container} from 'react-bootstrap';
 import React, { useState } from 'react'
-import styled from 'styled-components';
+
+// todo add panels with few o news, o products, o users
 
 export default function Home() {
-	const [pageNumber, setPageNumber] = useState(0);
-	const [getData, setBooksData] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
+	// const [pageNumber, setPageNumber] = useState(0);
+	// const [getData, setBooksData] = useState([]);
+	// const [isLoading, setIsLoading] = useState(true);
 	const [searchValue, setSearchValue] = useState("");
 	const [searchHints, setSearchHints] = useState(["harry potter", "chess", "physics", "tolstoy"]);
 
