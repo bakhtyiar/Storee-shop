@@ -1,10 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Form} from "react-bootstrap";
-import styled from "styled-components";
-
-const StyledForm = styled(Form)`
-  margin-bottom: 16px;
-`;
 
 function ProductsFilter() {
     const [isLoading, setIsLoading] = useState(true);
@@ -19,10 +14,10 @@ function ProductsFilter() {
     }, []);
 
     return (
-        <StyledForm>
+        <Form style={{"marginBottom": "16px"}} onSubmit={handleSubmit}>
             <h3>Filter</h3>
             <h4>Categories</h4>
-            <section>
+            <section style={{'margin': '8px 0'}}>
                 {!isLoading &&
                     categories.map((item, index) => (<Form.Check
                         inline
@@ -36,7 +31,7 @@ function ProductsFilter() {
             <Button variant="primary" type="submit">
                 Filter
             </Button>
-        </StyledForm>
+        </Form>
     );
 }
 
