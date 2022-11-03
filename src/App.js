@@ -3,7 +3,6 @@ import Home from './routes/home';
 import { routes } from './utils/constants';
 import News from './routes/news';
 import Products from './routes/products';
-import Users from './routes/users';
 import NotFound from './routes/notFound';
 import { ErrorBoundary } from 'react-error-boundary'
 import Product from './routes/product';
@@ -36,7 +35,6 @@ function App() {
             <Route path={routes.products.path + "/:page"} element={<Products/>}/>
             <Route path={routes.product.path} element={<Navigate to=""/>}/>
             <Route path={routes.product.path + "/:id"} element={<Product/>}/>
-            <Route path={routes.users.path} element={<Users />} />
             <Route path={routes.news.path} element={<News />} />
             <Route path="*" element={<Navigate to={routes.notFound.path}/>}/>
             <Route path={routes.notFound.path} element={<NotFound/>}/>

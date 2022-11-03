@@ -25,7 +25,6 @@ const Header = () => {
           <Nav>
             <Nav.Link as={NavLink} to={routes.home.path} end>Home</Nav.Link>
             <Nav.Link as={NavLink} to={routes.products.path}>Products</Nav.Link>
-            <Nav.Link as={NavLink} to={routes.users.path}>Users</Nav.Link>
             <Nav.Link as={NavLink} to={routes.news.path}>News</Nav.Link>
         </Nav>
         </Container>
