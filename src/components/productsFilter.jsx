@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Form} from "react-bootstrap";
+import {getCategories} from "../utils/methods";
 
 function ProductsFilter() {
     const [isLoading, setIsLoading] = useState(true);
@@ -7,8 +8,7 @@ function ProductsFilter() {
 
     useEffect(() => {
         setIsLoading(true);
-        fetch('https://dummyjson.com/products/categories')
-            .then(res => res.json())
+        getCategories()
             .then(data => setCategories(data))
             .finally(() => setIsLoading(false));
     }, []);
