@@ -60,7 +60,7 @@ const Products = () => {
 					) : (
 						<>
 							{data.products.map(item => <ProductCard item={item}/>)}
-							<Pagination pagesAmount={pagesAmount}/>
+							{ 1 < pagesAmount && <Pagination pagesAmount={pagesAmount}/>}
 						</>
 					)
 				}
