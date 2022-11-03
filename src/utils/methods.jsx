@@ -1,7 +1,10 @@
 import {dummyjsonURL, pageLimit} from './constants';
 
-export const getData = async (skip = 0, limit = pageLimit, url = dummyjsonURL) => {
-	return (fetch(`${url}/products?skip=${skip}&limit=${limit}`) 
+export const getProducts = async (skip = 0, limit = pageLimit, category = 'tops', url = dummyjsonURL) => {
+	if (category !== '') {
+		category = `/category/${category}`;
+	}
+	return (fetch(`${url}/products${category}?skip=${skip}&limit=${limit}`)
 	.catch(e => console.log(e))
 	.then(response => response.json()))
 };
