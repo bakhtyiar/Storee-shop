@@ -14,3 +14,9 @@ export const getProduct = async (id, url = dummyjsonURL) => {
 	.catch(e => console.log(e))
 	.then(response => response.json()))
 };
+
+export const getCategories = async (url = dummyjsonURL) => {
+	return (fetch(`${url}/products/categories`)
+		.catch(e => console.log(e))
+		.then(response => response.json()))
+}
