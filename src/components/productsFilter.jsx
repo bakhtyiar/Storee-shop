@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {Button, Form} from "react-bootstrap";
 import {getCategories} from "../utils/methods";
 
+// todo restyle categories to onClick->setCategory rounded buttons
+
 function ProductsFilter({ setCategory }) {
     const [isLoading, setIsLoading] = useState(true);
     const [categories, setCategories] = useState([]);
