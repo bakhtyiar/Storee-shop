@@ -2,9 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {Button, Form} from "react-bootstrap";
 import {getCategories} from "../utils/methods";
 
-function ProductsFilter() {
+function ProductsFilter({ setCategory }) {
     const [isLoading, setIsLoading] = useState(true);
     const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('');
 
     useEffect(() => {
         setIsLoading(true);
@@ -12,6 +13,11 @@ function ProductsFilter() {
             .then(data => setCategories(data))
             .finally(() => setIsLoading(false));
     }, []);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setCategory(selectedCategory);
+    }
 
     return (
         <Form style={{"marginBottom": "16px"}} onSubmit={handleSubmit}>
@@ -25,6 +31,8 @@ function ProductsFilter() {
                         name="categories"
                         type="radio"
                         id={`inline-checkbox-${index}`}
+                        key={`inline-checkbox-${index}`}
+                        onClick={() => setSelectedCategory(item)}
                     />))
                 }
             </section>
