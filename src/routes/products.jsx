@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { pageLimit, routes } from '../utils/constants';
 import { getData } from '../utils/methods';
@@ -31,9 +31,8 @@ const Products = () => {
 	}, [page]);
 
 	useEffect(() => {
-		if (data && !isPagesAmountCalced.current) {
-			setPagesAmount(calcPagesAmount(data.total, data.limit));
-			isPagesAmountCalced.current = true;
+		if (data) {
+			setPagesAmount(calcPagesAmount(data.total, pageLimit));
 		}
 	}, [data]);
 
