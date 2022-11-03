@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { pageLimit, routes } from '../utils/constants';
-import { getData } from '../utils/methods';
+import { getProducts } from '../utils/methods';
 import { Pagination } from '../components/pagination';
 import ProductCard from '../components/productCard';
 import { Breadcrumb, Container, Placeholder, Spinner } from 'react-bootstrap';
@@ -17,7 +17,7 @@ const Products = () => {
 	const [data, setData] = useState(null);
 	const { page } = useParams();
 	const [pagesAmount, setPagesAmount] = useState(0);
-	const isPagesAmountCalced = useRef(false);
+	const [category, setCategory] = useState('');
 
 	function calcPagesAmount(total, pageLimit) {
 		return (Math.floor(total / pageLimit) + (total % pageLimit > 0 ? 1 : 0));
@@ -25,10 +25,10 @@ const Products = () => {
 
 	useEffect(() => {
 		setIsLoading(true);
-		getData((Number(page) - 1) * pageLimit, pageLimit)
+		getProducts((Number(page) - 1) * pageLimit, pageLimit, category)
 			.then(data => setData(data))
 			.finally(() => setIsLoading(false));
-	}, [page]);
+	}, [page, category]);
 
 	useEffect(() => {
 		if (data) {
@@ -43,7 +43,7 @@ const Products = () => {
 				<Breadcrumb.Item><Link to={routes.home.path}>Home</Link></Breadcrumb.Item>
 				<Breadcrumb.Item active>Products</Breadcrumb.Item>
 			</Breadcrumb>
-			<ProductsFilter/>
+			<ProductsFilter setCategory={setCategory}/>
 			<div>
 				{
 					isLoading && (data === null) ? (
