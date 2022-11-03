@@ -48,8 +48,8 @@ const Products = () => {
 				{
 					isLoading && (data === null) ? (
 						<>
-							{[...Array(6)].map(() => (
-								<Placeholder as="p" animation="wave">
+							{[...Array(6)].map((_, index) => (
+								<Placeholder as="p" animation="wave" key={`placeholder-${index}`}>
 									<Placeholder xs={12}/>
 								</Placeholder>
 							))}
