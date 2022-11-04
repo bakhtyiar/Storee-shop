@@ -43,7 +43,7 @@ const Products = () => {
 				<Breadcrumb.Item><Link to={routes.home.path}>Home</Link></Breadcrumb.Item>
 				<Breadcrumb.Item active>Products</Breadcrumb.Item>
 			</Breadcrumb>
-			<ProductsFilter setCategory={setCategory}/>
+			<ProductsFilter category={category} setCategory={setCategory}/>
 			<div>
 				{
 					isLoading && (data === null) ? (

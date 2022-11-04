@@ -1,13 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Form} from "react-bootstrap";
 import {getCategories} from "../utils/methods";
+import styled from "styled-components";
 
-// todo restyle categories to onClick->setCategory rounded buttons
+const StyledSection = styled.section`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0;
+`;
 
-function ProductsFilter({ setCategory }) {
+function ProductsFilter({ category, setCategory }) {
     const [isLoading, setIsLoading] = useState(true);
     const [categories, setCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState('');
 
     useEffect(() => {
         setIsLoading(true);
@@ -16,31 +21,32 @@ function ProductsFilter({ setCategory }) {
             .finally(() => setIsLoading(false));
     }, []);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setCategory(selectedCategory);
+    const handleClick = (clickedCategory) => {
+        if (category === clickedCategory)
+            setCategory('')
+        else
+            setCategory(clickedCategory)
     }
 
     return (
-        <Form style={{"marginBottom": "16px"}} onSubmit={handleSubmit}>
+        <Form style={{"marginBottom": "16px"}}>
             <h3>Filter</h3>
             <h4>Categories</h4>
-            <section style={{'margin': '8px 0'}}>
+            <StyledSection>
                 {!isLoading &&
-                    categories.map((item, index) => (<Form.Check
-                        inline
-                        label={item}
-                        name="categories"
-                        type="radio"
-                        id={`inline-checkbox-${index}`}
-                        key={`inline-checkbox-${index}`}
-                        onClick={() => setSelectedCategory(item)}
-                    />))
+                    categories.map((item, index) => (<Button
+                        variant={item === category ? "primary" : "outline-primary"}
+                        id={`category-btn-${item}`}
+                        key={`category-btn-${index}`}
+                        onClick={() => handleClick(item)}
+                    >
+                        {item}
+                    </Button>))
                 }
-            </section>
-            <Button variant="primary" type="submit">
-                Filter
-            </Button>
+            </StyledSection>
+            {/*<Button variant="primary" type="submit">*/}
+            {/*    Filter*/}
+            {/*</Button>*/}
         </Form>
     );
 }
