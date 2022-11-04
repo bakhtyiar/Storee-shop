@@ -44,7 +44,7 @@ const Product = () => {
 			<Breadcrumb>
 				<Breadcrumb.Item ><Link to={routes.home.path}>Home</Link></Breadcrumb.Item>
 				<Breadcrumb.Item><Link to={routes.products.path}>Products</Link></Breadcrumb.Item>
-				<Breadcrumb.Item active>{isLoading && (data === null) ? (<>...</>) : (<>{id}</>)}</Breadcrumb.Item>
+				<Breadcrumb.Item active>{isLoading && (data === null) ? (<>...</>) : (<>{data.title}</>)}</Breadcrumb.Item>
 			</Breadcrumb>
 			{
 				isLoading && data === null ? (
