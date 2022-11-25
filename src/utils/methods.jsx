@@ -20,3 +20,16 @@ export const getCategories = async (url = dummyjsonURL) => {
 		.catch(e => console.log(e))
 		.then(response => response.json()))
 }
+
+export const getUsers = async (query, url = dummyjsonURL) => {
+	return (fetch(`${url}/users/search?q=${query}`)
+		.catch(e => console.log(e))
+		.then(response => response.json()))
+}
+
+export const getUser = async (id, url = dummyjsonURL) => {
+	return (fetch(`${url}/users/search?q=${id}`)
+		.catch(e => console.log(e))
+		.then(response => response.json())
+		.then(data => data["users"][0]))
+}
