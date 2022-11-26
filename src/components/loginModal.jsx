@@ -18,7 +18,7 @@ const loginModal = (props) => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Group className="mb-3" controlId="formBasicUsername">
                         <Form.Label>Username</Form.Label>
                         <Form.Control type="text" placeholder="Enter username"/>
                         <Form.Text className="text-muted">
