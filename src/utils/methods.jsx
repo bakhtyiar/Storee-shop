@@ -33,3 +33,11 @@ export const getUser = async (id, url = dummyjsonURL) => {
 		.then(response => response.json())
 		.then(data => data["users"][0]))
 }
+
+export const capitalizeStr = (str) => {
+	return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export const replaceDashToSpace = (str) => {
+	return str.replace(/-+/g, ' ');
+}
