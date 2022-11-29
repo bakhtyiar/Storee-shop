@@ -3,7 +3,7 @@ import {Button, Container, Nav, Navbar} from 'react-bootstrap';
 import {Link, NavLink} from 'react-router-dom';
 import {routes} from '../utils/constants';
 import styled from 'styled-components';
-import logo from '../materials/img/logotype/icons8-icons8.svg'
+import logo from '../assets/img/logotype/icons8-icons8.svg'
 import RegisterModal from "./registerModal";
 import LoginModal from "./loginModal";
 

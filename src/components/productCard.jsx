@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import imageIcon from '../materials/img/icons/image/icons8-image-48.png';
+import imageIcon from '../assets/img/icons/image/icons8-image-48.png';
 import { routes } from '../utils/constants';
 import { Link } from 'react-router-dom';
 
