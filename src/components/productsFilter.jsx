@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Form} from "react-bootstrap";
-import {getCategories} from "../utils/methods";
+import {getCategories, replaceDashToSpace} from "../utils/methods";
 import styled from "styled-components";
 
 const StyledSection = styled.section`
@@ -40,7 +40,7 @@ function ProductsFilter({ category, setCategory }) {
                         key={`category-btn-${index}`}
                         onClick={() => handleClick(item)}
                     >
-                        {item}
+                        {replaceDashToSpace(item.toUpperCase())}
                     </Button>))
                 }
             </StyledSection>
