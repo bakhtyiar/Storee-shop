@@ -10,7 +10,7 @@ const StyledSection = styled.section`
   margin: 8px 0;
 `;
 
-function ProductsFilter({ category, setCategory }) {
+function ProductsFilter({searchParams, setSearchParams}) {
     const [isLoading, setIsLoading] = useState(true);
     const [categories, setCategories] = useState([]);
 
@@ -22,10 +22,11 @@ function ProductsFilter({ category, setCategory }) {
     }, []);
 
     const handleClick = (clickedCategory) => {
-        if (category === clickedCategory)
-            setCategory('')
-        else
-            setCategory(clickedCategory)
+        if (searchParams.get('category') === clickedCategory) {
+            searchParams.delete('category');
+            setSearchParams({...searchParams});
+        } else
+            setSearchParams({...searchParams, 'category': clickedCategory})
     }
 
     return (
@@ -35,7 +36,7 @@ function ProductsFilter({ category, setCategory }) {
             <StyledSection>
                 {!isLoading &&
                     categories.map((item, index) => (<Button
-                        variant={item === category ? "primary" : "outline-primary"}
+                        variant={item === searchParams.get('category') ? "primary" : "outline-primary"}
                         id={`category-btn-${item}`}
                         key={`category-btn-${index}`}
                         onClick={() => handleClick(item)}

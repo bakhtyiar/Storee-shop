@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import {Link, useParams, useSearchParams} from 'react-router-dom';
 import { pageLimit, routes } from '../utils/constants';
 import { getProducts } from '../utils/methods';
 import { Pagination } from '../components/pagination';
@@ -17,7 +17,8 @@ const Products = () => {
 	const [data, setData] = useState(null);
 	const { page } = useParams();
 	const [pagesAmount, setPagesAmount] = useState(0);
-	const [category, setCategory] = useState('');
+	const [searchParams, setSearchParams] = useSearchParams();
+	let category = searchParams.get('category');
 
 	function calcPagesAmount(total, pageLimit) {
 		return (Math.floor(total / pageLimit) + (total % pageLimit > 0 ? 1 : 0));
@@ -25,7 +26,7 @@ const Products = () => {
 
 	useEffect(() => {
 		setIsLoading(true);
-		getProducts((Number(page) - 1) * pageLimit, pageLimit, category)
+		getProducts((Number(page) - 1) * pageLimit, pageLimit, category || '')
 			.then(data => setData(data))
 			.finally(() => setIsLoading(false));
 	}, [page, category]);
@@ -43,7 +44,7 @@ const Products = () => {
 				<Breadcrumb.Item><Link to={routes.home.path}>Home</Link></Breadcrumb.Item>
 				<Breadcrumb.Item active>Products</Breadcrumb.Item>
 			</Breadcrumb>
-			<ProductsFilter category={category} setCategory={setCategory}/>
+			<ProductsFilter searchParams={searchParams} setSearchParams={setSearchParams}/>
 			<div>
 				{
 					isLoading && (data === null) ? (
