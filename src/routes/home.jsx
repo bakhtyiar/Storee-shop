@@ -56,10 +56,10 @@ export default function Home() {
             </Row>
             <Row>
                 {!isLoading &&
-                    <div style={{'display': 'flex', 'gap': '18px', 'flex-wrap': 'wrap'}}>
+                    <div style={{'display': 'flex', 'gap': '18px', 'flexWrap': 'wrap'}}>
                         {
                             categories.map((item) => (
-                                <CategoryCard header={item}/>
+                                <CategoryCard header={item} key={item}/>
                             ))
                         }
                     </div>

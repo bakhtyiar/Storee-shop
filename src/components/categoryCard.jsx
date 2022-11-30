@@ -10,7 +10,7 @@ const CategoryCard = (props) => {
     header = replaceDashToSpace(header);
 
     return (
-        <Link to={routes.products.path} style={{'color': 'black', 'text-decoration': 'none'}}>
+        <Link to={routes.products.path} style={{'color': 'black', 'textDecoration': 'none'}}>
             <Card
                 bg={'Light'.toLowerCase()}
                 style={{width: '18rem'}}
