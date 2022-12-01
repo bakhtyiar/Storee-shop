@@ -19,19 +19,19 @@ function App() {
     };
 
     return (
-        <div>
-            <Header authUser={authUser}/>
             <div>
-                <ErrorBoundary
-                    FallbackComponent={ErrorFallback}
-                    onReset={() => {
-                        // reset the state of your app so the error doesn't happen again
-                    }}
-                >
-                    <AppRoutes authUser={authUser}/>
-                </ErrorBoundary>
+                <Header authUser={authUser}/>
+                <div>
+                    <ErrorBoundary
+                        FallbackComponent={ErrorFallback}
+                        onReset={() => {
+                            // reset the state of your app so the error doesn't happen again
+                        }}
+                    >
+                        <AppRoutes authUser={authUser}/>
+                    </ErrorBoundary>
+                </div>
             </div>
-        </div>
     );
 }
 
