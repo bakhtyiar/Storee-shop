@@ -13,7 +13,7 @@ const StyledImg = styled.img`
 `;
 
 const Header = (authUser) => {
-    const {onRegister, onLogin, onHide, isShow} = useContext(RootContext);
+    const {authModalState: {onRegister, onLogin, onHide, isShow } } = useContext(RootContext);
 
     return (
         <Navbar bg="dark" variant="dark" sticky="top">

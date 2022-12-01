@@ -3,8 +3,8 @@ import {Button, Form, Modal} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {RootContext} from "../contexts/root-context";
 
-const RegisterModal = (props) => {
-    const {onSwitchType} = useContext(RootContext);
+const RegisterModal = () => {
+    const {authModalState: { onSwitchType }} = useContext(RootContext);
 
     return (
         <Form>

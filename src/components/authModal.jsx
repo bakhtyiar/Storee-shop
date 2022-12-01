@@ -5,7 +5,7 @@ import RegisterModal from "./registerModal";
 import {RootContext} from "../contexts/root-context";
 
 const AuthModal = (props) => {
-    const {authType} = useContext(RootContext);
+    const {authModalState: { authType } } = useContext(RootContext);
 
     return (
         <Modal
@@ -14,8 +14,8 @@ const AuthModal = (props) => {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-            {authType == 'login' && <LoginModal/>}
-            {authType == 'register' && <RegisterModal/>}
+            {authType === 'login' && <LoginModal/>}
+            {authType === 'register' && <RegisterModal/>}
         </Modal>
     );
 };

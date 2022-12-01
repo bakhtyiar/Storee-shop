@@ -1,15 +1,23 @@
-import React, {useReducer} from "react";
+import React, {useReducer, useState} from "react";
 
 const initialState = {
-        authModalState: {
-            isShow: false,
-            authType: '',
-            onRegister: () => {},
-            onLogin: () => {},
-            onHide: () => {},
-            onSwitchType: () => {},
+    authModalState: {
+        isShow: false,
+        authType: '',
+        onRegister: () => {
         },
-
+        onLogin: () => {
+        },
+        onHide: () => {
+        },
+        onSwitchType: () => {
+        },
+    },
+    themeState: {
+        isDark: false,
+        onSwitchTheme: () => {
+        },
+    }
 };
 
 const authModalReducer = (state, action) => {
@@ -26,9 +34,11 @@ const authModalReducer = (state, action) => {
 }
 
 export const RootContext = React.createContext(initialState);
+export const ThemeContext = React.createContext(initialState.themeState);
 
 export const RootContextProvider = ({children}) => {
     const [authModal, dispatchAuthModal] = useReducer(authModalReducer, initialState.authModalState);
+    const [theme, setTheme] = useState(initialState.themeState);
 
     const authRegHandler = () => {
         dispatchAuthModal({type: 'authTypeRegister'});
@@ -45,24 +55,39 @@ export const RootContextProvider = ({children}) => {
     }
 
     const switchAuthType = () => {
-        if (authModal.authType == 'register') {
+        if (authModal.authType === 'register') {
             dispatchAuthModal({type: 'authTypeLogin'});
         } else {
             dispatchAuthModal({type: 'authTypeRegister'});
         }
     }
 
-    const authModalState = {
-        isShow: authModal.isShow,
-        authType: authModal.authType,
-        onRegister: authRegHandler,
-        onLogin: authLoginHandler,
-        onHide: hideModal,
-        onSwitchType: switchAuthType,
+    const switchTheme = () => {
+        setTheme((prevState) => (
+            {
+                ...prevState,
+                isDark: !prevState.isDark
+            })
+        );
+    }
+
+    const rootState = {
+        authModalState: {
+            isShow: authModal.isShow,
+            authType: authModal.authType,
+            onRegister: authRegHandler,
+            onLogin: authLoginHandler,
+            onHide: hideModal,
+            onSwitchType: switchAuthType,
+        },
+        themeState: {
+            isDark: theme.isDark,
+            onSwitchTheme: switchTheme,
+        },
     };
 
     return (
-        <RootContext.Provider value={authModalState}>
+        <RootContext.Provider value={rootState}>
             {children}
         </RootContext.Provider>
     )
