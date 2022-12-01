@@ -7,5 +7,7 @@ export const routes = {
 	news: { path: "/news" },
 	post: { path: "/post" },
 	user: { path: "/user"},
+	login: {path: "/login"},
+	register: {path: "/register"},
 	notFound: { path: "/page_not_found" },
 };

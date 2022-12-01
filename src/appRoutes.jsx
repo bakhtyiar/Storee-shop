@@ -7,6 +7,8 @@ import News from "./routes/news";
 import Profile from "./routes/profile";
 import NotFound from "./routes/notFound";
 import * as PropTypes from "prop-types";
+import Register from "./routes/register";
+import Login from "./routes/login";
 
 function AppRoutes(props) {
     return <Routes>
@@ -17,6 +19,8 @@ function AppRoutes(props) {
         <Route path={routes.product.path + "/:id"} element={<Product/>}/>
         <Route path={routes.news.path} element={<News/>}/>
         <Route path={routes.user.path} element={<Navigate to={routes.home.path} replace={true}/>}/>
+        <Route path={routes.register.path} element={<Register authUser={props.authUser}/>}/>
+        <Route path={routes.login.path} element={<Login authUser={props.authUser}/>}/>
         <Route path={routes.user.path + "/:id"} element={<Profile authUser={props.authUser}/>}/>
         <Route path="*" element={<Navigate to={routes.notFound.path}/>}/>
         <Route path={routes.notFound.path} element={<NotFound/>}/>
