@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import {Link, useParams, useSearchParams} from 'react-router-dom';
 import { pageLimit, routes } from '../utils/constants';
 import { getProducts } from '../utils/methods';
-import { Pagination } from '../components/pagination';
-import ProductCard from '../components/productCard';
 import { Breadcrumb, Container, Placeholder, Spinner } from 'react-bootstrap';
 import styled from 'styled-components';
+import ProductCard from '../components/productCard';
+import { Pagination } from '../components/pagination';
 import ProductsFilter from "../components/productsFilter";
 
 const StyledContainer = styled(Container)`

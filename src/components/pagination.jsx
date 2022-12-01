@@ -1,6 +1,6 @@
 import React from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { Pagination as BPagination } from 'react-bootstrap';
+import {useLocation, useNavigate, useParams} from 'react-router-dom';
+import {Pagination as BPagination} from 'react-bootstrap';
 import styled from "styled-components";
 
 const StyledBPagination = styled(BPagination)`
