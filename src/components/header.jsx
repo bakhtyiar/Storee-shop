@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Button, Container, Nav, Navbar} from 'react-bootstrap';
 import {Link, NavLink} from 'react-router-dom';
 import {routes} from '../utils/constants';
 import styled from 'styled-components';
 import logo from '../assets/img/logotype/icons8-icons8.svg'
-import RegisterModal from "./registerModal";
-import LoginModal from "./loginModal";
+import AuthModal from "./authModal";
+import {RootContext} from "../contexts/root-context";
 
 const StyledImg = styled.img`
   height: 44px;
@@ -13,8 +13,7 @@ const StyledImg = styled.img`
 `;
 
 const Header = (authUser) => {
-    const [loginModalShow, setLoginModalShow] = React.useState(false);
-    const [regModalShow, setRegModalShow] = React.useState(false);
+    const {onRegister, onLogin, onHide, isShow} = useContext(RootContext);
 
     return (
         <Navbar bg="dark" variant="dark" sticky="top">
@@ -35,14 +34,16 @@ const Header = (authUser) => {
                         <Nav.Link as={NavLink} to={routes.user.path + "/:" + authUser.id}>Profile</Nav.Link>
                         : (
                             <>
-                                <Nav.Link onClick={() => setRegModalShow(true)}>Register</Nav.Link>
-                                <Button onClick={() => setLoginModalShow(true)}>Login</Button>
+                                <Nav.Link onClick={() => onRegister()}>Register</Nav.Link>
+                                <Button onClick={() => onLogin()}>Login</Button>
                             </>
                         )}
                 </Nav>
             </Container>
-            <RegisterModal show={regModalShow} onHide={() => setRegModalShow(false)}/>
-            <LoginModal show={loginModalShow} onHide={() => setLoginModalShow(false)}/>
+            <AuthModal
+                show={isShow}
+                onHide={onHide}
+            />
         </Navbar>
     );
 }
