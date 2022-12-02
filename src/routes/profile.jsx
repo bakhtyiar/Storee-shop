@@ -5,6 +5,8 @@ import {RootContext} from "../contexts/root-context";
 import {useNavigate, useParams} from "react-router-dom";
 import {routes} from "../utils/constants";
 
+//todo: add editiing of personal data, add 'quit' button, add profile image and edit function for it
+
 const Profile = () => {
     const { authUserState: { username, image, email, password } } = useContext(RootContext);
     const [isLoading, setIsLoading] = useState(false);
