@@ -10,21 +10,23 @@ import * as PropTypes from "prop-types";
 import Register from "./routes/register";
 import Login from "./routes/login";
 
-function AppRoutes(props) {
-    return <Routes>
-        <Route path={routes.home.path} element={<Home/>}/>
-        <Route path={routes.products.path} element={<Navigate to={routes.products.path + "/1"} replace={true}/>}/>
-        <Route path={routes.products.path + "/:page"} element={<Products/>}/>
-        <Route path={routes.product.path} element={<Navigate to=""/>}/>
-        <Route path={routes.product.path + "/:id"} element={<Product/>}/>
-        <Route path={routes.news.path} element={<News/>}/>
-        <Route path={routes.user.path} element={<Navigate to={routes.home.path} replace={true}/>}/>
-        <Route path={routes.register.path} element={<Register authUser={props.authUser}/>}/>
-        <Route path={routes.login.path} element={<Login authUser={props.authUser}/>}/>
-        <Route path={routes.user.path + "/:id"} element={<Profile authUser={props.authUser}/>}/>
-        <Route path="*" element={<Navigate to={routes.notFound.path}/>}/>
-        <Route path={routes.notFound.path} element={<NotFound/>}/>
-    </Routes>;
+function AppRoutes() {
+    return (
+        <Routes>
+            <Route path={routes.home.path} element={<Home/>}/>
+            <Route path={routes.products.path} element={<Navigate to={routes.products.path + "/1"} replace={true}/>}/>
+            <Route path={routes.products.path + "/:page"} element={<Products/>}/>
+            <Route path={routes.product.path} element={<Navigate to=""/>}/>
+            <Route path={routes.product.path + "/:id"} element={<Product/>}/>
+            <Route path={routes.news.path} element={<News/>}/>
+            <Route path={routes.user.path} element={<Navigate to={routes.home.path} replace={true}/>}/>
+            <Route path={routes.register.path} element={<Register/>}/>
+            <Route path={routes.login.path} element={<Login/>}/>
+            <Route path={routes.user.path + "/:id"} element={<Profile/>}/>
+            <Route path="*" element={<Navigate to={routes.notFound.path}/>}/>
+            <Route path={routes.notFound.path} element={<NotFound/>}/>
+        </Routes>
+    );
 }
 
 AppRoutes.propTypes = {authUser: PropTypes.shape({isAuth: PropTypes.bool, id: PropTypes.number})};

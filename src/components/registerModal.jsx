@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {RootContext} from "../contexts/root-context";
 
 const RegisterModal = () => {
-    const {authModalState: { onSwitchType }} = useContext(RootContext);
+    const {authModalState: { onSwitchType }, authUserState: {id, onLogin}} = useContext(RootContext);
 
     return (
         <Form>

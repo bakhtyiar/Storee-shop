@@ -13,14 +13,9 @@ function ErrorFallback({error, resetErrorBoundary}) {
 }
 
 function App() {
-    let authUser = {
-        isAuth: false,
-        id: 0,
-    };
-
     return (
             <div>
-                <Header authUser={authUser}/>
+                <Header/>
                 <div>
                     <ErrorBoundary
                         FallbackComponent={ErrorFallback}
@@ -28,7 +23,7 @@ function App() {
                             // reset the state of your app so the error doesn't happen again
                         }}
                     >
-                        <AppRoutes authUser={authUser}/>
+                        <AppRoutes/>
                     </ErrorBoundary>
                 </div>
             </div>

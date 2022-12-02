@@ -12,8 +12,11 @@ const StyledImg = styled.img`
   width: 44px;
 `;
 
-const Header = (authUser) => {
-    const {authModalState: {onRegister, onLogin, onHide, isShow } } = useContext(RootContext);
+const Header = () => {
+    const {
+        authModalState: {onRegister, onLogin, onHide, isShow},
+        authUserState: {isLoggedIn, id}
+    } = useContext(RootContext);
 
     return (
         <Navbar bg="dark" variant="dark" sticky="top">
@@ -30,8 +33,8 @@ const Header = (authUser) => {
                     <Nav.Link as={NavLink} to={routes.home.path} end>Home</Nav.Link>
                     <Nav.Link as={NavLink} to={routes.products.path}>Products</Nav.Link>
                     <Nav.Link as={NavLink} to={routes.news.path}>News</Nav.Link>
-                    {authUser.isAuth ?
-                        <Nav.Link as={NavLink} to={routes.user.path + "/:" + authUser.id}>Profile</Nav.Link>
+                    {isLoggedIn ?
+                        <Nav.Link as={NavLink} to={routes.user.path + "/:" + id}>Profile</Nav.Link>
                         : (
                             <>
                                 <Nav.Link onClick={() => onRegister()}>Register</Nav.Link>

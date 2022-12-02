@@ -13,11 +13,19 @@ const initialState = {
         onSwitchType: () => {
         },
     },
+    authUserState: {
+        isLoggedIn: false,
+        id: 0,
+        onLogin: () => {
+        },
+        onLogout: () => {
+        },
+    },
     themeState: {
         isDark: false,
         onSwitchTheme: () => {
         },
-    }
+    },
 };
 
 const authModalReducer = (state, action) => {
@@ -33,11 +41,24 @@ const authModalReducer = (state, action) => {
     }
 }
 
+const authUserReducer = (state, action) => {
+    switch (action.type) {
+        case 'login':
+            return {...state, isLoggedIn: true, id: action.payload};
+        case 'logout':
+            return {...state, isLoggedIn: false, id: 0};
+        default:
+            return initialState;
+    }
+}
+
 export const RootContext = React.createContext(initialState);
+export const AuthUserContext = React.createContext(initialState.authUserState);
 export const ThemeContext = React.createContext(initialState.themeState);
 
 export const RootContextProvider = ({children}) => {
     const [authModal, dispatchAuthModal] = useReducer(authModalReducer, initialState.authModalState);
+    const [authUser, dispatchAuthUser] = useReducer(authUserReducer, initialState.authUserState);
     const [theme, setTheme] = useState(initialState.themeState);
 
     const authRegHandler = () => {
@@ -71,6 +92,14 @@ export const RootContextProvider = ({children}) => {
         );
     }
 
+    const loginUser = (id) => {
+        dispatchAuthUser({type: 'login', payload: id});
+    }
+
+    const logoutUser = () => {
+        dispatchAuthUser({type: 'logout', payload: 0});
+    }
+
     const rootState = {
         authModalState: {
             isShow: authModal.isShow,
@@ -79,6 +108,12 @@ export const RootContextProvider = ({children}) => {
             onLogin: authLoginHandler,
             onHide: hideModal,
             onSwitchType: switchAuthType,
+        },
+        authUserState: {
+            isLoggedIn: authUser.isLoggedIn,
+            id: authUser.id,
+            onLogin: loginUser,
+            onLogout: logoutUser,
         },
         themeState: {
             isDark: theme.isDark,
