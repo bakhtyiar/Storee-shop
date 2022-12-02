@@ -124,12 +124,12 @@ export const RootContextProvider = ({children}) => {
         );
     }
 
-    const loginUser = (id) => {
-        dispatchAuthUser({type: 'login', payload: id});
+    const loginUser = (serverResponse) => {
+        dispatchAuthUser({type: 'login', payload: serverResponse});
     }
 
     const logoutUser = () => {
-        dispatchAuthUser({type: 'logout', payload: 0});
+        dispatchAuthUser({type: 'logout'});
     }
 
     const rootState = {
