@@ -15,7 +15,15 @@ const initialState = {
     },
     authUserState: {
         isLoggedIn: false,
-        id: 0,
+        id: -1,
+        username: '',
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        gender: '',
+        image: '',
+        token: '',
         onLogin: () => {
         },
         onLogout: () => {
@@ -42,11 +50,35 @@ const authModalReducer = (state, action) => {
 }
 
 const authUserReducer = (state, action) => {
+    const {id, username, token, password, email, firstName, lastName, gender, image} = action.payload;
     switch (action.type) {
         case 'login':
-            return {...state, isLoggedIn: true, id: action.payload};
+            return {
+                ...state,
+                isLoggedIn: true,
+                id: id,
+                username: username,
+                email: email,
+                firstName: firstName,
+                lastName: lastName,
+                gender: gender,
+                image: image,
+                token: token,
+                password: password,
+            };
         case 'logout':
-            return {...state, isLoggedIn: false, id: 0};
+            return {
+                ...state,
+                isLoggedIn: false,
+                id: 0,
+                username: '',
+                email: '',
+                firstName: '',
+                lastName: '',
+                gender: '',
+                image: '',
+                token: '',
+            };
         default:
             return initialState;
     }
@@ -112,6 +144,13 @@ export const RootContextProvider = ({children}) => {
         authUserState: {
             isLoggedIn: authUser.isLoggedIn,
             id: authUser.id,
+            username: authUser.username,
+            email: authUser.email,
+            firstName: authUser.firstName,
+            lastName: authUser.lastName,
+            gender: authUser.gender,
+            image: authUser.image,
+            token: authUser.token,
             onLogin: loginUser,
             onLogout: logoutUser,
         },
