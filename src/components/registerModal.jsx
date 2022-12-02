@@ -39,7 +39,7 @@ const RegisterModal = () => {
                 </Form.Group>
             </Modal.Body>
             <Modal.Footer style={{'display': 'flex', 'justifyContent': 'space-between'}}>
-                <Button as={Link} onClick={onSwitchType}>Already have an account?</Button>
+                <Link onClick={onSwitchType}>Already have an account?</Link>
                 <Button variant="primary" type="submit">
                     Register
                 </Button>
