@@ -2,7 +2,7 @@ import {Button, InputGroup, Form, Container, Row} from 'react-bootstrap';
 import React, {useEffect, useState} from 'react'
 import CategoryCard from "../components/categoryCard";
 import {getCategories} from "../utils/methods";
-// todo add panels with few o news, o products, o users
+// todo add images to categories, add searching logic
 
 export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
