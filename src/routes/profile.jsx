@@ -2,12 +2,15 @@ import React, {Fragment, useContext, useEffect, useState} from 'react';
 import {Button, Container, Image} from "react-bootstrap";
 import {RootContext} from "../contexts/root-context";
 import avatarPlaceholder from "../assets/img/personalisation/avatar-placeholder.png";
+import {useNavigate} from "react-router-dom";
+import {routes} from "../utils/constants";
 
 //todo: add editiing of personal data, add 'quit' button, add profile image and edit function for it
 
 const Profile = () => {
     const { authUserState: { username, image, email, password, onLogout} } = useContext(RootContext);
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     // The original idea. Not realized due to api restrictions
     // const navigate = useNavigate();
@@ -30,6 +33,10 @@ const Profile = () => {
         avatar = image == '' ? avatarPlaceholder : image;
     }, [image, avatarPlaceholder]);
 
+    const handleClick = () => {
+        onLogout();
+        navigate(routes.home.path);
+    }
 
     return (
         <Container>
@@ -49,7 +56,7 @@ const Profile = () => {
                     <p>email: {email}</p>
                     <p>username: {username}</p>
                     <p>password: ***</p>
-                    <Button>Logout</Button>
+                    <Button onClick={handleClick}>Logout</Button>
                 </Fragment>
             )}
         </Container>
