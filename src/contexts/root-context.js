@@ -50,9 +50,9 @@ const authModalReducer = (state, action) => {
 }
 
 const authUserReducer = (state, action) => {
-    const {id, username, token, password, email, firstName, lastName, gender, image} = action.payload;
     switch (action.type) {
         case 'login':
+            const {id, username, token, password, email, firstName, lastName, gender, image} = action.payload;
             return {
                 ...state,
                 isLoggedIn: true,
