@@ -70,7 +70,7 @@ const authUserReducer = (state, action) => {
             return {
                 ...state,
                 isLoggedIn: false,
-                id: 0,
+                id: -1,
                 username: '',
                 email: '',
                 firstName: '',
