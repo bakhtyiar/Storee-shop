@@ -18,8 +18,8 @@ const schema = yup.object().shape({
     forgetSession: yup.bool(),
 });
 
-const LoginModal = () => {
-    const {authModalState: {onSwitchType, onHide}, authUserState: {onLogin, id}} = useContext(RootContext);
+const LoginForm = () => {
+    const {authModalState: {onSwitchType, onHide}, authUserState: {onLogin}} = useContext(RootContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -119,5 +119,5 @@ const LoginModal = () => {
     );
 };
 
-export default LoginModal;
+export default LoginForm;
 
