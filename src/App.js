@@ -1,5 +1,5 @@
 import {ErrorBoundary} from 'react-error-boundary'
-import Header from './components/header';
+import Header from './components/Header/Header';
 import AppRoutes from "./appRoutes";
 
 function ErrorFallback({error, resetErrorBoundary}) {

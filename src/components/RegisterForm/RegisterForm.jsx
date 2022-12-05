@@ -1,31 +1,34 @@
 import React, {useContext} from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
-import {RootContext} from "../contexts/root-context";
-import * as yup from "yup";
-import {loginUser} from "../utils/methods";
-import {routes} from "../utils/constants";
-import {Formik} from "formik";
+import {RootContext} from "../../contexts/root-context";
+import * as yup from 'yup';
+import {Formik} from 'formik';
+import {registerUser} from "../../utils/methods";
+import {routes} from "../../utils/constants";
 
 const schema = yup.object().shape({
     username: yup.string()
         .min(6, 'Username is too short. Required minimum 6 symbols')
         .max(50, 'Username is too long. Required maximum 50 symbols')
         .required('Username is required'),
+    email: yup.string()
+        .email('Seems like wrong format of email')
+        .required('Email is required'),
     password: yup.string()
         .min(6, 'Password is too short. Write at least 6 symbols')
         .required('Password is required'),
-    forgetSession: yup.bool(),
+    terms: yup.bool().required().oneOf([true], 'Terms must be accepted'),
 });
 
-const LoginForm = () => {
+const RegisterForm = () => {
     const {authModalState: {onSwitchType, onHide}, authUserState: {onLogin}} = useContext(RootContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         console.log('event', event);
-        const {username, password} = event;
-        const res = await loginUser(username, password);
+        const {username, email, password} = event;
+        const res = await registerUser(username, email, password);
         console.log('res', res);
         onLogin(res);
         onHide();
@@ -39,8 +42,9 @@ const LoginForm = () => {
             onSubmit={handleSubmit}
             initialValues={{
                 username: '',
+                email: '',
                 password: '',
-                forgetSession: false,
+                terms: false,
             }}
         >
             {({
@@ -54,7 +58,7 @@ const LoginForm = () => {
                 <Form noValidate onSubmit={handleSubmit}>
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
-                            Login
+                            Register
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -70,8 +74,29 @@ const LoginForm = () => {
                                 isValid={touched.username && !errors.username}
                                 isInvalid={touched.username && !!errors.username}
                             />
-                            <Form.Text className="text-muted">
+                            <Form.Control.Feedback type="invalid">
                                 {touched.username && errors.username}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control
+                                type="email"
+                                placeholder="Enter email"
+                                required
+                                name="email"
+                                value={values.email}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                isValid={touched.email && !errors.email}
+                                isInvalid={touched.email && !!errors.email}
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {touched.email && errors.email}
+                            </Form.Control.Feedback>
+                            <Form.Text className="text-muted">
+                                We'll never share your confidential data
                             </Form.Text>
                         </Form.Group>
 
@@ -95,22 +120,22 @@ const LoginForm = () => {
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
                             <Form.Check
                                 type="checkbox"
-                                label="Do not remember session on this computer"
+                                label="Agree to terms and conditions"
                                 required
-                                feedback={errors.forgetSession}
+                                feedback={errors.terms}
                                 feedbackType="invalid"
                                 name="terms"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                isValid={touched.forgetSession && !errors.forgetSession}
-                                isInvalid={touched.forgetSession && !!errors.forgetSession}
+                                isValid={touched.terms && !errors.terms}
+                                isInvalid={touched.terms && !!errors.terms}
                             />
                         </Form.Group>
                     </Modal.Body>
                     <Modal.Footer style={{'display': 'flex', 'justifyContent': 'space-between'}}>
-                        <Link onClick={onSwitchType}>Doesn't have an account?</Link>
+                        <Link onClick={onSwitchType}>Already have an account?</Link>
                         <Button variant="primary" type="submit">
-                            Login
+                            Register
                         </Button>
                     </Modal.Footer>
                 </Form>
@@ -119,5 +144,5 @@ const LoginForm = () => {
     );
 };
 
-export default LoginForm;
+export default RegisterForm;
 

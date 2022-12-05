@@ -4,9 +4,9 @@ import { pageLimit, routes } from '../utils/constants';
 import { getProducts } from '../utils/methods';
 import { Breadcrumb, Container, Placeholder, Spinner } from 'react-bootstrap';
 import styled from 'styled-components';
-import ProductCard from '../components/productCard';
-import { Pagination } from '../components/pagination';
-import ProductsFilter from "../components/productsFilter";
+import ProductCard from '../components/ProductCard/ProductCard';
+import { Pagination } from '../components/Pagination/Pagination';
+import ProductsFilter from "../components/ProductsFilter/ProductsFilter";
 
 const StyledContainer = styled(Container)`
 	padding-top: 16px;

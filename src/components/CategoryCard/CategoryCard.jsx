@@ -1,8 +1,8 @@
 import React from 'react';
-import {routes} from "../utils/constants";
+import {routes} from "../../utils/constants";
 import {useNavigate} from "react-router-dom";
 import {Card} from "react-bootstrap";
-import {capitalizeStr, replaceDashToSpace} from "../utils/methods";
+import {capitalizeStr, replaceDashToSpace} from "../../utils/methods";
 
 const CategoryCard = (props) => {
     let header = props.header;

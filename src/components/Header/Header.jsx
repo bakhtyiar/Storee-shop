@@ -1,11 +1,11 @@
 import React, {useContext} from 'react';
 import {Button, Container, Nav, Navbar} from 'react-bootstrap';
 import {Link, NavLink} from 'react-router-dom';
-import {routes} from '../utils/constants';
+import {routes} from '../../utils/constants';
 import styled from 'styled-components';
-import logo from '../assets/img/logotype/icons8-icons8.svg'
-import AuthModal from "./authModal";
-import {RootContext} from "../contexts/root-context";
+import logo from '../../assets/img/logotype/icons8-icons8.svg'
+import AuthModal from "../AuthModal/AuthModal";
+import {RootContext} from "../../contexts/root-context";
 
 const StyledImg = styled.img`
   height: 44px;
