@@ -14,7 +14,7 @@ const AuthModal = (props) => {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-            {authType === 'login' && <LoginForm/>}
+            {authType === 'login' && <LoginForm isHaveCloseButton={true}/>}
             {authType === 'register' && <RegisterForm/>}
         </Modal>
     );

@@ -18,7 +18,7 @@ const schema = yup.object().shape({
     forgetSession: yup.bool(),
 });
 
-const LoginForm = () => {
+const LoginForm = ({isHaveCloseButton = false}) => {
     const {authModalState: {onSwitchType, onHide}, authUserState: {onLogin}} = useContext(RootContext);
     const navigate = useNavigate();
 
@@ -52,7 +52,7 @@ const LoginForm = () => {
                   errors,
               }) => (
                 <Form noValidate onSubmit={handleSubmit}>
-                    <Modal.Header closeButton>
+                    <Modal.Header closeButton={isHaveCloseButton}>
                         <Modal.Title id="contained-modal-title-vcenter">
                             Login
                         </Modal.Title>
