@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {Modal} from "react-bootstrap";
 import LoginForm from "./loginForm";
-import RegisterModal from "./registerModal";
+import RegisterForm from "./registerForm";
 import {RootContext} from "../contexts/root-context";
 
 const AuthModal = (props) => {
@@ -15,7 +15,7 @@ const AuthModal = (props) => {
             centered
         >
             {authType === 'login' && <LoginForm/>}
-            {authType === 'register' && <RegisterModal/>}
+            {authType === 'register' && <RegisterForm/>}
         </Modal>
     );
 };

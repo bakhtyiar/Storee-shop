@@ -21,8 +21,8 @@ const schema = yup.object().shape({
     terms: yup.bool().required().oneOf([true], 'Terms must be accepted'),
 });
 
-const RegisterModal = () => {
-    const {authModalState: {onSwitchType, onHide}, authUserState: {onLogin, id}} = useContext(RootContext);
+const RegisterForm = () => {
+    const {authModalState: {onSwitchType, onHide}, authUserState: {onLogin}} = useContext(RootContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -144,5 +144,5 @@ const RegisterModal = () => {
     );
 };
 
-export default RegisterModal;
+export default RegisterForm;
 
