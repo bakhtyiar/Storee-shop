@@ -15,7 +15,7 @@ const AuthModal = (props) => {
             centered
         >
             {authType === 'login' && <LoginForm isHaveCloseButton={true}/>}
-            {authType === 'register' && <RegisterForm/>}
+            {authType === 'register' && <RegisterForm isHaveCloseButton={true}/>}
         </Modal>
     );
 };

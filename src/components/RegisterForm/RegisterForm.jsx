@@ -21,7 +21,7 @@ const schema = yup.object().shape({
     terms: yup.bool().required().oneOf([true], 'Terms must be accepted'),
 });
 
-const RegisterForm = () => {
+const RegisterForm = ({isHaveCloseButton = false}) => {
     const {authModalState: {onSwitchType, onHide}, authUserState: {onLogin}} = useContext(RootContext);
     const navigate = useNavigate();
 
@@ -56,7 +56,7 @@ const RegisterForm = () => {
                   errors,
               }) => (
                 <Form noValidate onSubmit={handleSubmit}>
-                    <Modal.Header closeButton>
+                    <Modal.Header closeButton={isHaveCloseButton}>
                         <Modal.Title id="contained-modal-title-vcenter">
                             Register
                         </Modal.Title>
