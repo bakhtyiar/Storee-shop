@@ -27,7 +27,7 @@ const Header = () => {
                         src={logo}
                         className="d-inline-block align-top"
                     />{' '}
-                    Storee
+                    <span className='align-middle'>Storee</span>
                 </Navbar.Brand>
                 <Nav>
                     <Nav.Link as={NavLink} to={routes.home.path} end>Home</Nav.Link>
