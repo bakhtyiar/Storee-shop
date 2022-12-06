@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Badge, Breadcrumb, Carousel, Col, Container, Row, Spinner } from 'react-bootstrap';
+import {Badge, Breadcrumb, Button, Carousel, Col, Container, Row, Spinner} from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { routes } from '../utils/constants';
@@ -10,14 +10,14 @@ const StyledContainer = styled(Container)`
 `;
 
 const StyledCarousel = styled(Carousel)`
-	width: 640px;
+	max-width: 640px;
 	height: 360px;
 	overflow: hidden;
 	background-color: rgba(0,0,0,0.1);
 `;
 
 const StyledCarouselItem = styled(Carousel.Item)`
-	width: 640px;
+	max-width: 640px;
 	height: 360px;
 `;
 
@@ -55,6 +55,15 @@ const Product = () => {
 					</>
 				) : (
 					<Row>
+						<Col sm={12} md={6}>
+							<StyledCarousel fade="true" variant="dark">
+								{data.images.map((item, index) => (
+									<StyledCarouselItem>
+										<StyledImg key={item} src={item} alt={`Carousel item ${index} slide`} />
+									</StyledCarouselItem>
+								))}
+							</StyledCarousel>
+						</Col>
 						<Col>
 							<h1>{data.title}</h1>
 							<h2>{data.description}</h2>
@@ -63,15 +72,8 @@ const Product = () => {
 							<p>Stock: {data.stock}</p>
 							<p>Brand: {data.brand}</p>
 							<p>Category: {data.category}</p>
-						</Col>
-						<Col>
-							<StyledCarousel fade="true" variant="dark">
-								{data.images.map((item, index) => (
-									<StyledCarouselItem>
-										<StyledImg key={item} src={item} alt={`Carousel item ${index} slide`} />
-									</StyledCarouselItem>
-								))}
-							</StyledCarousel>
+							<Button variant="dark" style={{marginRight: '16px'}}>Add to cart</Button>
+							<Button variant="outline-dark">Buy now</Button>
 						</Col>
 					</Row>
 				)
