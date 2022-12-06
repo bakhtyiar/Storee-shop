@@ -11,11 +11,12 @@ const CategoryCard = (props) => {
     header = replaceDashToSpace(header);
 
     return (
-        <div onClick={() => navigate(`${routes.products.path}/1?category=${props.header}`)}
-             style={{'color': 'black', 'textDecoration': 'none'}}>
+        <div
+            onClick={() => navigate(`${routes.products.path}/1?category=${props.header}`)}
+            style={{'color': 'black', 'textDecoration': 'none'}}
+        >
             <Card
-                bg={'Light'.toLowerCase()}
-                style={{width: '18rem'}}
+                bg={'light'}
                 className="mb-2"
             >
                 <Card.Body>
