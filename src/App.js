@@ -1,6 +1,7 @@
 import {ErrorBoundary} from 'react-error-boundary'
 import Header from './components/Header/Header';
 import AppRoutes from "./appRoutes";
+import Footer from "./components/Footer/Footer";
 
 function ErrorFallback({error, resetErrorBoundary}) {
     return (
@@ -14,17 +15,20 @@ function ErrorFallback({error, resetErrorBoundary}) {
 
 function App() {
     return (
-            <div>
-                <Header/>
-                    <ErrorBoundary
-                        FallbackComponent={ErrorFallback}
-                        onReset={() => {
-                            // reset the state of your app so the error doesn't happen again
-                        }}
-                    >
-                        <AppRoutes/>
-                    </ErrorBoundary>
-            </div>
+        <>
+            <Header/>
+            <ErrorBoundary
+                FallbackComponent={ErrorFallback}
+                onReset={() => {
+                    // reset the state of your app so the error doesn't happen again
+                }}
+            >
+                <div style={{flex: '1'}}>
+                    <AppRoutes/>
+                </div>
+            </ErrorBoundary>
+            <Footer/>
+        </>
     );
 }
 
