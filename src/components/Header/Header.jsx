@@ -36,7 +36,7 @@ const Header = () => {
                 <Button variant="outline-light" onClick={handleShow} className="d-sm-none d-block me-6">
                     ☰ Menu
                 </Button>
-                <Offcanvas show={show} onHide={handleClose}>
+                <Offcanvas show={show} onHide={handleClose} placement='end'>
                     <Offcanvas.Header closeButton>
                         <Offcanvas.Title>Menu</Offcanvas.Title>
                     </Offcanvas.Header>
