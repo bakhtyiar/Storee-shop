@@ -16,7 +16,6 @@ function App() {
     return (
             <div>
                 <Header/>
-                <>
                     <ErrorBoundary
                         FallbackComponent={ErrorFallback}
                         onReset={() => {
@@ -25,7 +24,6 @@ function App() {
                     >
                         <AppRoutes/>
                     </ErrorBoundary>
-                </>
             </div>
     );
 }
