@@ -6,13 +6,19 @@ import App from './App';
 import {BrowserRouter} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {RootContextProvider} from "./contexts/root-context";
+import {ThemeProvider} from "react-bootstrap";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <RootContextProvider>
-        <BrowserRouter>
-            <App/>
-        </BrowserRouter>
+        <ThemeProvider
+            breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
+            minBreakpoint="xxs"
+        >
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
+        </ThemeProvider>
     </RootContextProvider>
 );
 
