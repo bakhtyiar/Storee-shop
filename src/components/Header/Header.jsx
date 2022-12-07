@@ -25,13 +25,13 @@ const Header = () => {
     return (
         <Navbar bg="dark" variant="dark" sticky="top">
             <Container>
-                <Navbar.Brand as={Link} to={routes.home.path}>
+                <Navbar.Brand as={Link} to={routes.home.path} className='d-flex align-items-center'>
                     <StyledImg
                         alt="Logotype"
                         src={logo}
                         className="d-inline-block align-top"
                     />{' '}
-                    <span className='align-middle'>Storee</span>
+                    <span style={{margin: '0 0 4px 8px'}}>Storee</span>
                 </Navbar.Brand>
                 <Button variant="outline-light" onClick={handleShow} className="d-sm-none d-block me-6">
                     ☰ Menu
@@ -49,23 +49,25 @@ const Header = () => {
                                 <Nav.Link as={NavLink} to={routes.user.path + "/:" + id}>Profile</Nav.Link>
                                 : (
                                     <>
-                                        <Nav.Link onClick={() => onRegister()}>Register</Nav.Link>
+                                        <Button variant='outline-secondary' style={{margin: '8px 0'}} onClick={() => onRegister()}>Register</Button>
                                         <Button onClick={() => onLogin()}>Login</Button>
                                     </>
                                 )}
                         </Nav>
                     </Offcanvas.Body>
                 </Offcanvas>
-                <Nav className='d-none d-sm-flex'>
+                <Nav className='d-none d-sm-flex me-auto'>
                     <Nav.Link as={NavLink} to={routes.home.path} end>Home</Nav.Link>
                     <Nav.Link as={NavLink} to={routes.products.path}>Products</Nav.Link>
                     <Nav.Link as={NavLink} to={routes.news.path}>News</Nav.Link>
+                </Nav>
+                <Nav className='d-none d-sm-flex me-none'>
                     {isLoggedIn ?
                         <Nav.Link as={NavLink} to={routes.user.path + "/:" + id}>Profile</Nav.Link>
                         : (
                             <>
-                                <Nav.Link onClick={() => onRegister()}>Register</Nav.Link>
-                                <Button onClick={() => onLogin()}>Login</Button>
+                                <Button variant='outline-secondary' style={{margin: '0 8px'}} onClick={() => onRegister()}>Register</Button>
+                                <Button variant='primary' onClick={() => onLogin()}>Login</Button>
                             </>
                         )}
                 </Nav>
