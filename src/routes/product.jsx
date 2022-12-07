@@ -58,8 +58,8 @@ const Product = () => {
 						<Col sm={12} md={6}>
 							<StyledCarousel fade="true" variant="dark">
 								{data.images.map((item, index) => (
-									<StyledCarouselItem>
-										<StyledImg key={item} src={item} alt={`Carousel item ${index} slide`} />
+									<StyledCarouselItem key={item}>
+										<StyledImg src={item} alt={`Carousel item ${index} slide`} />
 									</StyledCarouselItem>
 								))}
 							</StyledCarousel>

@@ -62,7 +62,7 @@ const Products = () => {
                         <>
                             <Row xs={1} sm={3} lg={6}>
                                 {data.products.map(item => (
-                                    <Col className='mb-4'>
+                                    <Col className='mb-4' key={item.id}>
                                         <ProductCard item={item}/>
                                     </Col>
                                 ))}
