@@ -61,7 +61,11 @@ const Products = () => {
                     ) : (
                         <>
                             <Row xs={1} sm={3} lg={6}>
-                                {data.products.map(item => <Col style={{marginBottom: '32px'}}><ProductCard item={item}/></Col>)}
+                                {data.products.map(item => (
+                                    <Col className='mb-4'>
+                                        <ProductCard item={item}/>
+                                    </Col>
+                                ))}
                             </Row>
                             {1 < pagesAmount && <Pagination pagesAmount={pagesAmount}/>}
                         </>

@@ -56,7 +56,9 @@ export default function Home() {
             </Row>
             <Row>
                 {!isLoading &&
-                    <div style={{'display': 'flex', 'gap': '18px', 'flexWrap': 'wrap'}}>
+                    <div
+                        className='d-flex gap-2 flex-wrap'
+                    >
                         {
                             categories.map((item) => (
                                 <CategoryCard header={item} key={item}/>

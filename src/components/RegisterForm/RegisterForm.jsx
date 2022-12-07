@@ -132,7 +132,7 @@ const RegisterForm = ({isHaveCloseButton = false}) => {
                             />
                         </Form.Group>
                     </Modal.Body>
-                    <Modal.Footer style={{'display': 'flex', 'justifyContent': 'space-between'}}>
+                    <Modal.Footer className='d-flex justify-content-between'>
                         <Link onClick={onSwitchType}>Already have an account?</Link>
                         <Button variant="primary" type="submit">
                             Register

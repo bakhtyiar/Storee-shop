@@ -4,7 +4,7 @@ import LoginForm from "../components/LoginForm/LoginForm";
 
 const Login = () => {
 	return (
-			<Container style={{'padding': '10% 0'}}>
+			<Container className='mt-5'>
 				<LoginForm/>
 			</Container>
 	);

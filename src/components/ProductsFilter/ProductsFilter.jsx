@@ -30,7 +30,7 @@ function ProductsFilter({searchParams, setSearchParams}) {
     }
 
     return (
-        <Form style={{"marginBottom": "16px"}}>
+        <Form className='mb-4'>
             <h3>Filter</h3>
             <h4>Categories</h4>
             <StyledSection>

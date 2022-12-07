@@ -13,14 +13,13 @@ const CategoryCard = (props) => {
     return (
         <div
             onClick={() => navigate(`${routes.products.path}/1?category=${props.header}`)}
-            style={{'color': 'black', 'textDecoration': 'none'}}
         >
             <Card
                 bg={'light'}
                 className="mb-2"
             >
                 <Card.Body>
-                    <Card.Title style={{'margin': '0'}}>{header}</Card.Title>
+                    <Card.Title className='m-0'>{header}</Card.Title>
                 </Card.Body>
             </Card>
         </div>

@@ -23,7 +23,7 @@ function App() {
                     // reset the state of your app so the error doesn't happen again
                 }}
             >
-                <div style={{flex: '1'}}>
+                <div className='d-flex flex-grow-1'>
                     <AppRoutes/>
                 </div>
             </ErrorBoundary>

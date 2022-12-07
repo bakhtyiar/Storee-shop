@@ -31,7 +31,7 @@ const Header = () => {
                         src={logo}
                         className="d-inline-block align-top"
                     />{' '}
-                    <span style={{margin: '0 0 4px 8px'}}>Storee</span>
+                    <span className='align-self-center mb-1 ms-2'>Storee</span>
                 </Navbar.Brand>
                 <Button variant="outline-light" onClick={handleShow} className="d-sm-none d-block me-6">
                     ☰ Menu
@@ -49,7 +49,7 @@ const Header = () => {
                                 <Nav.Link as={NavLink} to={routes.user.path + "/:" + id}>Profile</Nav.Link>
                                 : (
                                     <>
-                                        <Button variant='outline-secondary' style={{margin: '8px 0'}} onClick={() => onRegister()}>Register</Button>
+                                        <Button variant='outline-secondary' className='my-2' onClick={() => onRegister()}>Register</Button>
                                         <Button onClick={() => onLogin()}>Login</Button>
                                     </>
                                 )}
@@ -63,10 +63,10 @@ const Header = () => {
                 </Nav>
                 <Nav className='d-none d-sm-flex me-none'>
                     {isLoggedIn ?
-                        <Nav.Link as={NavLink} to={routes.user.path + "/:" + id}>Profile</Nav.Link>
+                        <Nav.Link as={NavLink} to={`${routes.user.path}/${id}`}>Profile</Nav.Link>
                         : (
                             <>
-                                <Button variant='outline-secondary' style={{margin: '0 8px'}} onClick={() => onRegister()}>Register</Button>
+                                <Button variant='outline-secondary' className='mx-2' onClick={() => onRegister()}>Register</Button>
                                 <Button variant='primary' onClick={() => onLogin()}>Login</Button>
                             </>
                         )}
