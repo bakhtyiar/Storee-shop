@@ -71,8 +71,9 @@ const Header = () => {
                     <Nav.Link as={NavLink} to={routes.news.path}>News</Nav.Link>
                 </Nav>
                 <Nav className='d-none d-sm-flex me-none'>
-                    <Nav.Link as={NavLink} to={`${routes.cart.path}/${isLoggedIn ? id : ''}`} variant='outline-light'>
+                    <Nav.Link as={NavLink} to={`${routes.cart.path}/${isLoggedIn ? id : ''}`} variant='outline-light' className='mx-2'>
                         <i className="bi bi-bag me-2"></i>
+                        {' '}
                         Cart
                     </Nav.Link>
                     {isLoggedIn ?
