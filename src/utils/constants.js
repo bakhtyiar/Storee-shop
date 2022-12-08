@@ -5,6 +5,7 @@ export const routes = {
 	products: { path: "/products" },
 	product: { path: "/product" },
 	news: { path: "/news" },
+	cart: { path: "/cart"},
 	post: { path: "/post" },
 	user: { path: "/user"},
 	login: {path: "/login"},

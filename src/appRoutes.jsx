@@ -9,6 +9,7 @@ import NotFound from "./routes/notFound";
 import * as PropTypes from "prop-types";
 import Register from "./routes/register";
 import Login from "./routes/login";
+import Cart from "./routes/cart";
 
 function AppRoutes() {
     return (
@@ -23,6 +24,8 @@ function AppRoutes() {
             <Route path={routes.login.path} element={<Login/>}/>
             <Route path={routes.user.path} element={<Navigate to={routes.home.path} replace={true}/>}/>
             <Route path={routes.user.path + "/:id"} element={<Profile/>}/>
+            <Route path={routes.cart.path} element={<Cart/>}/>
+            <Route path={routes.cart.path + "/:id"} element={<Cart/>}/>
             <Route path="*" element={<Navigate to={routes.notFound.path}/>}/>
             <Route path={routes.notFound.path} element={<NotFound/>}/>
         </Routes>
