@@ -49,8 +49,17 @@ const Header = () => {
                                 <Nav.Link as={NavLink} to={routes.user.path + "/:" + id}>Profile</Nav.Link>
                                 : (
                                     <>
-                                        <Button variant='outline-secondary' className='my-2' onClick={() => onRegister()}>Register</Button>
-                                        <Button onClick={() => onLogin()}>Login</Button>
+                                        <Button variant='outline-secondary'
+                                                className='my-2'
+                                                onClick={() => onRegister()}
+                                        >
+                                            Register
+                                        </Button>
+                                        <Button
+                                            onClick={() => onLogin()}
+                                        >
+                                            Login
+                                        </Button>
                                     </>
                                 )}
                         </Nav>
@@ -70,8 +79,18 @@ const Header = () => {
                         <Nav.Link as={NavLink} to={`${routes.user.path}/${id}`}>Profile</Nav.Link>
                         : (
                             <>
-                                <Button variant='outline-secondary' className='mx-2' onClick={() => onRegister()}>Register</Button>
-                                <Button variant='primary' onClick={() => onLogin()}>Login</Button>
+                                <Button variant='outline-light'
+                                        className='mx-2'
+                                        onClick={() => onRegister()}
+                                >
+                                    Register
+                                </Button>
+                                <Button
+                                    variant='primary'
+                                    onClick={() => onLogin()}
+                                >
+                                    Login
+                                </Button>
                             </>
                         )}
                 </Nav>
