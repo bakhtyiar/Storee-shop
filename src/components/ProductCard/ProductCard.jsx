@@ -5,21 +5,6 @@ import {routes} from '../../utils/constants';
 import {Link} from 'react-router-dom';
 import {Button} from "react-bootstrap";
 
-const StyledProductCard = styled(Link)`
-  padding: 12px 8px;
-  border-radius: 8px;
-  border: 1px solid #cecece;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  color: inherit;
-  text-decoration: inherit;
-
-  & * {
-    margin: 0;
-  }
-`;
-
 const StyledImg = styled.img`
   align-self: center;
   max-width: 100%;
@@ -28,16 +13,16 @@ const StyledImg = styled.img`
 
 const ProductCard = ({item}) => {
     return (
-        <StyledProductCard to={`${routes.product.path}/${item.id}`} key={item.id}>
+        <Link className='px-2 py-3 border rounded d-flex flex-column align-items-start text-decoration-none text-black' to={`${routes.product.path}/${item.id}`} key={item.id}>
             <StyledImg src={imageIcon} alt="image icon"/>
             <h6 className='mt-2'>{item.title}</h6>
             <p>Price: ${item.price}</p>
-            <Button variant='dark' className='w-100 mt-2'>
+            <Button variant='dark' className='w-100'>
                 <i className="bi bi-bag-plus"></i>
                 {' '}
                 Add to cart
             </Button>
-        </StyledProductCard>
+        </Link>
     );
 }
 
