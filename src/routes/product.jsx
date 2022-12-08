@@ -72,7 +72,7 @@ const Product = () => {
 							<p>Stock: {data.stock}</p>
 							<p>Brand: {data.brand}</p>
 							<p>Category: {data.category}</p>
-							<Button variant="dark" className='me-2'>Add to cart</Button>
+							<Button variant="dark" className='me-3'>Add to cart</Button>
 							<Button variant="outline-dark">Buy now</Button>
 						</Col>
 					</Row>
