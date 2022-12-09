@@ -39,6 +39,9 @@ export const initialState = {
         discountedTotal: 0,
         userId: 0,
         totalProducts: 0,
-        totalQuantity: 0
+        totalQuantity: 0,
+        onAddToCart: () => {},
+        onRemoveFromCart: () => {},
+        onCleanCart: () => {},
     },
 };
