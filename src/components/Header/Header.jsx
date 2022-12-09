@@ -35,7 +35,7 @@ const Header = () => {
                     <span className='align-self-center mb-1 ms-2'>Storee</span>
                 </Navbar.Brand>
                 <Nav>
-                    <Nav.Link as={NavLink} to={`${routes.cart.path}/${isLoggedIn ? id : ''}`} variant='outline-light' className='mx-2'>
+                    <Nav.Link as={NavLink} to={`${routes.cart.path}/${isLoggedIn ? id : ''}`} variant='outline-light' className='d-sm-none d-block mx-2'>
                         <i className="bi bi-bag me-2"></i>
                         {' '}
                         Cart {products.length > 0 ? `(${products.length})` : ''}
