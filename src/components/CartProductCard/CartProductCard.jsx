@@ -16,10 +16,10 @@ const CartProductCard = ({product, selfIndexInCart}) => {
     const { cartState: { onRemoveFromCart } } = useContext(RootContext);
 
     return (
-        <Link className='px-2 py-3 border rounded d-flex flex-column align-items-start text-decoration-none text-black' to={`${routes.product.path}/${product.id}`}>
+        <Link className='px-2 py-3 border rounded d-flex flex-row align-items-center text-decoration-none text-black' to={`${routes.product.path}/${product.id}`}>
             <StyledImg src={imageIcon} alt="image icon"/>
             <h6 className='mt-2'>{product.title}</h6>
-            <p>Price: {product.price}</p>
+            <p className='my-0'>Price: {product.price}</p>
             <p>Amount: {product.quantity}</p>
             <Button
                 variant='dark'
