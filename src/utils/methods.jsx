@@ -94,3 +94,11 @@ export const updateCart = (cartId, products, url = dummyjsonURL) => {
             .then(res => res.json())
     );
 }
+
+export const getLocalCart = () => {
+    return (JSON.parse(localStorage.getItem('cart')));
+}
+
+export const setLocalCart = (cart) => {
+    return (localStorage.setItem('cart', JSON.stringify(cart)));
+}
