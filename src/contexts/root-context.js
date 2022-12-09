@@ -2,6 +2,7 @@ import React, {useReducer, useState} from "react";
 import {initialState} from "./initialState";
 import {authModalReducer} from "./authModalReducer";
 import {authUserReducer} from "./authUserReducer";
+import {cartReducer} from "./cartReducer";
 export const RootContext = React.createContext(initialState);
 export const AuthUserContext = React.createContext(initialState.authUserState);
 export const ThemeContext = React.createContext(initialState.themeState);
@@ -10,6 +11,7 @@ export const RootContextProvider = ({children}) => {
     const [authModal, dispatchAuthModal] = useReducer(authModalReducer, initialState.authModalState);
     const [authUser, dispatchAuthUser] = useReducer(authUserReducer, initialState.authUserState);
     const [theme, setTheme] = useState(initialState.themeState);
+    const [cart, dispatchCart] = useReducer(cartReducer, initialState.cartState);
 
     const authRegHandler = () => {
         dispatchAuthModal({type: 'authTypeRegister'});
@@ -75,6 +77,16 @@ export const RootContextProvider = ({children}) => {
         themeState: {
             isDark: theme.isDark,
             onSwitchTheme: switchTheme,
+        },
+        cartState: {
+            id: cart.id,
+            products: cart.products,
+            total: cart.total,
+            discountedTotal: cart.discountedTotal,
+            userId: cart.userId,
+            totalProducts: cart.totalProducts,
+            totalQuantity: cart.totalQuantity,
+
         },
     };
 

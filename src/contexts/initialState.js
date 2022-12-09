@@ -32,4 +32,13 @@ export const initialState = {
         onSwitchTheme: () => {
         },
     },
+    cartState: {
+        id: -1,
+        products: [],
+        total: 0,
+        discountedTotal: 0,
+        userId: 0,
+        totalProducts: 0,
+        totalQuantity: 0
+    },
 };
