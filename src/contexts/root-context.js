@@ -3,6 +3,7 @@ import {initialState} from "./initialState";
 import {authModalReducer} from "./authModalReducer";
 import {authUserReducer} from "./authUserReducer";
 import {cartReducer} from "./cartReducer";
+import {getLocalCart, getProduct, setLocalCart} from "../utils/methods";
 export const RootContext = React.createContext(initialState);
 export const AuthUserContext = React.createContext(initialState.authUserState);
 export const ThemeContext = React.createContext(initialState.themeState);
@@ -52,6 +53,25 @@ export const RootContextProvider = ({children}) => {
         dispatchAuthUser({type: 'logout'});
     }
 
+    const addToCart = async (productId) => {
+        let newProduct = await getProduct(productId);
+        let newCart = getLocalCart() || initialState.cartState;
+        newCart.products.push(newProduct);
+        dispatchCart({type: 'set', payload: newCart});
+        setLocalCart(newCart);
+    }
+
+    const removeFromCart = (indexInCart) => {
+        let newCart = getLocalCart() || initialState.cartState;
+        newCart.products = newCart.products.filter((product, index) => index !== indexInCart);
+        dispatchCart({type: 'set', payload: newCart});
+        setLocalCart(newCart);
+    }
+
+    const cleanCart = () => {
+        dispatchCart({type: 'clean'});
+    }
+
     const rootState = {
         authModalState: {
             isShow: authModal.isShow,
@@ -86,7 +106,9 @@ export const RootContextProvider = ({children}) => {
             userId: cart.userId,
             totalProducts: cart.totalProducts,
             totalQuantity: cart.totalQuantity,
-
+            onAddToCart: addToCart,
+            onRemoveFromCart: removeFromCart,
+            onCleanCart: cleanCart,
         },
     };
 
