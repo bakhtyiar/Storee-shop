@@ -7,15 +7,15 @@ const Cart = () => {
     const {cartState: {products, total, discountedTotal, totalQuantity}} = useContext(RootContext);
     return (
         <Container>
-            <Row >
+            <Row>
                 <Col xs={12} md={8}>
                     <h1>Cart</h1>
                     {products.length > 0 ? (
                         <>
-                        {products.map((product, index) => (
-                            <CartProductCard product={product} selfIndexInCart={index}/>
-                        ))}
-                        <h5>Amount: {totalQuantity}</h5>
+                            {products.map((product, index) => (
+                                <CartProductCard product={product} selfIndexInCart={index}/>
+                            ))}
+                            <h5 className='mt-3'>Amount: {totalQuantity}</h5>
                         </>
                     ) : (
                         <h3>Nothing here</h3>
