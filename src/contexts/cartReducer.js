@@ -7,6 +7,7 @@ export const cartReducer = (state, action) => {
                 ...state,
                 ...action.payload,
             };
+        case 'clean':
         default:
             return initialState;
     }
