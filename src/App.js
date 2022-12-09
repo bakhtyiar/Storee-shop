@@ -2,6 +2,9 @@ import {ErrorBoundary} from 'react-error-boundary'
 import Header from './components/Header/Header';
 import AppRoutes from "./appRoutes";
 import Footer from "./components/Footer/Footer";
+import {useContext, useEffect} from "react";
+import {RootContext} from "./contexts/root-context";
+import {getLocalCart} from "./utils/methods";
 
 function ErrorFallback({error, resetErrorBoundary}) {
     return (
@@ -14,6 +17,12 @@ function ErrorFallback({error, resetErrorBoundary}) {
 }
 
 function App() {
+    const { cartState: {onSetCart} } = useContext(RootContext);
+    useEffect(() => {
+        let newCart = getLocalCart();
+        onSetCart(newCart);
+    }, []);
+
     return (
         <>
             <Header/>
