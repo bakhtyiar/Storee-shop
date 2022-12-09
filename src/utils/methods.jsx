@@ -71,3 +71,26 @@ export const capitalizeStr = (str) => {
 export const replaceDashToSpace = (str) => {
     return str.replace(/-+/g, ' ');
 }
+
+export const getCart = (userId, url = dummyjsonURL) => {
+    return (
+        fetch(`${url}/carts/user/${userId}`)
+            .then(res => res.json())
+    );
+}
+
+export const updateCart = (cartId, products, url = dummyjsonURL) => {
+    return (
+        fetch(`${url}/carts/${cartId}`, {
+            method: 'PUT', /* or PATCH */
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                merge: true, // this will include existing products in the cart
+                products: [
+                    ...products,
+                ],
+            })
+        })
+            .then(res => res.json())
+    );
+}
