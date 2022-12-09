@@ -15,7 +15,8 @@ const StyledImg = styled.img`
 const Header = () => {
     const {
         authModalState: {onRegister, onLogin, onHide, isShow},
-        authUserState: {isLoggedIn, id}
+        authUserState: {isLoggedIn, id},
+        cartState: {products}
     } = useContext(RootContext);
     const [show, setShow] = useState(false);
 
@@ -74,7 +75,7 @@ const Header = () => {
                     <Nav.Link as={NavLink} to={`${routes.cart.path}/${isLoggedIn ? id : ''}`} variant='outline-light' className='mx-2'>
                         <i className="bi bi-bag me-2"></i>
                         {' '}
-                        Cart
+                        Cart {products.length > 0 ? `(${products.length})` : ''}
                     </Nav.Link>
                     {isLoggedIn ?
                         <Nav.Link as={NavLink} to={`${routes.user.path}/${id}`}>Profile</Nav.Link>
