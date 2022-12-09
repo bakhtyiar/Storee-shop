@@ -34,9 +34,16 @@ const Header = () => {
                     />{' '}
                     <span className='align-self-center mb-1 ms-2'>Storee</span>
                 </Navbar.Brand>
-                <Button variant="outline-light" onClick={handleShow} className="d-sm-none d-block me-6">
-                    ☰ Menu
-                </Button>
+                <Nav>
+                    <Nav.Link as={NavLink} to={`${routes.cart.path}/${isLoggedIn ? id : ''}`} variant='outline-light' className='mx-2'>
+                        <i className="bi bi-bag me-2"></i>
+                        {' '}
+                        Cart {products.length > 0 ? `(${products.length})` : ''}
+                    </Nav.Link>
+                    <Button variant="outline-light" onClick={handleShow} className="d-sm-none d-block me-6">
+                        ☰ Menu
+                    </Button>
+                </Nav>
                 <Offcanvas show={show} onHide={handleClose} placement='end'>
                     <Offcanvas.Header closeButton>
                         <Offcanvas.Title>Menu</Offcanvas.Title>
@@ -72,7 +79,12 @@ const Header = () => {
                     <Nav.Link as={NavLink} to={routes.news.path}>News</Nav.Link>
                 </Nav>
                 <Nav className='d-none d-sm-flex me-none'>
-                    <Nav.Link as={NavLink} to={`${routes.cart.path}/${isLoggedIn ? id : ''}`} variant='outline-light' className='mx-2'>
+                    <Nav.Link
+                        as={NavLink}
+                        to={`${routes.cart.path}/${isLoggedIn ? id : ''}`}
+                        variant='outline-light'
+                        className='mx-2'
+                    >
                         <i className="bi bi-bag me-2"></i>
                         {' '}
                         Cart {products.length > 0 ? `(${products.length})` : ''}
