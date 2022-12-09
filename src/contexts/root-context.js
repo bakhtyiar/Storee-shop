@@ -72,6 +72,10 @@ export const RootContextProvider = ({children}) => {
         dispatchCart({type: 'clean'});
     }
 
+    const setCart = (newCart) => {
+        dispatchCart({type: 'set', payload: newCart});
+    }
+
     const rootState = {
         authModalState: {
             isShow: authModal.isShow,
@@ -109,6 +113,7 @@ export const RootContextProvider = ({children}) => {
             onAddToCart: addToCart,
             onRemoveFromCart: removeFromCart,
             onCleanCart: cleanCart,
+            onSetCart: setCart,
         },
     };
 

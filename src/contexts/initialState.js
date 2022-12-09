@@ -43,5 +43,6 @@ export const initialState = {
         onAddToCart: () => {},
         onRemoveFromCart: () => {},
         onCleanCart: () => {},
+        onSetCart: () => {},
     },
 };
