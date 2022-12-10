@@ -57,6 +57,8 @@ export const RootContextProvider = ({children}) => {
         let newProduct = await getProduct(productId);
         let newCart = getLocalCart() || initialState.cartState;
         newCart.products.push(newProduct);
+        newCart.total = newCart.products.reduce((accumulator, product) => (accumulator + product.price), 0)
+        newCart.totalQuantity = newCart.products.length;
         dispatchCart({type: 'set', payload: newCart});
         setLocalCart(newCart);
     }
@@ -64,6 +66,8 @@ export const RootContextProvider = ({children}) => {
     const removeFromCart = (indexInCart) => {
         let newCart = getLocalCart() || initialState.cartState;
         newCart.products = newCart.products.filter((product, index) => index !== indexInCart);
+        newCart.total = newCart.products.reduce((accumulator, product) => (accumulator + product.price), 0)
+        newCart.totalQuantity = newCart.products.length;
         dispatchCart({type: 'set', payload: newCart});
         setLocalCart(newCart);
     }
