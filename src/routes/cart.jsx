@@ -13,7 +13,7 @@ const Cart = () => {
                     {products.length > 0 ? (
                         <>
                             {products.map((product, index) => (
-                                <CartProductCard product={product} selfIndexInCart={index}/>
+                                <CartProductCard product={product} selfIndexInCart={index} key={product.id}/>
                             ))}
                             <h5 className='mt-3'>Amount: {totalQuantity}</h5>
                         </>
