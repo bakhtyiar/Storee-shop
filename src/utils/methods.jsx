@@ -76,6 +76,7 @@ export const getCart = (userId, url = dummyjsonURL) => {
     return (
         fetch(`${url}/carts/user/${userId}`)
             .then(res => res.json())
+            .then(data => data.carts[0])
     );
 }
 
