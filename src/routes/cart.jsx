@@ -4,7 +4,7 @@ import {RootContext} from "../contexts/root-context";
 import CartProductCard from "../components/CartProductCard/CartProductCard";
 
 const Cart = () => {
-    const {cartState: {products, total, discountedTotal, totalQuantity}} = useContext(RootContext);
+    const {cartState: {products, total, totalQuantity}} = useContext(RootContext);
     return (
         <Container>
             <Row>
@@ -23,10 +23,7 @@ const Cart = () => {
                 </Col>
                 <Col xs={12} md={4}>
                     <h3>R Col</h3>
-                    <p>Total: </p>
-                    <p className='text-decoration-line-through'>{total}</p>
-                    <p>{discountedTotal}</p>
-                    <p></p>
+                    <p>Total: {total}</p>
                 </Col>
             </Row>
         </Container>
