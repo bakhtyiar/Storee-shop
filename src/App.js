@@ -4,7 +4,8 @@ import AppRoutes from "./appRoutes";
 import Footer from "./components/Footer/Footer";
 import {useContext, useEffect} from "react";
 import {RootContext} from "./contexts/root-context";
-import {getLocalCart} from "./utils/methods";
+import {getCart, getLocalCart} from "./utils/methods";
+import {initialState} from "./contexts/initialState";
 
 function ErrorFallback({error, resetErrorBoundary}) {
     return (
@@ -17,11 +18,11 @@ function ErrorFallback({error, resetErrorBoundary}) {
 }
 
 function App() {
-    const { cartState: {onSetCart} } = useContext(RootContext);
+    const { authUserState: {isLoggedIn, id}, cartState: {onSetCart} } = useContext(RootContext);
     useEffect(() => {
-        let newCart = getLocalCart();
+        let newCart = isLoggedIn ? getCart(id) : (getLocalCart() || initialState.cartState);
         onSetCart(newCart);
-    }, []);
+    }, [id, isLoggedIn, onSetCart]);
 
     return (
         <>
