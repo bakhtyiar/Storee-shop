@@ -22,7 +22,7 @@ function App() {
     useEffect(() => {
         let newCart = isLoggedIn ? getCart(id) : (getLocalCart() || initialState.cartState);
         onSetCart(newCart);
-    }, [id, isLoggedIn, onSetCart]);
+    }, []);
 
     return (
         <>
