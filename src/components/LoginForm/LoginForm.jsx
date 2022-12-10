@@ -3,7 +3,7 @@ import {Button, Form, Modal} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {RootContext} from "../../contexts/root-context";
 import * as yup from "yup";
-import {loginUser} from "../../utils/methods";
+import {getCart, loginUser} from "../../utils/methods";
 import {routes} from "../../utils/constants";
 import {Formik} from "formik";
 
@@ -19,7 +19,7 @@ const schema = yup.object().shape({
 });
 
 const LoginForm = ({isHaveCloseButton = false}) => {
-    const {authModalState: {onSwitchType, onHide}, authUserState: {onLogin}} = useContext(RootContext);
+    const {authModalState: {onSwitchType, onHide}, authUserState: {onLogin}, cartState: {onSetCart}} = useContext(RootContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -28,6 +28,9 @@ const LoginForm = ({isHaveCloseButton = false}) => {
         const res = await loginUser(username, password);
         console.log('res', res);
         onLogin(res);
+        const cart = await getCart(res.id);
+        console.log('cart', cart);
+        onSetCart(cart);
         onHide();
         navigate(`${routes.user.path}/${res.id}`);
     };
