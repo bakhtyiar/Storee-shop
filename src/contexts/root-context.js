@@ -70,10 +70,12 @@ export const RootContextProvider = ({children}) => {
 
     const cleanCart = () => {
         dispatchCart({type: 'clean'});
+        setLocalCart(initialState.cartState);
     }
 
     const setCart = (newCart) => {
         dispatchCart({type: 'set', payload: newCart});
+        setLocalCart(newCart);
     }
 
     const rootState = {
