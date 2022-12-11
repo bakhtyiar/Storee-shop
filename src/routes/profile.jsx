@@ -8,7 +8,7 @@ import {routes} from "../utils/constants";
 //todo: add editiing of personal data,add profile image and edit function for it
 
 const Profile = () => {
-    const { authUserState: { username, image, email, password, onLogout} } = useContext(RootContext);
+    const { authUserState: { username, image, email, onLogout} } = useContext(RootContext);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ const Profile = () => {
 
     let avatar = avatarPlaceholder;
     useEffect(() => {
-        avatar = image == '' ? avatarPlaceholder : image;
+        avatar = image === '' ? avatarPlaceholder : image;
     }, [image, avatarPlaceholder]);
 
     const handleClick = () => {
@@ -39,7 +39,7 @@ const Profile = () => {
     }
 
     return (
-        <Container>
+        <Container className='mt-3'>
             <h4>Profile</h4>
             {isLoading ? "Data is loading..." : (
                 <Fragment>
