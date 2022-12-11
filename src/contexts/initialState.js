@@ -1,16 +1,4 @@
 export const initialState = {
-    authModalState: {
-        isShow: false,
-        authType: '',
-        onRegister: () => {
-        },
-        onLogin: () => {
-        },
-        onHide: () => {
-        },
-        onSwitchType: () => {
-        },
-    },
     authUserState: {
         isLoggedIn: false,
         id: -1,
@@ -40,9 +28,13 @@ export const initialState = {
         userId: 0,
         totalProducts: 0,
         totalQuantity: 0,
-        onAddToCart: () => {},
-        onRemoveFromCart: () => {},
-        onCleanCart: () => {},
-        onSetCart: () => {},
+        onAddToCart: () => {
+        },
+        onRemoveFromCart: () => {
+        },
+        onCleanCart: () => {
+        },
+        onSetCart: () => {
+        },
     },
 };

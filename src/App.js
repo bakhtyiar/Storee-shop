@@ -6,6 +6,7 @@ import {useContext, useEffect} from "react";
 import {RootContext} from "./contexts/root-context";
 import {getCart, getLocalCart} from "./utils/methods";
 import {initialState} from "./contexts/initialState";
+import {AuthModalContextProvider} from "./contexts/authModal-context";
 
 function ErrorFallback({error, resetErrorBoundary}) {
     return (
@@ -16,9 +17,10 @@ function ErrorFallback({error, resetErrorBoundary}) {
         </div>
     )
 }
+
 //todo : add cookie auth mechanism for saving data about you are already logged in
 function App() {
-    const { authUserState: {isLoggedIn, id}, cartState: {onSetCart} } = useContext(RootContext);
+    const {authUserState: {isLoggedIn, id}, cartState: {onSetCart}} = useContext(RootContext);
     useEffect(() => {
         let newCart = isLoggedIn ? getCart(id) : (getLocalCart() || initialState.cartState);
         onSetCart(newCart);
@@ -26,7 +28,9 @@ function App() {
 
     return (
         <>
-            <Header/>
+            <AuthModalContextProvider>
+                <Header/>
+            </AuthModalContextProvider>
             <ErrorBoundary
                 FallbackComponent={ErrorFallback}
                 onReset={() => {

@@ -6,6 +6,7 @@ import * as yup from "yup";
 import {getCart, loginUser} from "../../utils/methods";
 import {routes} from "../../utils/constants";
 import {Formik} from "formik";
+import {AuthModalContext} from "../../contexts/authModal-context";
 
 const schema = yup.object().shape({
     username: yup.string()
@@ -19,7 +20,8 @@ const schema = yup.object().shape({
 });
 
 const LoginForm = ({isHaveCloseButton = false}) => {
-    const {authModalState: {onSwitchType, onHide}, authUserState: {onLogin}, cartState: {onSetCart}} = useContext(RootContext);
+    const {authUserState: {onLogin}, cartState: {onSetCart}} = useContext(RootContext);
+    const {onSwitchType, onHide} = useContext(AuthModalContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -111,7 +113,7 @@ const LoginForm = ({isHaveCloseButton = false}) => {
                         </Form.Group>
                     </Modal.Body>
                     <Modal.Footer className='d-flex justify-content-between'>
-                        <Link onClick={onSwitchType}>Doesn't have an account?</Link>
+                        <Link as={Button} onClick={onSwitchType}>Doesn't have an account?</Link>
                         <Button variant="primary" type="submit">
                             Login
                         </Button>

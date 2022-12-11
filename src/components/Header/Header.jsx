@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import logo from '../../assets/img/logotype/icons8-icons8.svg'
 import AuthModal from "../AuthModal/AuthModal";
 import {RootContext} from "../../contexts/root-context";
+import {AuthModalContext} from "../../contexts/authModal-context";
 
 const StyledImg = styled.img`
   height: 44px;
@@ -14,10 +15,12 @@ const StyledImg = styled.img`
 
 const Header = () => {
     const {
-        authModalState: {onRegister, onLogin, onHide, isShow},
         authUserState: {isLoggedIn, id},
         cartState: {products}
     } = useContext(RootContext);
+
+    const {onRegister, onLogin, onHide, isShow} = useContext(AuthModalContext);
+
     const [show, setShow] = useState(false);
 
     const handleShow = () => setShow(true);
@@ -35,7 +38,8 @@ const Header = () => {
                     <span className='align-self-center mb-1 ms-2'>Storee</span>
                 </Navbar.Brand>
                 <Nav>
-                    <Nav.Link as={NavLink} to={`${routes.cart.path}/${isLoggedIn ? id : ''}`} variant='outline-light' className='d-sm-none d-block mx-2'>
+                    <Nav.Link as={NavLink} to={`${routes.cart.path}/${isLoggedIn ? id : ''}`}
+                              variant='outline-light' className='d-sm-none d-block mx-2'>
                         <i className="bi bi-bag me-2"></i>
                         {' '}
                         Cart {products.length > 0 ? `(${products.length})` : ''}

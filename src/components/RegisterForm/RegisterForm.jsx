@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import {Formik} from 'formik';
 import {registerUser} from "../../utils/methods";
 import {routes} from "../../utils/constants";
+import {AuthModalContext} from "../../contexts/authModal-context";
 
 const schema = yup.object().shape({
     username: yup.string()
@@ -22,7 +23,8 @@ const schema = yup.object().shape({
 });
 
 const RegisterForm = ({isHaveCloseButton = false}) => {
-    const {authModalState: {onSwitchType, onHide}, authUserState: {onLogin}} = useContext(RootContext);
+    const {authUserState: {onLogin}} = useContext(RootContext);
+    const {onSwitchType, onHide} = useContext(AuthModalContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -133,7 +135,7 @@ const RegisterForm = ({isHaveCloseButton = false}) => {
                         </Form.Group>
                     </Modal.Body>
                     <Modal.Footer className='d-flex justify-content-between'>
-                        <Link onClick={onSwitchType}>Already have an account?</Link>
+                        <Link as={Button} onClick={onSwitchType}>Already have an account?</Link>
                         <Button variant="primary" type="submit">
                             Register
                         </Button>
