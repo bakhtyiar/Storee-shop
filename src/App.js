@@ -7,6 +7,7 @@ import {RootContext} from "./contexts/root-context";
 import {getCart, getLocalCart} from "./utils/methods";
 import {initialState} from "./contexts/initialState";
 import {AuthModalContextProvider} from "./contexts/authModal-context";
+import {BurgerMenuContextProvider} from "./contexts/burgerMenu-context";
 
 function ErrorFallback({error, resetErrorBoundary}) {
     return (
@@ -28,9 +29,11 @@ function App() {
 
     return (
         <>
-            <AuthModalContextProvider>
-                <Header/>
-            </AuthModalContextProvider>
+            <BurgerMenuContextProvider>
+                <AuthModalContextProvider>
+                    <Header/>
+                </AuthModalContextProvider>
+            </BurgerMenuContextProvider>
             <ErrorBoundary
                 FallbackComponent={ErrorFallback}
                 onReset={() => {

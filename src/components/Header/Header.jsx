@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import {Button, Container, Nav, Navbar, Offcanvas} from 'react-bootstrap';
 import {Link, NavLink} from 'react-router-dom';
 import {routes} from '../../utils/constants';
@@ -7,6 +7,7 @@ import logo from '../../assets/img/logotype/icons8-icons8.svg'
 import AuthModal from "../AuthModal/AuthModal";
 import {RootContext} from "../../contexts/root-context";
 import {AuthModalContext} from "../../contexts/authModal-context";
+import {BurgerMenuContext} from "../../contexts/burgerMenu-context";
 
 const StyledImg = styled.img`
   height: 44px;
@@ -20,11 +21,7 @@ const Header = () => {
     } = useContext(RootContext);
 
     const {onRegister, onLogin, onHide, isShow} = useContext(AuthModalContext);
-
-    const [show, setShow] = useState(false);
-
-    const handleShow = () => setShow(true);
-    const handleClose = () => setShow(false);
+    const {isShow: isShowBurgerMenu, onShow: showBurgerMenu, onHide: hideBurgerMenu} = useContext(BurgerMenuContext);
 
     return (
         <Navbar bg="dark" variant="dark" sticky="top">
@@ -44,11 +41,11 @@ const Header = () => {
                         {' '}
                         Cart {products.length > 0 ? `(${products.length})` : ''}
                     </Nav.Link>
-                    <Button variant="outline-light" onClick={handleShow} className="d-sm-none d-block me-6">
+                    <Button variant="outline-light" onClick={showBurgerMenu} className="d-sm-none d-block me-6">
                         ☰ Menu
                     </Button>
                 </Nav>
-                <Offcanvas show={show} onHide={handleClose} placement='end'>
+                <Offcanvas show={isShowBurgerMenu} onHide={hideBurgerMenu} placement='end'>
                     <Offcanvas.Header closeButton>
                         <Offcanvas.Title>Menu</Offcanvas.Title>
                     </Offcanvas.Header>

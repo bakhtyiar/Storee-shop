@@ -7,6 +7,7 @@ import {getCart, loginUser} from "../../utils/methods";
 import {routes} from "../../utils/constants";
 import {Formik} from "formik";
 import {AuthModalContext} from "../../contexts/authModal-context";
+import {BurgerMenuContext} from "../../contexts/burgerMenu-context";
 
 const schema = yup.object().shape({
     username: yup.string()
@@ -21,6 +22,7 @@ const schema = yup.object().shape({
 
 const LoginForm = ({isHaveCloseButton = false}) => {
     const {authUserState: {onLogin}, cartState: {onSetCart}} = useContext(RootContext);
+    const {onHide: hideBurgerMenu} = useContext(BurgerMenuContext);
     const {onSwitchType, onHide} = useContext(AuthModalContext);
     const navigate = useNavigate();
 
@@ -34,6 +36,7 @@ const LoginForm = ({isHaveCloseButton = false}) => {
         console.log('cart', cart);
         onSetCart(cart);
         onHide();
+        hideBurgerMenu();
         navigate(`${routes.user.path}/${res.id}`);
     };
 
