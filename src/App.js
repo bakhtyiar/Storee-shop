@@ -4,31 +4,40 @@ import AppRoutes from "./appRoutes";
 import Footer from "./components/Footer/Footer";
 import {useContext, useEffect} from "react";
 import {RootContext} from "./contexts/root-context";
-import {getCart, getLocalCart} from "./utils/methods";
+import {getCart, getCookie, getLocalCart, getUser} from "./utils/methods";
 import {initialState} from "./contexts/initialState";
 import {AuthModalContextProvider} from "./contexts/authModal-context";
 import {BurgerMenuContextProvider} from "./contexts/burgerMenu-context";
 
 function ErrorFallback({error, resetErrorBoundary}) {
-    return (
-        <div role="alert">
+    return (<div role="alert">
             <p>Something went wrong:</p>
             <pre>{error.message}</pre>
             <button onClick={resetErrorBoundary}>Try again</button>
-        </div>
-    )
+        </div>)
 }
 
 //todo : add cookie auth mechanism for saving data about you are already logged in
 function App() {
-    const {authUserState: {isLoggedIn, id}, cartState: {onSetCart}} = useContext(RootContext);
+    const {authUserState: {isLoggedIn, id, onLogin}, cartState: {onSetCart}} = useContext(RootContext);
     useEffect(() => {
-        let newCart = isLoggedIn ? getCart(id) : (getLocalCart() || initialState.cartState);
-        onSetCart(newCart);
+        const authCookie = getCookie('user');
+        if (authCookie !== undefined && authCookie !== -1) {
+            getUser(authCookie).then((res) => {
+                onLogin(res);
+                console.log('cookie login res', res)
+            })
+        }
+        if (isLoggedIn) {
+            getCart(id).then((res) => {
+                onSetCart(res);
+            })
+        } else {
+            onSetCart(getLocalCart() || initialState.cartState);
+        }
     }, []);
 
-    return (
-        <>
+    return (<>
             <BurgerMenuContextProvider>
                 <AuthModalContextProvider>
                     <Header/>
@@ -45,8 +54,7 @@ function App() {
                 </div>
             </ErrorBoundary>
             <Footer/>
-        </>
-    );
+        </>);
 }
 
 export default App;

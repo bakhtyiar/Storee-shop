@@ -2,7 +2,7 @@ import React, {useReducer, useState} from "react";
 import {initialState} from "./initialState";
 import {authUserReducer} from "./authUserReducer";
 import {cartReducer} from "./cartReducer";
-import {getLocalCart, getProduct, setLocalCart} from "../utils/methods";
+import {deleteCookie, getLocalCart, getProduct, setCookie, setLocalCart} from "../utils/methods";
 
 export const RootContext = React.createContext(initialState);
 
@@ -21,10 +21,12 @@ export const RootContextProvider = ({children}) => {
     }
 
     const loginUser = (serverResponse) => {
+        setCookie('user', serverResponse.id, {path: '/', 'max-age': 36000, secure: true, samesite: 'lax'});
         dispatchAuthUser({type: 'login', payload: serverResponse});
     }
 
     const logoutUser = () => {
+        deleteCookie('user');
         dispatchAuthUser({type: 'logout'});
     }
 
@@ -57,7 +59,7 @@ export const RootContextProvider = ({children}) => {
         setLocalCart(newCart);
     }
 
-    const rootState = {
+    const state = {
         authUserState: {
             isLoggedIn: authUser.isLoggedIn,
             id: authUser.id,
@@ -91,7 +93,7 @@ export const RootContextProvider = ({children}) => {
     };
 
     return (
-        <RootContext.Provider value={rootState}>
+        <RootContext.Provider value={state}>
             {children}
         </RootContext.Provider>
     )
