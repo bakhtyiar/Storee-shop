@@ -48,6 +48,22 @@ export const RootContextProvider = ({children}) => {
         setLocalCart(newCart);
     }
 
+    const updateProductQuantity = async (productId, quantity) => {
+        let newCart = getLocalCart() || initialState.cartState;
+        let productIndex = newCart.products.findIndex( (product) => product.id === productId);
+        newCart.products[productIndex].quantity = quantity;
+        if (authUser.isLoggedIn) {
+            newCart = await updateCart(cart.id, newCart.products);
+        } else {
+            newCart.total = newCart.products.reduce((accumulator, product) => (accumulator + product.price), 0)
+            newCart.discountedTotal = newCart.products.reduce((accumulator, product) => (accumulator + product.discountedTotal), 0) || newCart.total;
+            newCart.totalProducts = newCart.products.length;
+            newCart.totalQuantity = newCart.products.reduce((accumulator, product) => (accumulator + product.quantity), 0) || newCart.totalProducts;
+        }
+        dispatchCart({type: 'set', payload: newCart});
+        setLocalCart(newCart);
+    }
+
     const removeFromCart = async (indexInCart) => {
         let newCart = getLocalCart() || initialState.cartState;
         newCart.products = newCart.products.filter((product, index) => index !== indexInCart);
@@ -109,6 +125,7 @@ export const RootContextProvider = ({children}) => {
             onRemoveFromCart: removeFromCart,
             onCleanCart: cleanCart,
             onSetCart: setCart,
+            onUpdateQuantity: updateProductQuantity,
         },
     };
 

@@ -36,5 +36,7 @@ export const initialState = {
         },
         onSetCart: () => {
         },
+        onUpdateQuantity: () => {
+        },
     },
 };
