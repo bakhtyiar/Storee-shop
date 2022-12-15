@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Form} from "react-bootstrap";
-import {getCategories, replaceDashToSpace} from "../../utils/methods";
 import styled from "styled-components";
+import {getCategories} from "../../utils/server-api/products/products";
+import {replaceDashToSpace} from "../../utils/str/str";
 
 const StyledSection = styled.section`
   display: flex;

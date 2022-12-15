@@ -3,7 +3,7 @@ import {Badge, Breadcrumb, Button, Carousel, Col, Container, Row, Spinner} from 
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { routes } from '../utils/constants';
-import { getProduct } from '../utils/methods';
+import {getProduct} from "../utils/server-api/products/products";
 
 const StyledContainer = styled(Container)`
 	padding-top: 16px;

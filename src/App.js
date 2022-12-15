@@ -4,10 +4,12 @@ import AppRoutes from "./appRoutes";
 import Footer from "./components/Footer/Footer";
 import {useContext, useEffect} from "react";
 import {RootContext} from "./contexts/root-context";
-import {getCart, getCookie, getLocalCart, getUser} from "./utils/methods";
 import {initialState} from "./contexts/initialState";
 import {AuthModalContextProvider} from "./contexts/authModal-context";
 import {BurgerMenuContextProvider} from "./contexts/burgerMenu-context";
+import {getCookie} from "./utils/cookies/cookies";
+import {getUser} from "./utils/server-api/user/user";
+import {getCart, getLocalCart} from "./utils/server-api/cart/cart";
 
 function ErrorFallback({error, resetErrorBoundary}) {
     return (<div role="alert">
@@ -17,7 +19,7 @@ function ErrorFallback({error, resetErrorBoundary}) {
         </div>)
 }
 
-//todo : add cookie auth mechanism for saving data about you are already logged in
+//todo : add cookies auth mechanism for saving data about you are already logged in
 function App() {
     const {authUserState: {isLoggedIn, id, onLogin}, cartState: {onSetCart}} = useContext(RootContext);
     useEffect(() => {
@@ -25,7 +27,7 @@ function App() {
         if (authCookie !== undefined && authCookie !== -1) {
             getUser(authCookie).then((res) => {
                 onLogin(res);
-                console.log('cookie login res', res)
+                console.log('cookies login res', res)
             })
         }
         if (isLoggedIn) {

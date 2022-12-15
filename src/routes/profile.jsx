@@ -12,7 +12,7 @@ const Profile = () => {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
-    // The original idea. Not realized due to api restrictions
+    // The original idea. Not realized due to web-api restrictions
     // const navigate = useNavigate();
     // const { authUserState: { isLoggedIn, id: userID } } = useContext(RootContext);
     // const [data, setData] = useState(null);

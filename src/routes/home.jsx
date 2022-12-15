@@ -1,7 +1,7 @@
 import {Button, InputGroup, Form, Container, Row} from 'react-bootstrap';
 import React, {useEffect, useState} from 'react'
 import CategoryCard from "../components/CategoryCard/CategoryCard";
-import {getCategories} from "../utils/methods";
+import {getCategories} from "../utils/server-api/products/products";
 // todo add images to categories, add searching logic
 
 export default function Home() {

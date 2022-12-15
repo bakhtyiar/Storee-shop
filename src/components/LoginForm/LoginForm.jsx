@@ -3,11 +3,12 @@ import {Button, Form, Modal} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {RootContext} from "../../contexts/root-context";
 import * as yup from "yup";
-import {getCart, loginUser} from "../../utils/methods";
-import {routes} from "../../utils/constants";
 import {Formik} from "formik";
 import {AuthModalContext} from "../../contexts/authModal-context";
 import {BurgerMenuContext} from "../../contexts/burgerMenu-context";
+import {getCart} from "../../utils/server-api/cart/cart";
+import {loginUser} from "../../utils/server-api/user/user";
+import {routes} from "../../utils/constants";
 
 const schema = yup.object().shape({
     username: yup.string()
