@@ -2,9 +2,9 @@ import React, {useReducer, useState} from "react";
 import {initialState} from "./initialState";
 import {authUserReducer} from "./authUserReducer";
 import {cartReducer} from "./cartReducer";
-import {deleteCookie, setCookie} from "../utils/cookies/cookies";
-import {getProduct} from "../utils/server-api/products/products";
-import {getLocalCart, setLocalCart} from "../utils/server-api/cart/cart";
+import {deleteCookie, setCookie} from "../../utils/cookies/cookies";
+import {getProduct} from "../../utils/server-api/products/products";
+import {getLocalCart, setLocalCart} from "../../utils/server-api/cart/cart";
 
 export const RootContext = React.createContext(initialState);
 

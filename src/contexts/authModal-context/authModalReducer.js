@@ -1,4 +1,4 @@
-import {initialState} from "./initialState";
+import {initialState} from "../root-context/initialState";
 
 export const authModalReducer = (state, action) => {
     switch (action.type) {

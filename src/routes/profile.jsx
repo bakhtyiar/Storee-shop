@@ -1,6 +1,6 @@
 import React, {Fragment, useContext, useEffect, useState} from 'react';
 import {Button, Container, Image} from "react-bootstrap";
-import {RootContext} from "../contexts/root-context";
+import {RootContext} from "../contexts/root-context/root-context";
 import avatarPlaceholder from "../assets/img/personalisation/avatar-placeholder.png";
 import {useNavigate} from "react-router-dom";
 import {routes} from "../utils/constants";

@@ -5,9 +5,9 @@ import {routes} from '../../utils/constants';
 import styled from 'styled-components';
 import logo from '../../assets/img/logotype/icons8-icons8.svg'
 import AuthModal from "../AuthModal/AuthModal";
-import {RootContext} from "../../contexts/root-context";
-import {AuthModalContext} from "../../contexts/authModal-context";
-import {BurgerMenuContext} from "../../contexts/burgerMenu-context";
+import {RootContext} from "../../contexts/root-context/root-context";
+import {AuthModalContext} from "../../contexts/authModal-context/authModal-context";
+import {BurgerMenuContext} from "../../contexts/burgerMenu-context/burgerMenu-context";
 
 const StyledImg = styled.img`
   height: 44px;

@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {RootContext} from "../../contexts/root-context";
+import {RootContext} from "../../contexts/root-context/root-context";
 import {Link} from "react-router-dom";
 import {routes} from "../../utils/constants";
 import imageIcon from "../../assets/img/icons/image/icons8-image-48.png";

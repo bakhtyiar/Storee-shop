@@ -4,7 +4,7 @@ import imageIcon from '../../assets/img/icons/image/icons8-image-48.png';
 import {routes} from '../../utils/constants';
 import {Link} from 'react-router-dom';
 import {Button} from "react-bootstrap";
-import {RootContext} from "../../contexts/root-context";
+import {RootContext} from "../../contexts/root-context/root-context";
 
 const StyledImg = styled.img`
   align-self: center;

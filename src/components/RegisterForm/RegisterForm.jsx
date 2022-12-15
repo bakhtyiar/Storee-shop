@@ -1,12 +1,12 @@
 import React, {useContext} from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
-import {RootContext} from "../../contexts/root-context";
+import {RootContext} from "../../contexts/root-context/root-context";
 import * as yup from 'yup';
 import {Formik} from 'formik';
 import {routes} from "../../utils/constants";
-import {AuthModalContext} from "../../contexts/authModal-context";
-import {BurgerMenuContext} from "../../contexts/burgerMenu-context";
+import {AuthModalContext} from "../../contexts/authModal-context/authModal-context";
+import {BurgerMenuContext} from "../../contexts/burgerMenu-context/burgerMenu-context";
 import {registerUser} from "../../utils/server-api/user/user";
 
 const schema = yup.object().shape({

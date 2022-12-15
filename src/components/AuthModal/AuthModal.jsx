@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {Modal} from "react-bootstrap";
 import LoginForm from "../LoginForm/LoginForm";
 import RegisterForm from "../RegisterForm/RegisterForm";
-import {AuthModalContext} from "../../contexts/authModal-context";
+import {AuthModalContext} from "../../contexts/authModal-context/authModal-context";
 
 const AuthModal = (props) => {
     const { authType } = useContext(AuthModalContext);

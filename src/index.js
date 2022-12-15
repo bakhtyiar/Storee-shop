@@ -5,7 +5,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import App from './App';
 import {BrowserRouter} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {RootContextProvider} from "./contexts/root-context";
+import {RootContextProvider} from "./contexts/root-context/root-context";
 import {ThemeProvider} from "react-bootstrap";
 // import reportWebVitals from './reportWebVitals';
 
