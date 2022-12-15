@@ -14,7 +14,7 @@ export const updateCart = (cartId, products, url = dummyjsonURL) => {
             method: 'PUT', /* or PATCH */
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                merge: true, // this will include existing products in the cart
+                merge: false, // include existing products in the cart
                 products: [
                     ...products,
                 ],
