@@ -4,7 +4,7 @@ import {authUserReducer} from "./authUserReducer";
 import {cartReducer} from "./cartReducer";
 import {deleteCookie, setCookie} from "../../utils/cookies/cookies";
 import {getProduct} from "../../utils/server-api/products/products";
-import {getLocalCart, setLocalCart} from "../../utils/server-api/cart/cart";
+import {getLocalCart, setLocalCart, updateCart} from "../../utils/server-api/cart/cart";
 
 export const RootContext = React.createContext(initialState);
 
@@ -36,27 +36,45 @@ export const RootContextProvider = ({children}) => {
         let newProduct = await getProduct(productId);
         let newCart = getLocalCart() || initialState.cartState;
         newCart.products.push(newProduct);
-        newCart.total = newCart.products.reduce((accumulator, product) => (accumulator + product.price), 0)
-        newCart.totalQuantity = newCart.products.length;
+        if (authUser.isLoggedIn) {
+            newCart = await updateCart(cart.id, newCart.products);
+        } else {
+            newCart.total = newCart.products.reduce((accumulator, product) => (accumulator + product.price), 0)
+            newCart.discountedTotal = newCart.products.reduce((accumulator, product) => (accumulator + product.discountedTotal), 0) || newCart.total;
+            newCart.totalProducts = newCart.products.length;
+            newCart.totalQuantity = newCart.products.reduce((accumulator, product) => (accumulator + product.quantity), 0) || newCart.totalProducts;
+        }
         dispatchCart({type: 'set', payload: newCart});
         setLocalCart(newCart);
     }
 
-    const removeFromCart = (indexInCart) => {
+    const removeFromCart = async (indexInCart) => {
         let newCart = getLocalCart() || initialState.cartState;
         newCart.products = newCart.products.filter((product, index) => index !== indexInCart);
-        newCart.total = newCart.products.reduce((accumulator, product) => (accumulator + product.price), 0)
-        newCart.totalQuantity = newCart.products.length;
+        if (authUser.isLoggedIn) {
+            newCart = await updateCart(cart.id, newCart.products);
+        } else {
+            newCart.total = newCart.products.reduce((accumulator, product) => (accumulator + product.price), 0)
+            newCart.discountedTotal = newCart.products.reduce((accumulator, product) => (accumulator + product.discountedTotal), 0) || newCart.total;
+            newCart.totalProducts = newCart.products.length;
+            newCart.totalQuantity = newCart.products.reduce((accumulator, product) => (accumulator + product.quantity), 0) || newCart.totalProducts;
+        }
         dispatchCart({type: 'set', payload: newCart});
         setLocalCart(newCart);
     }
 
-    const cleanCart = () => {
+    const cleanCart = async () => {
         dispatchCart({type: 'clean'});
+        if (authUser.isLoggedIn) {
+            await updateCart(cart.id, []);
+        }
         setLocalCart(initialState.cartState);
     }
 
-    const setCart = (newCart) => {
+    const setCart = async (newCart) => {
+        if (authUser.isLoggedIn) {
+            await updateCart(cart.id, newCart.products);
+        }
         dispatchCart({type: 'set', payload: newCart});
         setLocalCart(newCart);
     }
