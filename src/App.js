@@ -19,7 +19,6 @@ function ErrorFallback({error, resetErrorBoundary}) {
         </div>)
 }
 
-//todo : add cookies auth mechanism for saving data about you are already logged in
 function App() {
     const {authUserState: {isLoggedIn, id, onLogin}, cartState: {onSetCart}} = useContext(RootContext);
     useEffect(() => {
