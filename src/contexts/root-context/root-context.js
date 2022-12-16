@@ -33,9 +33,14 @@ export const RootContextProvider = ({children}) => {
     }
 
     const addToCart = async (productId) => {
-        let newProduct = await getProduct(productId);
         let newCart = getLocalCart() || initialState.cartState;
-        newCart.products.push(newProduct);
+        let productIndex = newCart.products.findIndex((product) => product.id === productId);
+        if (productIndex !== -1) {
+            newCart.products[productIndex].quantity += 1;
+        } else {
+            let newProduct = await getProduct(productId);
+            newCart.products.push(newProduct);
+        }
         if (authUser.isLoggedIn) {
             newCart = await updateCart(cart.id, newCart.products);
         } else {
