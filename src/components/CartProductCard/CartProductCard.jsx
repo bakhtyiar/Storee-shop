@@ -11,7 +11,7 @@ const StyledImg = styled.img`
   max-width: 100%;
   max-height: 200px;
 `;
-//todo : add amount of per product, add controls to make a buy, add list in right column of discounts
+//todo :add list in right column of discounts
 const CartProductCard = ({product, selfIndexInCart}) => {
     const {cartState: {onRemoveFromCart, onUpdateQuantity}} = useContext(RootContext);
     const [quantity, setQuantity] = useState(product.quantity);
