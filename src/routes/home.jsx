@@ -17,7 +17,6 @@ export default function Home() {
     useEffect(() => {
         fetch('https://dummyjson.com/quotes/random')
             .then(res => res.json())
-            .then(console.log);
     }, []);
 
     useEffect(() => {
