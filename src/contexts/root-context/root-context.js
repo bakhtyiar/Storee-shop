@@ -23,7 +23,7 @@ export const RootContextProvider = ({children}) => {
     }
 
     const loginUser = (serverResponse) => {
-        setCookie('user', serverResponse.id, {path: '/', 'max-age': 36000, secure: true, samesite: 'lax'});
+        setCookie('user', serverResponse.id, {path: '/', 'max-age': 36000, secure: true, samesite: 'lax', httpOnly: true});
         dispatchAuthUser({type: 'login', payload: serverResponse});
     }
 
