@@ -23,7 +23,7 @@ function App() {
     const {authUserState: {isLoggedIn, id, onLogin}, cartState: {onSetCart}} = useContext(RootContext);
     useEffect(() => {
         const authCookie = getCookie('user');
-        if (authCookie !== undefined && authCookie !== -1) {
+        if (authCookie !== undefined && authCookie !== '-1') {
             getUser(authCookie).then((res) => {
                 onLogin(res);
                 console.log('cookies login res', res)
