@@ -1,4 +1,5 @@
 import {dummyjsonURL} from "../../constants";
+import authHeader from "../server-api";
 
 export const getCart = (userId, url = dummyjsonURL) => {
     return (
@@ -12,7 +13,7 @@ export const updateCart = (cartId, products, url = dummyjsonURL) => {
     return (
         fetch(`${url}/carts/${cartId}`, {
             method: 'PUT', /* or PATCH */
-            headers: { 'Content-Type': 'application/json' },
+            headers: authHeader(),
             body: JSON.stringify({
                 merge: false, // include existing products in the cart
                 products: [
