@@ -6,6 +6,7 @@ export const routes = {
 	product: { path: "/product" },
 	news: { path: "/news" },
 	cart: { path: "/cart"},
+	order: {path: "/order"},
 	post: { path: "/post" },
 	user: { path: "/user"},
 	login: {path: "/login"},

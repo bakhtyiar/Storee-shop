@@ -10,6 +10,7 @@ import * as PropTypes from "prop-types";
 import Register from "./routes/register";
 import Login from "./routes/login";
 import Cart from "./routes/cart";
+import Order from "./routes/order";
 
 function AppRoutes() {
     return (
@@ -26,6 +27,7 @@ function AppRoutes() {
             <Route path={routes.user.path + "/:id"} element={<Profile/>}/>
             <Route path={routes.cart.path} element={<Cart/>}/>
             <Route path={routes.cart.path + "/:id"} element={<Cart/>}/>
+            <Route path={routes.order.path} element={<Order/>}/>
             <Route path="*" element={<Navigate to={routes.notFound.path}/>}/>
             <Route path={routes.notFound.path} element={<NotFound/>}/>
         </Routes>

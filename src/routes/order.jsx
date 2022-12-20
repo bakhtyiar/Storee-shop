@@ -1,11 +1,9 @@
-import React, {useContext, useEffect, useLayoutEffect} from 'react';
+import React, {useContext} from 'react';
 import dayjs from "dayjs";
-import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {RootContext} from "../contexts/root-context/root-context";
-import {BurgerMenuContext} from "../contexts/burgerMenu-context/burgerMenu-context";
-import {AuthModalContext} from "../contexts/authModal-context/authModal-context";
-import {Link, useNavigate} from "react-router-dom";
-import {getUser, registerUser} from "../utils/server-api/user/user";
+import {useNavigate} from "react-router-dom";
+import {registerUser} from "../utils/server-api/user/user";
 import {routes} from "../utils/constants";
 import {Formik} from "formik";
 import * as yup from "yup";
@@ -107,7 +105,7 @@ const Order = () => {
                                 </Form.Text>
                             </Form.Group>
 
-                            <Form.Group>
+                            <Form.Group className='mb-3'>
                                 <h5>Shipment method</h5>
                                 <Form.Check
                                     inline
@@ -143,18 +141,20 @@ const Order = () => {
                                 />
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formGridAddress1">
-                                <Form.Label>Street</Form.Label>
-                                <Form.Control placeholder="1234 Main St"/>
-                                <Form.Control.Feedback type="invalid">
-                                    {touched.password && errors.password}
-                                </Form.Control.Feedback>
-                            </Form.Group>
+                            <Row>
+                                <Form.Group as={Col} className="mb-3" controlId="formGridAddress1">
+                                    <Form.Label>Street & house</Form.Label>
+                                    <Form.Control placeholder="1234 Main St"/>
+                                    <Form.Control.Feedback type="invalid">
+                                        {touched.password && errors.password}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formGridAddress2">
-                                <Form.Label>Address 2</Form.Label>
-                                <Form.Control placeholder="Apartment, studio, or floor"/>
-                            </Form.Group>
+                                <Form.Group as={Col} className="mb-3" controlId="formGridAddress2">
+                                    <Form.Label>Apartment</Form.Label>
+                                    <Form.Control placeholder="Apartment, studio, or floor"/>
+                                </Form.Group>
+                            </Row>
 
                             <Row className="mb-3">
                                 <Form.Group as={Col} controlId="formGridCity">
