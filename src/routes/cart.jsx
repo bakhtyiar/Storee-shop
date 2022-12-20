@@ -1,10 +1,14 @@
 import React, {useContext} from 'react';
-import {Col, Container, Row} from "react-bootstrap";
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {RootContext} from "../contexts/root-context/root-context";
 import CartProductCard from "../components/CartProductCard/CartProductCard";
+import {useNavigate} from "react-router-dom";
+import {routes} from "../utils/constants";
 
 const Cart = () => {
     const {cartState: {products, total, discountedTotal, totalProducts, totalQuantity}} = useContext(RootContext);
+    const navigate = useNavigate();
+
     return (
         <Container className='mt-4'>
             <Row>
@@ -22,8 +26,17 @@ const Cart = () => {
                     )}
                 </Col>
                 <Col xs={12} md={4}>
-                    <h3>R Col</h3>
-                    <p>Total: <b style={{textDecoration: 'line-through'}}>{total}</b> {discountedTotal}</p>
+                    <h3>Order</h3>
+                    <Form.Group className="mb-3 w-50" controlId="formBasicUsername">
+                        <Form.Label>Promocode</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter promocode"
+                            name="promocode"
+                        />
+                    </Form.Group>
+                    <p>Total: $<b style={{textDecoration: 'line-through'}}>{total}</b> ${discountedTotal}</p>
+                    <Button onClick={() => navigate(routes.order.path)}>Make order</Button>
                 </Col>
             </Row>
         </Container>
