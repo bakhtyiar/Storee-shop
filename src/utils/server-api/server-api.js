@@ -1,9 +1,12 @@
-export default function authHeader() {
-    const user = JSON.parse(localStorage.getItem('user'));
+import {getCookie} from "../cookies/cookies";
 
-    if (user && user.token) {
+export default function authHeader() {
+    // const { token } = JSON.parse(localStorage.getItem('user'));
+    const token = getCookie('auth-token');
+
+    if (token !== undefined && token !== 'undefined') {
         return {
-            Authorization: 'Bearer ' + user.token,
+            Authorization: 'Bearer ' + token,
             'Content-Type': 'application/json',
         };
     } else {

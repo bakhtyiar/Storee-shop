@@ -23,12 +23,16 @@ export const RootContextProvider = ({children}) => {
     }
 
     const loginUser = (serverResponse) => {
-        setCookie('user', serverResponse.id, {path: '/', 'max-age': 36000, secure: true, samesite: 'lax', httpOnly: true});
+        setCookie('user', serverResponse.id, {path: '/', 'max-age': 36000, secure: true, samesite: 'lax'});
+        setCookie('auth-token', serverResponse.token, {path: '/', 'max-age': 36000, secure: true, samesite: 'strict'});
+        // setCookie('jwt-token', serverResponse.token, {path: '/', 'max-age': 36000, secure: true, samesite: 'strict', httpOnly: true});
+        delete serverResponse.token;
         dispatchAuthUser({type: 'login', payload: serverResponse});
     }
 
     const logoutUser = () => {
         deleteCookie('user');
+        deleteCookie('auth-token');
         dispatchAuthUser({type: 'logout'});
     }
 

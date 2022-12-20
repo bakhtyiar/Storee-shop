@@ -13,3 +13,4 @@ export const routes = {
 	register: {path: "/register"},
 	notFound: { path: "/page_not_found" },
 };
+export const encryptKey = 'StoreeEncryptKey2023';
