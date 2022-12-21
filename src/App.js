@@ -29,10 +29,12 @@ function App() {
                 console.log('cookies login res', res)
             })
         }
+        //todo : try to refactor
         if (isLoggedIn) {
-            getCart(id).then((res) => {
-                onSetCart(res);
-            })
+            getCart(id)
+                .then((res) => {
+                    onSetCart(res || initialState.cartState);
+                })
         } else {
             onSetCart(getLocalCart() || initialState.cartState);
         }
