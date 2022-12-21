@@ -26,7 +26,11 @@ export const updateCart = (cartId, products, url = dummyjsonURL) => {
 }
 
 export const getLocalCart = () => {
-    return (JSON.parse(localStorage.getItem('cart')));
+    const cart = localStorage.getItem('cart');
+    if (cart === 'undefined' || cart === undefined) {
+        return null;
+    }
+    return (JSON.parse(cart));
 }
 
 export const setLocalCart = (cart) => {
