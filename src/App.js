@@ -13,10 +13,10 @@ import {getCart, getLocalCart} from "./utils/server-api/cart/cart";
 
 function ErrorFallback({error, resetErrorBoundary}) {
     return (<div role="alert">
-            <p>Something went wrong:</p>
-            <pre>{error.message}</pre>
-            <button onClick={resetErrorBoundary}>Try again</button>
-        </div>)
+        <p>Something went wrong:</p>
+        <pre>{error.message}</pre>
+        <button onClick={resetErrorBoundary}>Try again</button>
+    </div>)
 }
 
 function App() {
@@ -26,7 +26,6 @@ function App() {
         if (authCookie !== undefined && authCookie !== '-1') {
             getUser(authCookie).then((res) => {
                 onLogin(res);
-                console.log('cookies login res', res)
             })
         }
         //todo : try to refactor
@@ -41,23 +40,23 @@ function App() {
     }, []);
 
     return (<>
-            <BurgerMenuContextProvider>
-                <AuthModalContextProvider>
-                    <Header/>
-                </AuthModalContextProvider>
-            </BurgerMenuContextProvider>
-            <ErrorBoundary
-                FallbackComponent={ErrorFallback}
-                onReset={() => {
-                    // reset the state of your app so the error doesn't happen again
-                }}
-            >
-                <div className='d-flex flex-grow-1'>
-                    <AppRoutes/>
-                </div>
-            </ErrorBoundary>
-            <Footer/>
-        </>);
+        <BurgerMenuContextProvider>
+            <AuthModalContextProvider>
+                <Header/>
+            </AuthModalContextProvider>
+        </BurgerMenuContextProvider>
+        <ErrorBoundary
+            FallbackComponent={ErrorFallback}
+            onReset={() => {
+                // reset the state of your app so the error doesn't happen again
+            }}
+        >
+            <div className='d-flex flex-grow-1'>
+                <AppRoutes/>
+            </div>
+        </ErrorBoundary>
+        <Footer/>
+    </>);
 }
 
 export default App;
