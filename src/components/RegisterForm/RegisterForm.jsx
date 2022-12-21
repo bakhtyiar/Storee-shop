@@ -29,15 +29,18 @@ const RegisterForm = ({isHaveCloseButton = false}) => {
     const {onSwitchType, onHide} = useContext(AuthModalContext);
     const navigate = useNavigate();
 
-    const handleSubmit = async (event) => {
-        console.log('event', event);
-        const {username, email, password} = event;
+    const handleSubmit = async (values, actions) => {
+        const {username, email, password} = values;
         const res = await registerUser(username, email, password);
-        console.log('res', res);
-        onLogin(res);
-        onHide();
-        hideBurgerMenu();
-        navigate(`${routes.user.path}/${res.id}`);
+        if (!res.message) {
+            onLogin(res);
+            onHide();
+            hideBurgerMenu();
+            navigate(`${routes.user.path}/${res.id}`);
+        } else {
+            actions.setFieldError('general', res.message);
+            actions.setSubmitting(false);
+        }
     };
 
     return (

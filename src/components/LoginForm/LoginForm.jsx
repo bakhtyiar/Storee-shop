@@ -9,6 +9,9 @@ import {BurgerMenuContext} from "../../contexts/burgerMenu-context/burgerMenu-co
 import {getCart} from "../../utils/server-api/cart/cart";
 import {loginUser} from "../../utils/server-api/user/user";
 import {routes} from "../../utils/constants";
+import {initialState} from "../../contexts/root-context/initialState";
+
+//todo : remake login and register logic
 
 const schema = yup.object().shape({
     username: yup.string()
@@ -27,18 +30,26 @@ const LoginForm = ({isHaveCloseButton = false}) => {
     const {onSwitchType, onHide} = useContext(AuthModalContext);
     const navigate = useNavigate();
 
-    const handleSubmit = async (event) => {
-        console.log('event', event);
-        const {username, password} = event;
+    const handleSubmit = async (values, actions) => {
+        const {username, password} = values;
         const res = await loginUser(username, password);
-        console.log('res', res);
-        onLogin(res);
-        const cart = await getCart(res.id);
-        console.log('cart', cart);
-        onSetCart(cart);
-        onHide();
-        hideBurgerMenu();
-        navigate(`${routes.user.path}/${res.id}`);
+        //tried to refactor & use .then.catch try{}catch(e){}, but cant get [[PromiseResult]] out from loginUser()
+        if (!res.message) { //message appears on 400 error
+            onLogin(res);
+            const cart = await getCart(res.id);
+            console.log('cart', cart);
+            if (cart !== undefined) {
+                onSetCart(cart);
+            } else {
+                onSetCart(initialState.cartState);
+            }
+            onHide();
+            hideBurgerMenu();
+            navigate(`${routes.user.path}/${res.id}`);
+        } else {
+            actions.setFieldError('general', res.message);
+            actions.setSubmitting(false);
+        }
     };
 
     return (
@@ -115,6 +126,9 @@ const LoginForm = ({isHaveCloseButton = false}) => {
                                 isInvalid={touched.forgetSession && !!errors.forgetSession}
                             />
                         </Form.Group>
+                        <h6 className='text-danger'>
+                            {errors.general}
+                        </h6>
                     </Modal.Body>
                     <Modal.Footer className='d-flex justify-content-between'>
                         <Link as={Button} onClick={onSwitchType}>Doesn't have an account?</Link>
