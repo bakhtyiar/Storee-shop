@@ -61,6 +61,14 @@ export const loginUser = async (username, password, url = dummyjsonURL) => {
     } catch (error) {
         throw new Error(error);
     }
+    let personalData;
+    try {
+        personalData = await fetch(`${url}/users/${auth.id}`);
+        personalData = await personalData.json();
+    } catch (error) {
+        throw new Error(error);
+    }
 
-    return (auth);
+    const data = deepmerge(auth, personalData);
+    return (data);
 }

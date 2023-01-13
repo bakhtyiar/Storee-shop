@@ -3,19 +3,10 @@ import {initialState} from "./initialState";
 export const authUserReducer = (state, action) => {
     switch (action.type) {
         case 'login':
-            const {id, username, token, password, email, firstName, lastName, gender, image} = action.payload;
             return {
                 ...state,
                 isLoggedIn: true,
-                id: id,
-                username: username,
-                email: email,
-                firstName: firstName,
-                lastName: lastName,
-                gender: gender,
-                image: image,
-                token: token,
-                password: password,
+                ...action.payload,
             };
         case 'logout':
             return {
