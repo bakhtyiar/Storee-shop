@@ -1,20 +1,33 @@
 import {dummyjsonURL} from "../../constants";
 import authHeader from "../server-api";
+import deepmerge from "deepmerge";
 
 export const getUsers = async (query, url = dummyjsonURL) => {
-    return (fetch(`${url}/users/search?q=${query}`)
-        .catch(e => console.log(e))
-        .then(response => response.json()))
+    let res;
+    try {
+        res = await fetch(`${url}/users/search?q=${query}`);
+        res = await res.json();
+    } catch (error) {
+        throw new Error(error);
+    }
+    return res;
 }
 
 export const getUser = async (id, url = dummyjsonURL) => {
-    return (fetch(`${url}/users/${id}`)
-        .catch(e => console.log(e))
-        .then(response => response.json()))
+    let res;
+    try {
+        res = await fetch(`${url}/users/${id}`);
+        res = await res.json();
+    } catch (error) {
+        throw new Error(error);
+    }
+    return res;
 }
 
 export const registerUser = async (username, email, password, url = dummyjsonURL) => {
-    return (fetch(`${url}/users/add`, {
+    let res;
+    try {
+        res = await fetch(`${url}/users/add`, {
             method: 'POST',
             headers: authHeader(),
             body: JSON.stringify({
@@ -24,13 +37,17 @@ export const registerUser = async (username, email, password, url = dummyjsonURL
                 /* other user data */
             })
         })
-            .then(res => res.json())
-    )
+        res = await res.json();
+    } catch (error) {
+        throw new Error(error);
+    }
+    return (res);
 }
 
 export const loginUser = async (username, password, url = dummyjsonURL) => {
-    return (
-        fetch(`${url}/auth/login`, {
+    let auth;
+    try {
+        auth = await fetch(`${url}/auth/login`, {
             method: 'POST',
             headers: authHeader(),
             body: JSON.stringify({
@@ -39,7 +56,11 @@ export const loginUser = async (username, password, url = dummyjsonURL) => {
                 'password': password,
                 // expiresInMins: 60, // optional
             })
-        })
-            .then(res => res.json())
-    )
+        });
+        auth = await auth.json();
+    } catch (error) {
+        throw new Error(error);
+    }
+
+    return (auth);
 }
