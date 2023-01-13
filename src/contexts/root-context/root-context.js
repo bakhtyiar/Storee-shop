@@ -64,8 +64,8 @@ export const RootContextProvider = ({children}) => {
         if (authUser.isLoggedIn) {
             newCart = await updateCart(cart.id, newCart.products);
         } else {
-            newCart.total = newCart.products.reduce((accumulator, product) => (accumulator + product.price), 0)
-            newCart.discountedTotal = newCart.products.reduce((accumulator, product) => (accumulator + product.discountedTotal), 0) || newCart.total;
+            newCart.total = newCart.products.reduce((accumulator, product) => (accumulator + product.total), 0)
+            newCart.discountedTotal = newCart.products.reduce((accumulator, product) => (accumulator + product.discountedPrice), 0) || newCart.total;
             newCart.totalProducts = newCart.products.length;
             newCart.totalQuantity = newCart.products.reduce((accumulator, product) => (accumulator + product.quantity), 0) || newCart.totalProducts;
         }
@@ -79,8 +79,8 @@ export const RootContextProvider = ({children}) => {
         if (authUser.isLoggedIn) {
             newCart = await updateCart(cart.id, newCart.products);
         } else {
-            newCart.total = newCart.products.reduce((accumulator, product) => (accumulator + product.price), 0)
-            newCart.discountedTotal = newCart.products.reduce((accumulator, product) => (accumulator + product.discountedTotal), 0) || newCart.total;
+            newCart.total = newCart.products.reduce((accumulator, product) => (accumulator + product.total), 0)
+            newCart.discountedTotal = newCart.products.reduce((accumulator, product) => (accumulator + product.discountedPrice), 0) || newCart.total;
             newCart.totalProducts = newCart.products.length;
             newCart.totalQuantity = newCart.products.reduce((accumulator, product) => (accumulator + product.quantity), 0) || newCart.totalProducts;
         }
