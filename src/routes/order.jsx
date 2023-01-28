@@ -1,12 +1,15 @@
 import React, {useContext} from 'react';
-import dayjs from "dayjs";
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import {Button, Card, Col, Container, Form, Row} from "react-bootstrap";
 import {RootContext} from "../contexts/root-context/root-context";
 import {useNavigate} from "react-router-dom";
-import {registerUser} from "../utils/server-api/user/user";
-import {routes} from "../utils/constants";
+import {paymentMethods, shipmentMethods} from "../utils/constants";
 import {Formik} from "formik";
 import * as yup from "yup";
+import IdentityForm from "../components/OrderForm/IdentityForm/IdentityForm";
+import ShipmentForm from "../components/OrderForm/ShipmentForm/ShipmentForm";
+import PaymentForm from "../components/OrderForm/PaymentForm/PaymentForm";
+import ProductsForm from "../components/OrderForm/ProductsForm/ProductsForm";
+import TermsForm from "../components/OrderForm/TermsForm/TermsForm";
 
 // todo : fix 1.when logged in on page refresh auto fill data to input does not working
 
@@ -18,25 +21,34 @@ const schema = yup.object().shape({
     email: yup.string()
         .email('Seems like wrong format of email')
         .required('Email is required'),
-    password: yup.string()
-        .min(6, 'Password is too short. Write at least 6 symbols')
-        .required('Password is required'),
+    shipmentMethod: yup.string(),
+    address: yup.string()
+        .min(6, 'Address is too short. Required minimum 6 symbols'),
+    city: yup.string()
+        .min(4, 'City\'s name is too short. Required minimum 4 symbols'),
+    state: yup.string()
+        .min(2, 'State\'s name is too short. Required minimum 2 symbols'),
+    postalCode: yup.string()
+        .min(5, 'Postalcode is too short. Required minimum 6 symbols')
+        .max(5, 'Postalcode is too long. Required maximum 6 symbols'),
+    paymentMethod: yup.string(),
     terms: yup.bool().required().oneOf([true], 'Terms must be accepted'),
 });
 
 const Order = () => {
-    const {authUserState} = useContext(RootContext);
-    const navigate = useNavigate();
+    const {
+        authUserState,
+        cartState: {products, total, discountedTotal, totalProducts, totalQuantity}
+    } = useContext(RootContext);
+
+    console.log('authUserState', authUserState);
 
     const handleSubmit = async (event) => {
-        const {username, email, password} = event;
-        const res = await registerUser(username, email, password);
-        authUserState.onLogin(res);
-        navigate(`${routes.user.path}/${res.id}`);
+        console.log('Order form submitted content', event);
     };
 
     return (
-        <Container>
+        <Container className='mt-4'>
             <Formik
                 validationSchema={schema}
                 validateOnBlur
@@ -44,9 +56,12 @@ const Order = () => {
                 initialValues={{
                     username: authUserState.isLoggedIn ? authUserState.username : '',
                     email: authUserState.isLoggedIn ? authUserState.email : '',
-                    firstName: authUserState.isLoggedIn ? authUserState.firstName : '',
-                    lastName: authUserState.isLoggedIn ? authUserState.lastName : '',
-                    shipmentMethod: 'warehouse',
+                    shipmentMethod: shipmentMethods.courier.value,
+                    address: authUserState.isLoggedIn ? authUserState.address.address : '',
+                    city: authUserState.isLoggedIn ? authUserState.address.city : '',
+                    state: authUserState.isLoggedIn ? authUserState.address.state : '',
+                    postalCode: authUserState.isLoggedIn ? authUserState.address.postalCode : '',
+                    paymentMethod: paymentMethods.card.value,
                     terms: false,
                 }}
             >
@@ -59,151 +74,63 @@ const Order = () => {
                       errors,
                   }) => (
                     <Form noValidate onSubmit={handleSubmit}>
-                        <h3>
-                            Order
-                        </h3>
+                        <h3 className='mb-3'>Order</h3>
                         <Row>
-                            <Form.Group as={Col} className="mb-3" controlId="formBasicUsername">
-                                <Form.Label>Username</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Enter username"
-                                    name="username"
-                                    value={values.username}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    isValid={touched.username && !errors.username}
-                                    isInvalid={touched.username && !!errors.username}
-                                    disabled={authUserState.isLoggedIn}
-                                    readOnly={authUserState.isLoggedIn}
+                            <Col xs={12} md={8} className='d-flex flex-column gap-2'>
+                                <IdentityForm
+                                    values={values}
+                                    touched={touched}
+                                    errors={errors}
+                                    authUserState={authUserState}
+                                    handleChange={handleChange}
+                                    handleBlur={handleBlur}
                                 />
-                                <Form.Control.Feedback type="invalid">
-                                    {touched.username && errors.username}
-                                </Form.Control.Feedback>
-                            </Form.Group>
-
-                            <Form.Group as={Col} className="mb-3" controlId="formBasicEmail">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control
-                                    type="email"
-                                    placeholder="Enter email"
-                                    required
-                                    name="email"
-                                    value={values.email}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    isValid={touched.email && !errors.email}
-                                    isInvalid={touched.email && !!errors.email}
-                                    disabled={authUserState.isLoggedIn}
-                                    readOnly={authUserState.isLoggedIn}
+                                <ShipmentForm
+                                    values={values}
+                                    touched={touched}
+                                    errors={errors}
+                                    authUserState={authUserState}
+                                    handleChange={handleChange}
+                                    handleBlur={handleBlur}
                                 />
-                                <Form.Control.Feedback type="invalid">
-                                    {touched.email && errors.email}
-                                </Form.Control.Feedback>
-                                <Form.Text className="text-muted">
-                                    We'll never share your confidential data
-                                </Form.Text>
-                            </Form.Group>
-
-                            <Form.Group className='mb-3'>
-                                <h5>Shipment method</h5>
-                                <Form.Check
-                                    inline
-                                    label="Pick up from warehouse"
-                                    name="group1"
-                                    value='warehouse'
-                                    type='radio'
-                                    id={`inline-radio-1`}
+                                <PaymentForm
+                                    values={values}
+                                    touched={touched}
+                                    errors={errors}
+                                    authUserState={authUserState}
+                                    handleChange={handleChange}
+                                    handleBlur={handleBlur}
                                 />
-                                <Form.Check
-                                    inline
-                                    label="Courier delivery"
-                                    name="group1"
-                                    value='courier'
-                                    type='radio'
-                                    id={`inline-radio-2`}
+                                <ProductsForm
+                                    products={products}
+                                    totalProducts={totalProducts}
+                                    totalQuantity={totalQuantity}
                                 />
-                                <Form.Check
-                                    inline
-                                    label="Delivery to the post office"
-                                    name="group1"
-                                    value='postOffice'
-                                    type='radio'
-                                    id={`inline-radio-3`}
-                                />
-                                <Form.Check
-                                    inline
-                                    disabled
-                                    label="Air drone shipment"
-                                    value='airDrone'
-                                    type='radio'
-                                    id={`inline-radio-4`}
-                                />
-                            </Form.Group>
-
-                            <Row>
-                                <Form.Group as={Col} className="mb-3" controlId="formGridAddress1">
-                                    <Form.Label>Street & house</Form.Label>
-                                    <Form.Control placeholder="1234 Main St"/>
-                                    <Form.Control.Feedback type="invalid">
-                                        {touched.password && errors.password}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-
-                                <Form.Group as={Col} className="mb-3" controlId="formGridAddress2">
-                                    <Form.Label>Apartment</Form.Label>
-                                    <Form.Control placeholder="Apartment, studio, or floor"/>
-                                </Form.Group>
-                            </Row>
-
-                            <Row className="mb-3">
-                                <Form.Group as={Col} controlId="formGridCity">
-                                    <Form.Label>City</Form.Label>
-                                    <Form.Control/>
-                                </Form.Group>
-
-                                <Form.Group as={Col} controlId="formGridState">
-                                    <Form.Label>State</Form.Label>
-                                    <Form.Select defaultValue="Choose...">
-                                        <option>Choose...</option>
-                                        <option>...</option>
-                                    </Form.Select>
-                                </Form.Group>
-
-                                <Form.Group as={Col} controlId="formGridZip">
-                                    <Form.Label>Zip</Form.Label>
-                                    <Form.Control/>
-                                </Form.Group>
-                            </Row>
-
-                            <Form.Group className="mb-3" id="formGridCheckbox">
-                                <Form.Check type="checkbox" label="Check me out"/>
-                            </Form.Group>
-
-                            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                                <Form.Check
-                                    type="checkbox"
-                                    label="Agree to terms and conditions"
-                                    required
-                                    feedback={errors.terms}
-                                    feedbackType="invalid"
-                                    name="terms"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    isValid={touched.terms && !errors.terms}
-                                    isInvalid={touched.terms && !!errors.terms}
-                                />
-                            </Form.Group>
+                               <TermsForm
+                                   touched={touched}
+                                   errors={errors}
+                                   handleChange={handleChange   }
+                                   handleBlur={handleBlur}
+                               />
+                            </Col>
+                            <Col xs={12} md={4}>
+                                <Card body>
+                                    <h3>Order</h3>
+                                    <p className='d-flex justify-content-between'>
+                                        <span>Cost: </span> <span>${total}</span>
+                                    </p>
+                                    <p className='d-flex justify-content-between'>
+                                        <span>Discount: </span> <span>${total - discountedTotal}</span>
+                                    </p>
+                                    <p className='d-flex justify-content-between'>
+                                        <span>Total: </span> <b><span className='d-inline'>${discountedTotal}</span></b>
+                                    </p>
+                                    <Button variant="primary" type="submit" className='w-100'>
+                                        Confirm order
+                                    </Button>
+                                </Card>
+                            </Col>
                         </Row>
-                        <Row>
-                            <h5>Shipment</h5>
-                            <p>Date: {dayjs().add(3, 'day').format('D MMMM YYYY')}</p>
-                        </Row>
-                        <div className='d-flex justify-content-between'>
-                            <Button variant="primary" type="submit">
-                                Make order
-                            </Button>
-                        </div>
                     </Form>
                 )}
             </Formik>
