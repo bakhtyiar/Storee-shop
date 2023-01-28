@@ -36,7 +36,7 @@ const Cart = () => {
                             <span>Discount: </span> <span>${total - discountedTotal}</span>
                         </p>
                         <p className='d-flex justify-content-between'>
-                            <span>Total: </span> <h5 className='d-inline'>${discountedTotal}</h5>
+                            <span>Total: </span> <b><span className='d-inline'>${discountedTotal}</span></b>
                         </p>
                         <Button as={Link} to={routes.order.path} className='w-100'>Make order</Button>
                     </Card>
