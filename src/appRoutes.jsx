@@ -24,10 +24,8 @@ function AppRoutes() {
             <Route path={routes.news.path} element={<News/>}/>
             <Route path={routes.register.path} element={<Register/>}/>
             <Route path={routes.login.path} element={<Login/>}/>
-            <Route path={routes.user.path} element={<Navigate to={routes.home.path} replace={true}/>}/>
-            <Route path={routes.user.path + "/:id"} element={<Profile/>}/>
+            <Route path={routes.profile.path} element={<Profile/>}/>
             <Route path={routes.cart.path} element={<Cart/>}/>
-            <Route path={routes.cart.path + "/:id"} element={<Cart/>}/>
             <Route path={routes.orderMaking.path} element={<OrderMaking/>}/>
             <Route path={routes.orderCompleted.path} element={<OrderCompleted/>}/>
             <Route path="*" element={<Navigate to={routes.notFound.path}/>}/>

@@ -16,7 +16,7 @@ const StyledImg = styled.img`
 
 const Header = () => {
     const {
-        authUserState: {isLoggedIn, id},
+        authUserState: {isLoggedIn},
         cartState: {products}
     } = useContext(RootContext);
 
@@ -35,7 +35,7 @@ const Header = () => {
                     <span className='align-self-center mb-1 ms-2'>Storee</span>
                 </Navbar.Brand>
                 <Nav>
-                    <Nav.Link as={NavLink} to={`${routes.cart.path}/${isLoggedIn ? id : ''}`}
+                    <Nav.Link as={NavLink} to={`${routes.cart.path}`}
                               variant='outline-light' className='d-sm-none d-block mx-2'>
                         <i className="bi bi-bag me-2"></i>
                         {' '}
@@ -55,7 +55,7 @@ const Header = () => {
                             <Nav.Link as={NavLink} to={routes.products.path}>Products</Nav.Link>
                             <Nav.Link as={NavLink} to={routes.news.path}>News</Nav.Link>
                             {isLoggedIn ?
-                                <Nav.Link as={NavLink} to={routes.user.path + "/:" + id}>Profile</Nav.Link>
+                                <Nav.Link as={NavLink} to={routes.profile.path}>Profile</Nav.Link>
                                 : (
                                     <>
                                         <Button variant='outline-secondary'
@@ -82,7 +82,7 @@ const Header = () => {
                 <Nav className='d-none d-sm-flex me-none'>
                     <Nav.Link
                         as={NavLink}
-                        to={`${routes.cart.path}/${isLoggedIn ? id : ''}`}
+                        to={`${routes.cart.path}`}
                         variant='outline-light'
                         className='mx-2'
                     >
@@ -91,7 +91,7 @@ const Header = () => {
                         Cart {products.length > 0 ? `(${products.length})` : ''}
                     </Nav.Link>
                     {isLoggedIn ?
-                        <Nav.Link as={NavLink} to={`${routes.user.path}/${id}`}>Profile</Nav.Link>
+                        <Nav.Link as={NavLink} to={`${routes.profile.path}`}>Profile</Nav.Link>
                         : (
                             <>
                                 <Button variant='outline-light'

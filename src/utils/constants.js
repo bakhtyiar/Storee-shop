@@ -9,7 +9,7 @@ export const routes = {
 	orderMaking: {path: "/orderMaking"},
 	orderCompleted: {path: "/order_completed"},
 	post: { path: "/post" },
-	user: { path: "/user"},
+	profile: { path: "/profile"},
 	login: {path: "/login"},
 	register: {path: "/register"},
 	notFound: { path: "/page_not_found" },

@@ -36,7 +36,7 @@ const RegisterForm = ({isHaveCloseButton = false}) => {
             onLogin(res);
             onHide();
             hideBurgerMenu();
-            navigate(`${routes.user.path}/${res.id}`);
+            navigate(`${routes.profile.path}`);
         } else {
             actions.setFieldError('general', res.message);
             actions.setSubmitting(false);
