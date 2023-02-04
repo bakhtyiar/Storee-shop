@@ -1,13 +1,10 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Col, Row} from "react-bootstrap";
 import FormTextField from "../../../utils/formik/FormTextField";
 import FormSelectField from "../../../utils/formik/FormSelectField";
 import {states} from "../../../utils/constants";
-import {RootContext} from "../../../contexts/root-context/root-context";
 
 const CourierFormSection = () => {
-    const {authUserState} = useContext(RootContext);
-
     return (
         <>
             <Row className="mb-3">
@@ -36,10 +33,9 @@ const CourierFormSection = () => {
                     placeholder='New York'
                     name='state'
                     type='text'
-                    defaultValue={authUserState.isLoggedIn && authUserState.address.state ? authUserState.address.state : 'Choose...'}
                 >
                     <>
-                        <option disabled>Choose...</option>
+                        <option value={''} disabled>Choose...</option>
                         {states.map((state) => (
                             <option key={state.value}
                                     value={state.value}>{state.label}</option>

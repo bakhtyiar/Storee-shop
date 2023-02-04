@@ -1,13 +1,10 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import FormTextField from "../../../utils/formik/FormTextField";
 import {Col, Row} from "react-bootstrap";
 import FormSelectField from "../../../utils/formik/FormSelectField";
 import {states} from "../../../utils/constants";
-import {RootContext} from "../../../contexts/root-context/root-context";
 
 const PostOfficeFormSection = () => {
-    const {authUserState} = useContext(RootContext);
-
     return (
         <Row>
             <FormTextField
@@ -25,10 +22,9 @@ const PostOfficeFormSection = () => {
                 placeholder='New York'
                 name='state'
                 type='text'
-                defaultValue={authUserState.isLoggedIn && authUserState.address.state ? authUserState.address.state : 'Choose...'}
             >
                 <>
-                    <option disabled>Choose...</option>
+                    <option value={''} disabled>Choose...</option>
                     {states.map((state) => (
                         <option key={state.value}
                                 value={state.value}>{state.label}</option>
