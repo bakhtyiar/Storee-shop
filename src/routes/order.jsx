@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {Accordion, Alert, Button, Card, Col, Container, Form, ListGroup, Row} from "react-bootstrap";
 import {RootContext} from "../contexts/root-context/root-context";
 import {paymentMethods, shipmentMethods} from "../utils/constants";
@@ -53,6 +53,20 @@ const Order = () => {
     } = useContext(RootContext);
 
     console.log('authUserState', authUserState);
+
+    let initialValues = {
+        username: authUserState.isLoggedIn ? authUserState.username : '',
+        email: authUserState.isLoggedIn ? authUserState.email : '',
+        shipmentMethod: shipmentMethods.courier.value,
+        address: authUserState.isLoggedIn ? authUserState.address.address : '',
+        city: authUserState.isLoggedIn ? authUserState.address.city : '',
+        state: authUserState.isLoggedIn ? authUserState.address.state : '',
+        postalCode: authUserState.isLoggedIn ? authUserState.address.postalCode : '',
+        paymentMethod: paymentMethods.card.value,
+        terms: false,
+        cart: products,
+        totalToBePaid: discountedTotal,
+    };
 
     const handleSubmit = async (event) => {
         console.log('Order form submitted content', event);
