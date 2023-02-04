@@ -131,7 +131,7 @@ const Order = () => {
                                                 ))}
                                             </Form.Group>
                                         </ListGroup.Item>
-                                        <ListGroup.Item className=''>
+                                        <ListGroup.Item>
                                             {values.shipmentMethod === shipmentMethods.warehouse.value &&
                                                 <div className={'mb-3'}>
                                                     <WarehouseAddressesFormSection/>
