@@ -38,10 +38,12 @@ const schema = yup.object().shape({
     postalCode: yup.string()
         .when('shipmentMethod', {
             is: (value) => ([shipmentMethods.courier.value, shipmentMethods.airDrone.value, shipmentMethods.postOffice.value].includes(value)),
-            then: yup.string().required('Required').length(5, 'Postalcode is required to be 6 symbols'),
+            then: yup.string().required('Required').matches(/^\d+$/, 'The field should have digits only').matches(/^\d+$/, 'The field should have digits only').length(5, 'Postalcode is required to be 6 symbols'),
         }),
     paymentMethod: yup.string().required('Required'),
     terms: yup.bool().required().oneOf([true], 'Terms must be accepted'),
+    cart: yup.array(yup.object()).required().min(1, 'Empty cart'),
+    totalToBePaid: yup.number().required().positive(),
 });
 
 const Order = () => {
@@ -72,6 +74,8 @@ const Order = () => {
                     postalCode: authUserState.isLoggedIn ? authUserState.address.postalCode : '',
                     paymentMethod: paymentMethods.card.value,
                     terms: false,
+                    cart: products,
+                    totalToBePaid: discountedTotal,
                 }}
             >
                 {({
