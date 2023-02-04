@@ -1,7 +1,7 @@
 import React from 'react';
 import {Col, Row} from "react-bootstrap";
-import FormTextField from "../../../utils/formik/FormTextField";
-import FormSelectField from "../../../utils/formik/FormSelectField";
+import FormTextField from "../../formikElements/FormTextField";
+import FormSelectField from "../../formikElements/FormSelectField";
 import {states} from "../../../utils/constants";
 
 const CourierFormSection = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
-import FormTextField from "../../../utils/formik/FormTextField";
+import FormTextField from "../../formikElements/FormTextField";
 import {Col, Row} from "react-bootstrap";
-import FormSelectField from "../../../utils/formik/FormSelectField";
+import FormSelectField from "../../formikElements/FormSelectField";
 import {states} from "../../../utils/constants";
 
 const PostOfficeFormSection = () => {

@@ -1,10 +1,10 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Accordion, Alert, Button, Card, Col, Container, Form, ListGroup, Row} from "react-bootstrap";
 import {RootContext} from "../contexts/root-context/root-context";
 import {paymentMethods, shipmentMethods} from "../utils/constants";
 import {Field, Formik} from "formik";
 import * as yup from "yup";
-import FormTextField from "../utils/formik/FormTextField";
+import FormTextField from "../components/formikElements/FormTextField";
 import dayjs from "dayjs";
 import WarehouseAddressesFormSection from "../components/OrderForm/ShipmentFormParts/WarehouseAddressesFormSection";
 import PostOfficeFormSection from "../components/OrderForm/ShipmentFormParts/PostOfficeFormSection";
@@ -64,19 +64,7 @@ const Order = () => {
                 validationSchema={schema}
                 validateOnBlur
                 onSubmit={handleSubmit}
-                initialValues={{
-                    username: authUserState.isLoggedIn ? authUserState.username : '',
-                    email: authUserState.isLoggedIn ? authUserState.email : '',
-                    shipmentMethod: shipmentMethods.courier.value,
-                    address: authUserState.isLoggedIn ? authUserState.address.address : '',
-                    city: authUserState.isLoggedIn ? authUserState.address.city : '',
-                    state: authUserState.isLoggedIn ? authUserState.address.state : '',
-                    postalCode: authUserState.isLoggedIn ? authUserState.address.postalCode : '',
-                    paymentMethod: paymentMethods.card.value,
-                    terms: false,
-                    cart: products,
-                    totalToBePaid: discountedTotal,
-                }}
+                initialValues={initialValues}
             >
                 {({
                       handleSubmit,
@@ -87,6 +75,7 @@ const Order = () => {
                       errors,
                   }) => (
                     <Form noValidate onSubmit={handleSubmit}>
+                        <pre>{JSON.stringify(values, null, "\t")}</pre>
                         <h3 className='mb-3'>Order</h3>
                         <Row>
                             <Col xs={12} md={8} className='d-flex flex-column gap-2'>
