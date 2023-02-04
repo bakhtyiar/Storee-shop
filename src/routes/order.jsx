@@ -11,8 +11,6 @@ import PostOfficeFormSection from "../components/OrderForm/ShipmentFormParts/Pos
 import CourierFormSection from "../components/OrderForm/ShipmentFormParts/CourierFormSection";
 import OrderProductCard from "../components/OrderProductCard/OrderProductCard";
 
-// todo : fix 1.when logged in on page refresh auto fill data to input does not working
-
 const schema = yup.object().shape({
     username: yup.string()
         .required('Required')
@@ -52,6 +50,7 @@ const Order = () => {
         cartState: {products, total, discountedTotal, totalProducts, totalQuantity}
     } = useContext(RootContext);
 
+
     console.log('authUserState', authUserState);
 
     let initialValues = {
@@ -79,6 +78,7 @@ const Order = () => {
                 validateOnBlur
                 onSubmit={handleSubmit}
                 initialValues={initialValues}
+                enableReinitialize={true}
             >
                 {({
                       handleSubmit,
@@ -89,7 +89,6 @@ const Order = () => {
                       errors,
                   }) => (
                     <Form noValidate onSubmit={handleSubmit}>
-                        <pre>{JSON.stringify(values, null, "\t")}</pre>
                         <h3 className='mb-3'>Order</h3>
                         <Row>
                             <Col xs={12} md={8} className='d-flex flex-column gap-2'>
