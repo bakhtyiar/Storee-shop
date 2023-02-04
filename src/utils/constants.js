@@ -7,6 +7,7 @@ export const routes = {
 	news: { path: "/news" },
 	cart: { path: "/cart"},
 	order: {path: "/order"},
+	orderCompleted: {path: "/order_completed"},
 	post: { path: "/post" },
 	user: { path: "/user"},
 	login: {path: "/login"},

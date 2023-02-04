@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {Accordion, Alert, Button, Card, Col, Container, Form, ListGroup, Row} from "react-bootstrap";
 import {RootContext} from "../contexts/root-context/root-context";
-import {paymentMethods, shipmentMethods} from "../utils/constants";
+import {paymentMethods, routes, shipmentMethods} from "../utils/constants";
 import {Field, Formik} from "formik";
 import * as yup from "yup";
 import FormTextField from "../components/formikElements/FormTextField";
@@ -10,6 +10,7 @@ import WarehouseAddressesFormSection from "../components/OrderForm/ShipmentFormP
 import PostOfficeFormSection from "../components/OrderForm/ShipmentFormParts/PostOfficeFormSection";
 import CourierFormSection from "../components/OrderForm/ShipmentFormParts/CourierFormSection";
 import OrderProductCard from "../components/OrderProductCard/OrderProductCard";
+import {useNavigate} from "react-router-dom";
 
 const schema = yup.object().shape({
     username: yup.string()
@@ -44,11 +45,12 @@ const schema = yup.object().shape({
     totalToBePaid: yup.number().required().positive(),
 });
 
-const Order = () => {
+const OrderMaking = () => {
     const {
         authUserState,
         cartState: {products, total, discountedTotal, totalProducts, totalQuantity}
     } = useContext(RootContext);
+    const navigate = useNavigate();
 
 
     console.log('authUserState', authUserState);
@@ -68,7 +70,8 @@ const Order = () => {
     };
 
     const handleSubmit = async (event) => {
-        console.log('Order form submitted content', event);
+        console.log('OrderMaking form submitted content', event);
+        navigate(`${routes.orderCompleted.path}`);
     };
 
     return (
@@ -246,4 +249,4 @@ const Order = () => {
     );
 };
 
-export default Order;
+export default OrderMaking;
