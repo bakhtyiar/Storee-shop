@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Alert, Col, Container, Row} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import {routes} from "../utils/constants";
@@ -12,9 +12,16 @@ const OrderCompleted = () => {
         setRemain((prevState) => prevState - 1);
     }, 1000);
 
-    setTimeout(() => {
-        navigate(`${routes.home.path}`);
-    }, redirectAtS * 1000)
+    useEffect(() => {
+
+        let timeOutRedirect = setTimeout(() => {
+            navigate(`${routes.home.path}`, {replace: true});
+        }, redirectAtS * 1000)
+
+        return () => {
+            clearTimeout(timeOutRedirect);
+        }
+    }, [])
 
     return (
         <Container className='mt-4'>
