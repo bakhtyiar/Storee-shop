@@ -72,3 +72,20 @@ export const loginUser = async (username, password, url = dummyjsonURL) => {
     const data = deepmerge(auth, personalData);
     return (data);
 }
+
+export const updateUser = async (userId, data, url = dummyjsonURL) => {
+    let response;
+    try {
+        response = await fetch(`${url}/users/${userId}`, {
+            method: 'PUT', /* or PATCH */
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                ...data,
+            })
+        })
+        response = await response.json();
+    } catch (error) {
+        throw new Error(error);
+    }
+    return (response);
+}
