@@ -28,7 +28,6 @@ function App() {
                 onLogin(res);
             })
         }
-        //todo : try to refactor
         if (isLoggedIn) {
             getCart(id)
                 .then((res) => {
