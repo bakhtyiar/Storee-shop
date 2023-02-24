@@ -10,8 +10,6 @@ import {updateUser} from "../utils/server-api/user/user";
 import FormTextField from "../components/formikElements/FormTextField";
 import FormSelectField from "../components/formikElements/FormSelectField";
 
-//todo: fix submit action update profile data and replace new response profile data on page
-
 const schema = yup.object().shape({
     avatar: yup.string(),
     firstName: yup.string()
@@ -27,11 +25,7 @@ const schema = yup.object().shape({
         .min(6, 'Username is too short. Required minimum 6 symbols')
         .max(50, 'Username is too long. Required maximum 50 symbols'),
     email: yup.string()
-        .required('Required')
         .email('Seems like wrong format of email'),
-    password: yup.string()
-        .required('Required')
-        .min(6),
     newPassword: yup.string()
         .min(6),
     address: yup.string()
@@ -57,6 +51,7 @@ const Profile = () => {
     const navigate = useNavigate();
     const [isEditing, setIsEditing] = useState(false);
     const [show, setShow] = useState(false);
+    const [bufferedPersonalData, setBufferedPersonalData] = useState({});
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -66,21 +61,30 @@ const Profile = () => {
         navigate(routes.home.path);
     }
 
-    const handleEditProfile = async (event) => {
+    const handleEditProfile = async () => {
         setIsEditing(true);
     };
 
-    const handleCancelEditProfile = async (event) => {
+    const handleCancelEditProfile = async () => {
         setIsEditing(false);
     };
 
-    const handleSaveChanges = () => {
+    const handleSaveChanges = (values, touched) => {
+        let editedPersonalData = {};
+        for (let property in values) {
+            if (property in touched)
+                editedPersonalData[property] = values[property];
+        }
+        if (editedPersonalData.newPassword && editedPersonalData.newPassword.length === 0) {
+            delete editedPersonalData.newPassword;
+        }
+        setBufferedPersonalData(editedPersonalData);
         handleShow();
     };
 
-    const handleSubmit = async (event) => {
-        console.log('Edited personal data form submitted content', event);
-        const res = updateUser(authUserState.id, event);
+    const handleSubmitChanges = async () => {
+        const res = await updateUser(authUserState.id, bufferedPersonalData);
+        authUserState.onLogout();
         authUserState.onLogin(res);
         handleClose();
         handleCancelEditProfile();
@@ -93,7 +97,6 @@ const Profile = () => {
         username: authUserState.username,
         email: authUserState.email,
         newPassword: '',
-        password: '',
         address: authUserState.address.address,
         city: authUserState.address.city,
         state: authUserState.address.state,
@@ -104,14 +107,14 @@ const Profile = () => {
         <Formik
             validationSchema={schema}
             validateOnBlur
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmitChanges}
             initialValues={initialValues}
             enableReinitialize={true}
         >
             {({
                   handleSubmit, handleChange, handleBlur, values, touched, errors,
               }) => (<>
-                <Form noValidate >
+                <Form noValidate>
                     <div className='d-flex justify-content-between'>
                         <h2 className={'mb-4'}>Profile</h2>
                         <div>
@@ -198,11 +201,11 @@ const Profile = () => {
                                     {isEditing ?
                                         <FormTextField
                                             as={Col}
-                                            controlId="formBasicPassword"
-                                            label='Password'
-                                            placeholder='Password'
-                                            name='password'
-                                            type='password'
+                                            controlId="formBasicNewPassword"
+                                            label='New password'
+                                            placeholder='New password'
+                                            name='newPassword'
+                                            type='text'
                                         />
                                         :
                                         <Col>Password <br/>****** </Col>}
@@ -268,10 +271,13 @@ const Profile = () => {
                                 </Row>
                             </Col>
                         </Row>
+
+
                         {isEditing && <div className={'d-flex justify-content-end mt-3'}>
                             <Button variant="outline-secondary" onClick={handleCancelEditProfile}
                                     className={'mx-2 px-3'}>Cancel editing</Button>
-                            <Button variant="primary" className={'px-4'} onClick={handleShow}>Save
+                            <Button variant="primary" className={'px-4'} disabled={Object.keys(touched).length === 0}
+                                    onClick={() => handleSaveChanges(values, touched)}>Save
                                 changes</Button>
                         </div>}
                         <Modal show={show} onHide={handleClose}>
@@ -283,7 +289,7 @@ const Profile = () => {
                                 <Button variant="secondary" onClick={handleClose}>
                                     Close
                                 </Button>
-                                <Button variant="primary" type="submit">
+                                <Button variant="primary" onClick={handleSubmitChanges}>
                                     Save Changes
                                 </Button>
                             </Modal.Footer>

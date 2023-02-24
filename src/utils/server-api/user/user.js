@@ -78,7 +78,7 @@ export const updateUser = async (userId, data, url = dummyjsonURL) => {
     try {
         response = await fetch(`${url}/users/${userId}`, {
             method: 'PUT', /* or PATCH */
-            headers: { 'Content-Type': 'application/json' },
+            headers: authHeader(),
             body: JSON.stringify({
                 ...data,
             })
