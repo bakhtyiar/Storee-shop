@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Button, Form, Modal} from "react-bootstrap";
+import {Button, Col, Form, Modal} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import {RootContext} from "../../contexts/root-context/root-context";
 import * as yup from "yup";
@@ -10,6 +10,7 @@ import {getCart} from "../../utils/server-api/cart/cart";
 import {loginUser} from "../../utils/server-api/user/user";
 import {routes} from "../../utils/constants";
 import {initialState} from "../../contexts/root-context/initialState";
+import FormTextField from "../formikElements/FormTextField";
 
 //todo : remake login and register logic
 
@@ -78,45 +79,30 @@ const LoginForm = ({isHaveCloseButton = false}) => {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form.Group className="mb-3" controlId="formBasicUsername">
-                            <Form.Label>Username</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Enter username"
-                                name="username"
-                                value={values.username}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                isValid={touched.username && !errors.username}
-                                isInvalid={touched.username && !!errors.username}
+                        <div className={'mb-3'}>
+                            <FormTextField
+                                as={Col}
+                                controlId="formBasicUsername"
+                                label='Username'
+                                placeholder='Enter username'
+                                name='username'
+                                type='text'
                             />
-                            <Form.Text className="text-muted">
-                                {touched.username && errors.username}
-                            </Form.Text>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                type="password"
-                                placeholder="Password"
-                                required
-                                name="password"
-                                value={values.password}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                isValid={touched.password && !errors.password}
-                                isInvalid={touched.password && !!errors.password}
+                        </div>
+                        <div className={'mb-3'}>
+                            <FormTextField
+                                as={Col}
+                                controlId="formBasicPassword"
+                                label='Password'
+                                placeholder='Enter password'
+                                name='password'
+                                type='password'
                             />
-                            <Form.Control.Feedback type="invalid">
-                                {touched.password && errors.password}
-                            </Form.Control.Feedback>
-                        </Form.Group>
+                        </div>
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
                             <Form.Check
                                 type="checkbox"
                                 label="Do not remember session on this computer"
-                                required
                                 feedback={errors.forgetSession}
                                 feedbackType="invalid"
                                 name="terms"
