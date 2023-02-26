@@ -36,12 +36,12 @@ const Header = () => {
                 </Navbar.Brand>
                 <Nav>
                     <Nav.Link as={NavLink} to={`${routes.cart.path}`}
-                              variant='outline-light' className='d-sm-none d-block mx-2'>
+                              variant='outline-light' className='d-md-none d-block mx-2'>
                         <i className="bi bi-bag me-2"></i>
                         {' '}
                         Cart {products.length > 0 ? `(${products.length})` : ''}
                     </Nav.Link>
-                    <Button variant="outline-light" onClick={showBurgerMenu} className="d-sm-none d-block me-6">
+                    <Button variant="outline-light" onClick={showBurgerMenu} className="d-md-none d-block me-6">
                         ☰ Menu
                     </Button>
                 </Nav>
@@ -74,12 +74,12 @@ const Header = () => {
                         </Nav>
                     </Offcanvas.Body>
                 </Offcanvas>
-                <Nav className='d-none d-sm-flex me-auto'>
+                <Nav className='d-none d-md-flex me-auto'>
                     <Nav.Link as={NavLink} to={routes.home.path} end>Home</Nav.Link>
                     <Nav.Link as={NavLink} to={routes.products.path}>Products</Nav.Link>
                     <Nav.Link as={NavLink} to={routes.news.path}>News</Nav.Link>
                 </Nav>
-                <Nav className='d-none d-sm-flex me-none'>
+                <Nav className='d-none d-md-flex me-none'>
                     <Nav.Link
                         as={NavLink}
                         to={`${routes.cart.path}`}
