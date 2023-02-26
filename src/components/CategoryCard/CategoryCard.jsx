@@ -5,24 +5,23 @@ import {Card} from "react-bootstrap";
 import {capitalizeStr, replaceDashToSpace} from "../../utils/str/str";
 
 const CategoryCard = (props) => {
-    let header = props.header;
     let navigate = useNavigate();
-    header = capitalizeStr(header);
-    header = replaceDashToSpace(header);
+    let headerFormatted = props.header;
+    headerFormatted = capitalizeStr(headerFormatted);
+    headerFormatted = replaceDashToSpace(headerFormatted);
 
     return (
-        <div
-            onClick={() => navigate(`${routes.products.path}/1?category=${props.header}`)}
-        >
             <Card
+                onClick={() => navigate(`${routes.products.path}/1?category=${props.header}`)}
                 bg={'light'}
                 className="mb-2"
             >
-                <Card.Body>
-                    <Card.Title className='m-0'>{header}</Card.Title>
+                <Card.Body className={'d-flex flex-column justify-center'}>
+                    <Card.Title className='m-0'>{headerFormatted}</Card.Title>
+                    {props.picture && <img alt={'No material'} src={props.picture} className={'img-fluid align-self-center'}
+                                           style={{maxHeight: '256px'}}/>}
                 </Card.Body>
             </Card>
-        </div>
     );
 };
 
