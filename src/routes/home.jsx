@@ -1,8 +1,12 @@
-import {Button, InputGroup, Form, Container, Row} from 'react-bootstrap';
+import {Button, InputGroup, Form, Container, Row, Col} from 'react-bootstrap';
 import React, {useEffect, useState} from 'react'
 import CategoryCard from "../components/CategoryCard/CategoryCard";
 import {getCategories} from "../utils/server-api/products/products";
-// todo add images to categories, add searching logic
+import smartphonePic from '../assets/img/product_categories/smartphones.png';
+import skincarePic from '../assets/img/product_categories/skincare.png';
+import furniturePic from '../assets/img/product_categories/furniture.png';
+import sunglassesPic from '../assets/img/product_categories/sunglasses.png';
+// todo add searching logic
 
 export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
@@ -28,9 +32,9 @@ export default function Home() {
 
 
     return (
-        <Container>
+        <Container className={'mt-3'}>
             <Row>
-                <h1>Home</h1>
+                <h3>Home</h3>
                 <InputGroup className="mb-3">
                     <Form.Control
                         placeholder="Recipient's username"
@@ -53,19 +57,43 @@ export default function Home() {
                     </Button>
                 </InputGroup>
             </Row>
-            <Row>
-                {!isLoading &&
-                    <div
-                        className='d-flex gap-2 flex-wrap'
-                    >
-                        {
-                            categories.map((item) => (
-                                <CategoryCard header={item} key={item}/>
-                            ))
-                        }
-                    </div>
-                }
-            </Row>
+            <div className={'mt-3'}>
+                <h3>Popular</h3>
+                <Row className={'d-flex'}>
+                    {(categories.includes('smartphones') !== -1) &&
+                        <Col xxs={6} md={3}><CategoryCard header={'smartphones'} key={'smartphones' + 'Pictured'}
+                                                         picture={smartphonePic}/></Col>
+                    }
+                    {(categories.includes('skincare') !== -1) &&
+                        <Col xxs={6} md={3}><CategoryCard header={'skincare'} key={'skincare' + 'Pictured'}
+                                                         picture={skincarePic}/></Col>
+                    }
+                    {(categories.includes('furniture') !== -1) &&
+                        <Col xxs={6} md={3}><CategoryCard header={'furniture'} key={'furniture' + 'Pictured'}
+                                                         picture={furniturePic}/></Col>
+                    }
+                    {(categories.includes('sunglasses') !== -1) &&
+                        <Col xxs={6} md={3}><CategoryCard header={'sunglasses'} key={'sunglasses' + 'Pictured'}
+                                                         picture={sunglassesPic}/></Col>
+                    }
+                </Row>
+            </div>
+            <div className={'mt-3'}>
+                <h3>Categories</h3>
+                <Row>
+                    {!isLoading &&
+                        <div
+                            className='d-flex gap-2 flex-wrap'
+                        >
+                            {
+                                categories.map((item) => (
+                                    <CategoryCard header={item} key={item}/>
+                                ))
+                            }
+                        </div>
+                    }
+                </Row>
+            </div>
         </Container>
     )
 }
