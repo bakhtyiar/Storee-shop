@@ -1,5 +1,8 @@
 export const dummyjsonURL = `https://dummyjson.com`;
 export const pageLimit = 30;
+export const cartKey = 'cart';
+export const userKey = 'user';
+export const authKey = 'auth-token';
 export const routes = {
 	home: { path: "/" },
 	products: { path: "/products" },

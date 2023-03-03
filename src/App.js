@@ -10,6 +10,7 @@ import {BurgerMenuContextProvider} from "./contexts/burgerMenu-context/burgerMen
 import {getCookie} from "./utils/cookies/cookies";
 import {getUser} from "./utils/server-api/user/user";
 import {getCart, getLocalCart} from "./utils/server-api/cart/cart";
+import {userKey} from "./utils/constants";
 
 function ErrorFallback({error, resetErrorBoundary}) {
     return (<div role="alert">
@@ -22,7 +23,7 @@ function ErrorFallback({error, resetErrorBoundary}) {
 function App() {
     const {authUserState: {isLoggedIn, id, onLogin}, cartState: {onSetCart}} = useContext(RootContext);
     useEffect(() => {
-        const authCookie = getCookie('user');
+        const authCookie = getCookie(userKey);
         if (authCookie !== undefined && authCookie !== '-1') {
             getUser(authCookie).then((res) => {
                 onLogin(res);

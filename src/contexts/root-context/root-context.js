@@ -5,6 +5,7 @@ import {cartReducer} from "./cartReducer";
 import {deleteCookie, setCookie} from "../../utils/cookies/cookies";
 import {getProduct} from "../../utils/server-api/products/products";
 import {getLocalCart, setLocalCart, updateCart} from "../../utils/server-api/cart/cart";
+import {authKey, userKey} from "../../utils/constants";
 
 export const RootContext = React.createContext(initialState);
 
@@ -23,16 +24,16 @@ export const RootContextProvider = ({children}) => {
     }
 
     const loginUser = (serverResponse) => {
-        setCookie('user', serverResponse.id, {path: '/', 'max-age': 36000, secure: true, samesite: 'lax'});
-        setCookie('auth-token', serverResponse.token, {path: '/', 'max-age': 36000, secure: true, samesite: 'strict'});
+        setCookie(userKey, serverResponse.id, {path: '/', 'max-age': 36000, secure: true, samesite: 'lax'});
+        setCookie(authKey, serverResponse.token, {path: '/', 'max-age': 36000, secure: true, samesite: 'strict'});
         // setCookie('jwt-token', serverResponse.token, {path: '/', 'max-age': 36000, secure: true, samesite: 'strict', httpOnly: true});
         delete serverResponse.token;
         dispatchAuthUser({type: 'login', payload: serverResponse});
     }
 
     const logoutUser = () => {
-        deleteCookie('user');
-        deleteCookie('auth-token');
+        deleteCookie(userKey);
+        deleteCookie(authKey);
         dispatchAuthUser({type: 'logout'});
     }
 

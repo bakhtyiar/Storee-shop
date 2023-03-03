@@ -1,8 +1,10 @@
 import {getCookie} from "../cookies/cookies";
+import {authKey} from "../constants";
+// import {userKey} from "../constants";
 
 export default function authHeader() {
-    // const { token } = JSON.parse(localStorage.getItem('user'));
-    const token = getCookie('auth-token');
+    // const { token } = JSON.parse(localStorage.getItem(userKey));
+    const token = getCookie(authKey);
 
     if (token !== undefined && token !== 'undefined') {
         return {

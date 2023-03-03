@@ -1,4 +1,4 @@
-import {dummyjsonURL} from "../../constants";
+import {cartKey, dummyjsonURL} from "../../constants";
 import authHeader from "../server-api";
 
 export const getCart = (userId, url = dummyjsonURL) => {
@@ -26,7 +26,7 @@ export const updateCart = (cartId, products, url = dummyjsonURL) => {
 }
 
 export const getLocalCart = () => {
-    const cart = localStorage.getItem('cart');
+    const cart = localStorage.getItem(cartKey);
     if (cart === 'undefined' || cart === undefined) {
         return null;
     }
@@ -34,5 +34,5 @@ export const getLocalCart = () => {
 }
 
 export const setLocalCart = (cart) => {
-    return (localStorage.setItem('cart', JSON.stringify(cart)));
+    return (localStorage.setItem(cartKey, JSON.stringify(cart)));
 }
