@@ -5,7 +5,7 @@ export const getCart = (userId, url = dummyjsonURL) => {
     return (
         fetch(`${url}/carts/user/${userId}`)
             .then(res => res.json())
-            .then(data => data.carts[0])
+            .then(data => data.length > 0 ? data.carts[0] : data)
     );
 }
 
