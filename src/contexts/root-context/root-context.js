@@ -44,6 +44,8 @@ export const RootContextProvider = ({children}) => {
             newCart.products[productIndex].quantity += 1;
         } else {
             let newProduct = await getProduct(productId);
+            newProduct.quantity = 1;
+            console.log('47 newProduct.quantity', newProduct.quantity);
             newCart.products.push(newProduct);
         }
         if (authUser.isLoggedIn) {
