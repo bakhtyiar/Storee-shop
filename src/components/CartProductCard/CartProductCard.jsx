@@ -4,13 +4,6 @@ import {Link} from "react-router-dom";
 import {routes} from "../../utils/constants";
 import imageIcon from "../../assets/img/icons/image/icons8-image-48.png";
 import {Button, Form} from "react-bootstrap";
-import styled from "styled-components";
-
-const StyledImg = styled.img`
-  align-self: center;
-  max-width: 100%;
-  max-height: 200px;
-`;
 
 const CartProductCard = ({product, selfIndexInCart}) => {
     const {cartState: {onRemoveFromCart, onUpdateQuantity}} = useContext(RootContext);
@@ -28,7 +21,15 @@ const CartProductCard = ({product, selfIndexInCart}) => {
         <div className='px-2 py-3 border rounded d-flex flex-row align-items-center text-decoration-none text-black'>
             <Link className='w-100 d-flex flex-row text-decoration-none text-black'
                   to={`${routes.product.path}/${product.id}`}>
-                <StyledImg src={imageIcon} alt="image icon"/>
+                <div className={'bg-image rounded align-self-center'}
+                     style={{
+                         height: '64px',
+                         width: '64px',
+                         backgroundImage: `url(${product.thumbnail || imageIcon})`,
+                         backgroundPosition: 'center',
+                         backgroundSize: 'contain',
+                         backgroundRepeat: 'no-repeat'
+                     }}/>
                 <div className='flex-column ms-2'>
                     <h6 className='mt-2'>{product.title}</h6>
                     <p className='my-0'>Price: {product.price}</p>
