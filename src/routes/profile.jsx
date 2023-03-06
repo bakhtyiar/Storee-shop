@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {Button, Card, Col, Container, Form, Image, Modal, Row} from "react-bootstrap";
+import {Button, Card, Col, Form, Image, Modal, Row} from "react-bootstrap";
 import {RootContext} from "../contexts/root-context/root-context";
 import avatarPlaceholder from "../assets/img/personalisation/avatar-placeholder.png";
 import {useNavigate} from "react-router-dom";
@@ -103,202 +103,205 @@ const Profile = () => {
         postalCode: authUserState.address.postalCode,
     };
 
-    return (<Container className='mt-4'>
-        <Formik
-            validationSchema={schema}
-            validateOnBlur
-            onSubmit={handleSubmitChanges}
-            initialValues={initialValues}
-            enableReinitialize={true}
-        >
-            {({
-                  handleSubmit, handleChange, handleBlur, values, touched, errors,
-              }) => (<>
-                <Form noValidate>
-                    <div className='d-flex justify-content-between'>
-                        <h2 className={'mb-4'}>Profile</h2>
-                        <div>
-                            {!isEditing && <Button variant="outline-primary" onClick={handleEditProfile}
-                                                   className={'mx-2 px-4'}>Edit</Button>
-                            }
-                            <Button variant="outline-danger" onClick={handleLogout}>Logout</Button>
+    return (
+        <>
+            <Formik
+                validationSchema={schema}
+                validateOnBlur
+                onSubmit={handleSubmitChanges}
+                initialValues={initialValues}
+                enableReinitialize={true}
+            >
+                {({
+                      handleSubmit, handleChange, handleBlur, values, touched, errors,
+                  }) => (<>
+                    <Form noValidate>
+                        <div className='d-flex justify-content-between'>
+                            <h2 className={'mb-4'}>Profile</h2>
+                            <div>
+                                {!isEditing && <Button variant="outline-primary" onClick={handleEditProfile}
+                                                       className={'mx-2 px-4'}>Edit</Button>
+                                }
+                                <Button variant="outline-danger" onClick={handleLogout}>Logout</Button>
+                            </div>
                         </div>
-                    </div>
-                    <Card body>
-                        <Row>
-                            <Col className='mb-4' md={4}>
-                                <Row>
-                                    <div className='d-flex justify-content-center mt-4'>
-                                        <Image
-                                            src={values.avatar}
-                                            alt="Profile's avatar"
-                                            roundedCircle
-                                            style={{
-                                                width: '128px', height: '128px',
-                                                border: '1px solid lightGray',
-                                            }}
-                                            className='mb-3'
-                                        />
-                                    </div>
-                                    {isEditing && <Form.Group controlId="formFile" className="mb-3">
-                                        <Form.Label>Load file to update avatar</Form.Label>
-                                        <Form.Control type="file"/>
-                                    </Form.Group>}
-                                </Row>
-                            </Col>
-                            <Col className='d-flex flex-column gap-3 my-3' md={8}>
-                                <Row>
-                                    {isEditing ?
-                                        <FormTextField
-                                            as={Col}
-                                            controlId="formBasicName"
-                                            label='Name'
-                                            placeholder='Enter your name'
-                                            name='firstName'
-                                            type='text'
-                                        />
-                                        :
-                                        <Col>Name <br/>{authUserState.firstName}</Col>
-                                    }
-                                    {isEditing ?
-                                        <FormTextField
-                                            as={Col}
-                                            controlId="formBasicSurname"
-                                            label='Surname'
-                                            placeholder='Enter your surname'
-                                            name='lastName'
-                                            type='text'
-                                        />
-                                        :
-                                        <Col>Surname <br/>{authUserState.lastName}</Col>}
-                                </Row>
-                                <Row>
-                                    {isEditing ?
-                                        <FormTextField
-                                            as={Col}
-                                            controlId="formBasicEmail"
-                                            label='Email'
-                                            placeholder='Enter your email'
-                                            name='email'
-                                            type='email'
-                                        />
-                                        :
-                                        <Col>Email <br/>{authUserState.email}
-                                        </Col>}
-                                    {isEditing ?
-                                        <FormTextField
-                                            as={Col}
-                                            controlId="formBasicUsername"
-                                            label='Username'
-                                            placeholder='Enter your username'
-                                            name='username'
-                                            type='text'
-                                        />
-                                        :
-                                        <Col>Username <br/>{authUserState.username} </Col>}
-                                </Row>
-                                <Row>
-                                    {isEditing ?
-                                        <FormTextField
-                                            as={Col}
-                                            controlId="formBasicNewPassword"
-                                            label='New password'
-                                            placeholder='New password'
-                                            name='newPassword'
-                                            type='text'
-                                        />
-                                        :
-                                        <Col>Password <br/>****** </Col>}
-                                </Row>
-                                <hr className={'mx-2'}/>
-                                <Row>
-                                    {isEditing ?
-                                        <FormTextField
-                                            as={Col}
-                                            controlId="formGridAddress1"
-                                            label='House and street'
-                                            placeholder='1234 Main St'
-                                            name='address'
-                                            type='text'
-                                        />
-                                        :
-                                        <Col>Address <br/>{authUserState.address.address}
-                                        </Col>}
-                                    {isEditing ?
-                                        <FormTextField
-                                            as={Col}
-                                            controlId="formGridCity"
-                                            label='City'
-                                            placeholder='New York'
-                                            name='city'
-                                            type='text'
-                                        />
-                                        :
-                                        <Col>City <br/>{authUserState.address.city} </Col>}
-                                </Row>
-                                <Row>
-                                    {isEditing ?
-                                        <FormSelectField
-                                            as={Col}
-                                            controlId="formGridState"
-                                            label='State'
-                                            placeholder='New York'
-                                            name='state'
-                                            type='text'
-                                        >
-                                            <>
-                                                <option value={''} disabled>Choose...</option>
-                                                {states.map((state) => (
-                                                    <option key={state.value}
-                                                            value={state.value}>{state.label}</option>
-                                                ))}
-                                            </>
-                                        </FormSelectField>
-                                        :
-                                        <Col>State <br/>{authUserState.address.state}
-                                        </Col>}
-                                    {isEditing ?
-                                        <FormTextField
-                                            as={Col}
-                                            controlId="formGridZip"
-                                            label='Zip'
-                                            placeholder='10000'
-                                            name='postalCode'
-                                            type='text'
-                                        />
-                                        :
-                                        <Col>Postal code <br/>{authUserState.address.postalCode}</Col>}
-                                </Row>
-                            </Col>
-                        </Row>
+                        <Card body>
+                            <Row>
+                                <Col className='mb-4' md={4}>
+                                    <Row>
+                                        <div className='d-flex justify-content-center mt-4'>
+                                            <Image
+                                                src={values.avatar}
+                                                alt="Profile's avatar"
+                                                roundedCircle
+                                                style={{
+                                                    width: '128px', height: '128px',
+                                                    border: '1px solid lightGray',
+                                                }}
+                                                className='mb-3'
+                                            />
+                                        </div>
+                                        {isEditing && <Form.Group controlId="formFile" className="mb-3">
+                                            <Form.Label>Load file to update avatar</Form.Label>
+                                            <Form.Control type="file"/>
+                                        </Form.Group>}
+                                    </Row>
+                                </Col>
+                                <Col className='d-flex flex-column gap-3 my-3' md={8}>
+                                    <Row>
+                                        {isEditing ?
+                                            <FormTextField
+                                                as={Col}
+                                                controlId="formBasicName"
+                                                label='Name'
+                                                placeholder='Enter your name'
+                                                name='firstName'
+                                                type='text'
+                                            />
+                                            :
+                                            <Col>Name <br/>{authUserState.firstName}</Col>
+                                        }
+                                        {isEditing ?
+                                            <FormTextField
+                                                as={Col}
+                                                controlId="formBasicSurname"
+                                                label='Surname'
+                                                placeholder='Enter your surname'
+                                                name='lastName'
+                                                type='text'
+                                            />
+                                            :
+                                            <Col>Surname <br/>{authUserState.lastName}</Col>}
+                                    </Row>
+                                    <Row>
+                                        {isEditing ?
+                                            <FormTextField
+                                                as={Col}
+                                                controlId="formBasicEmail"
+                                                label='Email'
+                                                placeholder='Enter your email'
+                                                name='email'
+                                                type='email'
+                                            />
+                                            :
+                                            <Col>Email <br/>{authUserState.email}
+                                            </Col>}
+                                        {isEditing ?
+                                            <FormTextField
+                                                as={Col}
+                                                controlId="formBasicUsername"
+                                                label='Username'
+                                                placeholder='Enter your username'
+                                                name='username'
+                                                type='text'
+                                            />
+                                            :
+                                            <Col>Username <br/>{authUserState.username} </Col>}
+                                    </Row>
+                                    <Row>
+                                        {isEditing ?
+                                            <FormTextField
+                                                as={Col}
+                                                controlId="formBasicNewPassword"
+                                                label='New password'
+                                                placeholder='New password'
+                                                name='newPassword'
+                                                type='text'
+                                            />
+                                            :
+                                            <Col>Password <br/>****** </Col>}
+                                    </Row>
+                                    <hr className={'mx-2'}/>
+                                    <Row>
+                                        {isEditing ?
+                                            <FormTextField
+                                                as={Col}
+                                                controlId="formGridAddress1"
+                                                label='House and street'
+                                                placeholder='1234 Main St'
+                                                name='address'
+                                                type='text'
+                                            />
+                                            :
+                                            <Col>Address <br/>{authUserState.address.address}
+                                            </Col>}
+                                        {isEditing ?
+                                            <FormTextField
+                                                as={Col}
+                                                controlId="formGridCity"
+                                                label='City'
+                                                placeholder='New York'
+                                                name='city'
+                                                type='text'
+                                            />
+                                            :
+                                            <Col>City <br/>{authUserState.address.city} </Col>}
+                                    </Row>
+                                    <Row>
+                                        {isEditing ?
+                                            <FormSelectField
+                                                as={Col}
+                                                controlId="formGridState"
+                                                label='State'
+                                                placeholder='New York'
+                                                name='state'
+                                                type='text'
+                                            >
+                                                <>
+                                                    <option value={''} disabled>Choose...</option>
+                                                    {states.map((state) => (
+                                                        <option key={state.value}
+                                                                value={state.value}>{state.label}</option>
+                                                    ))}
+                                                </>
+                                            </FormSelectField>
+                                            :
+                                            <Col>State <br/>{authUserState.address.state}
+                                            </Col>}
+                                        {isEditing ?
+                                            <FormTextField
+                                                as={Col}
+                                                controlId="formGridZip"
+                                                label='Zip'
+                                                placeholder='10000'
+                                                name='postalCode'
+                                                type='text'
+                                            />
+                                            :
+                                            <Col>Postal code <br/>{authUserState.address.postalCode}</Col>}
+                                    </Row>
+                                </Col>
+                            </Row>
 
 
-                        {isEditing && <div className={'d-flex justify-content-end mt-3'}>
-                            <Button variant="outline-secondary" onClick={handleCancelEditProfile}
-                                    className={'mx-2 px-3'}>Cancel editing</Button>
-                            <Button variant="primary" className={'px-4'} disabled={Object.keys(touched).length === 0}
-                                    onClick={() => handleSaveChanges(values, touched)}>Save
-                                changes</Button>
-                        </div>}
-                        <Modal show={show} onHide={handleClose}>
-                            <Modal.Header closeButton>
-                                <Modal.Title>Are you sure to save changes?</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>Press submit to save changes to your profile, otherwise press close</Modal.Body>
-                            <Modal.Footer>
-                                <Button variant="secondary" onClick={handleClose}>
-                                    Close
-                                </Button>
-                                <Button variant="primary" onClick={handleSubmitChanges}>
-                                    Save Changes
-                                </Button>
-                            </Modal.Footer>
-                        </Modal>
-                    </Card>
-                </Form>
-            </>)}
-        </Formik>
-    </Container>);
+                            {isEditing && <div className={'d-flex justify-content-end mt-3'}>
+                                <Button variant="outline-secondary" onClick={handleCancelEditProfile}
+                                        className={'mx-2 px-3'}>Cancel editing</Button>
+                                <Button variant="primary" className={'px-4'}
+                                        disabled={Object.keys(touched).length === 0}
+                                        onClick={() => handleSaveChanges(values, touched)}>Save
+                                    changes</Button>
+                            </div>}
+                            <Modal show={show} onHide={handleClose}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Are you sure to save changes?</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>Press submit to save changes to your profile, otherwise press
+                                    close</Modal.Body>
+                                <Modal.Footer>
+                                    <Button variant="secondary" onClick={handleClose}>
+                                        Close
+                                    </Button>
+                                    <Button variant="primary" onClick={handleSubmitChanges}>
+                                        Save Changes
+                                    </Button>
+                                </Modal.Footer>
+                            </Modal>
+                        </Card>
+                    </Form>
+                </>)}
+            </Formik>
+        </>);
 };
 
 export default Profile;

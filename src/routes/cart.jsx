@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Button, Card, Col, Container, Row} from "react-bootstrap";
+import {Button, Card, Col, Row} from "react-bootstrap";
 import {RootContext} from "../contexts/root-context/root-context";
 import CartProductCard from "../components/CartProductCard/CartProductCard";
 import {Link} from "react-router-dom";
@@ -9,7 +9,7 @@ const Cart = () => {
     const {cartState: {products, total, discountedTotal, totalProducts, totalQuantity}} = useContext(RootContext);
 
     return (
-        <Container className='mt-4'>
+        <>
             <Row>
                 <h2 className='mb-3'>Cart</h2>
                 <Col xs={12} md={8}>
@@ -42,7 +42,7 @@ const Cart = () => {
                     </Card>
                 </Col>
             </Row>
-        </Container>
+        </>
     );
 };
 

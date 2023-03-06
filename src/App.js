@@ -11,6 +11,7 @@ import {getCookie} from "./utils/cookies/cookies";
 import {getUser} from "./utils/server-api/user/user";
 import {getCart, getLocalCart} from "./utils/server-api/cart/cart";
 import {userKey} from "./utils/constants";
+import {Container} from "react-bootstrap";
 
 function ErrorFallback({error, resetErrorBoundary}) {
     return (<div role="alert">
@@ -33,8 +34,8 @@ function App() {
             getCart(id)
                 .then((res) => {
                     res.products ?
-                    onSetCart(res) :
-                    onSetCart(initialState.cartState);
+                        onSetCart(res) :
+                        onSetCart(initialState.cartState);
                 })
         } else {
             onSetCart(getLocalCart() || initialState.cartState);
@@ -53,8 +54,10 @@ function App() {
                 // reset the state of your app so the error doesn't happen again
             }}
         >
-            <div className='d-flex flex-grow-1'>
-                <AppRoutes/>
+            <div className='d-flex flex-grow-1 pt-4'>
+                <Container>
+                    <AppRoutes/>
+                </Container>
             </div>
         </ErrorBoundary>
         <Footer/>

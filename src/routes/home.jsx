@@ -1,4 +1,4 @@
-import {Button, InputGroup, Form, Container, Row, Col} from 'react-bootstrap';
+import {Button, InputGroup, Form, Row, Col} from 'react-bootstrap';
 import React, {useEffect, useState} from 'react'
 import CategoryCard from "../components/CategoryCard/CategoryCard";
 import {getCategories} from "../utils/server-api/products/products";
@@ -32,7 +32,7 @@ export default function Home() {
 
 
     return (
-        <Container className={'mt-3'}>
+        <>
             <Row>
                 <h3>Home</h3>
                 <InputGroup className="mb-3">
@@ -94,6 +94,6 @@ export default function Home() {
                     }
                 </Row>
             </div>
-        </Container>
+        </>
     )
 }

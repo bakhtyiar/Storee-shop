@@ -1,16 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useParams, useSearchParams} from 'react-router-dom';
 import {pageLimit, routes} from '../utils/constants';
-import {Breadcrumb, Col, Container, Placeholder, Row, Spinner} from 'react-bootstrap';
-import styled from 'styled-components';
+import {Breadcrumb, Col, Placeholder, Row, Spinner} from 'react-bootstrap';
 import ProductCard from '../components/ProductCard/ProductCard';
 import {Pagination} from '../components/Pagination/Pagination';
 import ProductsFilter from "../components/ProductsFilter/ProductsFilter";
 import {getProducts} from "../utils/server-api/products/products";
-
-const StyledContainer = styled(Container)`
-  padding-top: 16px;
-`;
 
 const Products = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -38,7 +33,7 @@ const Products = () => {
     }, [data]);
 
     return (
-        <StyledContainer>
+        <>
             <h1>Products</h1>
             <Breadcrumb>
                 <Breadcrumb.Item><Link to={routes.home.path}>Home</Link></Breadcrumb.Item>
@@ -72,7 +67,7 @@ const Products = () => {
                     )
                 }
             </div>
-        </StyledContainer>
+        </>
     );
 }
 

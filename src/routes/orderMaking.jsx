@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Accordion, Alert, Button, Card, Col, Container, Form, ListGroup, Row} from "react-bootstrap";
+import {Accordion, Alert, Button, Card, Col, Form, ListGroup, Row} from "react-bootstrap";
 import {RootContext} from "../contexts/root-context/root-context";
 import {paymentMethods, routes, shipmentMethods} from "../utils/constants";
 import {Field, Formik} from "formik";
@@ -75,7 +75,7 @@ const OrderMaking = () => {
     };
 
     return (
-        <Container className='mt-4'>
+        <>
             <Formik
                 validationSchema={schema}
                 validateOnBlur
@@ -245,7 +245,7 @@ const OrderMaking = () => {
                     </Form>
                 )}
             </Formik>
-        </Container>
+        </>
     );
 };
 

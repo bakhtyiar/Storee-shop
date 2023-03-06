@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import {Badge, Breadcrumb, Button, Carousel, Col, Container, Row, Spinner} from 'react-bootstrap';
+import {Badge, Breadcrumb, Button, Carousel, Col, Row, Spinner} from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { routes } from '../utils/constants';
 import {getProduct} from "../utils/server-api/products/products";
-
-const StyledContainer = styled(Container)`
-	padding-top: 16px;
-`;
 
 const StyledCarousel = styled(Carousel)`
 	max-width: 640px;
@@ -40,7 +36,7 @@ const Product = () => {
 	}, [id]);
 
 	return (
-		<StyledContainer>
+		<>
 			<Breadcrumb>
 				<Breadcrumb.Item ><Link to={routes.home.path}>Home</Link></Breadcrumb.Item>
 				<Breadcrumb.Item><Link to={routes.products.path}>Products</Link></Breadcrumb.Item>
@@ -78,7 +74,7 @@ const Product = () => {
 					</Row>
 				)
 			}
-		</StyledContainer>
+		</>
 	);
 }
 
