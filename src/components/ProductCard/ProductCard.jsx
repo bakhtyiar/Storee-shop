@@ -20,14 +20,12 @@ const ProductCard = ({item}) => {
                      backgroundSize: 'contain',
                      backgroundRepeat: 'no-repeat'
                  }}/>
-            <h5 className='mt-2'>{item.title}</h5>
+            <p className={'mb-0'}><i className="bi bi-star-fill text-warning"></i> <small>{item.rating}</small></p>
+            <p className='mb-0'><b>{item.title}</b></p>
             <div>
-                Price:
+                <small><strike>${item.price}</strike></small>
                 <br/>
-                <small><strike>$ {item.price}</strike></small> <Badge bg="warning"
-                                                                      text="dark">{item.discountPercentage}%</Badge>
-                <br/>
-                <h6>$ {Math.round(item.price * (100 - item.discountPercentage) / 100)}</h6>
+                <p className={'d-flex'}><big><b>${Math.round(item.price * (100 - item.discountPercentage) / 100)}</b></big> <Badge className={'align-self-start ms-1'} bg="warning" text="dark">{item.discountPercentage}%</Badge></p>
             </div>
             <Button
                 variant='dark'
