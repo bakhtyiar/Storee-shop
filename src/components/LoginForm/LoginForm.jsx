@@ -35,22 +35,22 @@ const LoginForm = ({isHaveCloseButton = false}) => {
         const {username, password} = values;
         const res = await loginUser(username, password);
         //tried to refactor & use .then.catch try{}catch(e){}, but cant get [[PromiseResult]] out from loginUser()
-        if (!res.message) { //message appears on 400 error
-            onLogin(res);
-            const cart = await getCart(res.id);
-            console.log('cart', cart);
-            if (cart !== undefined) {
-                onSetCart(cart);
-            } else {
-                onSetCart(initialState.cartState);
-            }
-            onHide();
-            hideBurgerMenu();
-            navigate(`${routes.profile.path}`);
-        } else {
+        if (res.message) { //message appears on 400 error
             actions.setFieldError('general', res.message);
             actions.setSubmitting(false);
+            return ;
         }
+        onLogin(res);
+        const cart = await getCart(res.id);
+        console.log('cart', cart);
+        if (cart === undefined) {
+            onSetCart(initialState.cartState);
+        } else {
+            onSetCart(cart);
+        }
+        onHide();
+        hideBurgerMenu();
+        navigate(`${routes.profile.path}`);
     };
 
     return (

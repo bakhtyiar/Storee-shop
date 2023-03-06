@@ -33,15 +33,15 @@ const RegisterForm = ({isHaveCloseButton = false}) => {
     const handleSubmit = async (values, actions) => {
         const {username, email, password} = values;
         const res = await registerUser(username, email, password);
-        if (!res.message) {
-            onLogin(res);
-            onHide();
-            hideBurgerMenu();
-            navigate(`${routes.profile.path}`);
-        } else {
+        if (res.message) {
             actions.setFieldError('general', res.message);
             actions.setSubmitting(false);
+            return ;
         }
+        onLogin(res);
+        onHide();
+        hideBurgerMenu();
+        navigate(`${routes.profile.path}`);
     };
 
     return (
