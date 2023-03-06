@@ -1,15 +1,9 @@
-import styled from "styled-components";
 import React, {useContext, useEffect, useState} from "react";
 import {RootContext} from "../../contexts/root-context/root-context";
 import {Link} from "react-router-dom";
 import {routes} from "../../utils/constants";
 import imageIcon from "../../assets/img/icons/image/icons8-image-48.png";
 
-const StyledImg = styled.img`
-  align-self: center;
-  max-width: 100%;
-  max-height: 200px;
-`;
 const OrderProductCard = ({product, selfIndexInCart}) => {
     const {cartState: {onRemoveFromCart, onUpdateQuantity}} = useContext(RootContext);
     const [quantity, setQuantity] = useState(product.quantity);
@@ -26,7 +20,15 @@ const OrderProductCard = ({product, selfIndexInCart}) => {
         <Link to={`${routes.product.path}/${product.id}`}
               className='px-2 py-3 d-flex flex-row align-items-center text-decoration-none text-black'>
             <div className='w-100 d-flex flex-row'>
-                <StyledImg src={imageIcon} alt="image icon"/>
+                <div className={'bg-image rounded align-self-center'}
+                     style={{
+                         height: '128px',
+                         width: '128px',
+                         backgroundImage: `url(${product.thumbnail || imageIcon})`,
+                         backgroundPosition: 'center',
+                         backgroundSize: 'contain',
+                         backgroundRepeat: 'no-repeat'
+                     }}/>
                 <div className='flex-column align-self-center ms-2'>
                     <h6 className='my-0'>{product.title}</h6>
                     {product.quantity && <p className='my-0'>Quantity: {product.quantity}</p>}
