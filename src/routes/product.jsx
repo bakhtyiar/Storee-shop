@@ -63,7 +63,11 @@ const Product = () => {
 						<Col>
 							<h1>{data.title}</h1>
 							<h2>{data.description}</h2>
-							<h3>Price: ${data.price} Discount:  <Badge bg="warning" text="dark">{data.discountPercentage}%</Badge></h3>
+							<div className={'d-flex align-items-start gap-1'}>
+								<h3>Price: <strike>${data.price}</strike> </h3>
+								<Badge bg="warning" text="dark">{data.discountPercentage}%</Badge>
+								<h3 className={'mx-2'}>${Math.round(data.price * (100 - data.discountPercentage) / 100)}</h3>
+							</div>
 							<p>Rating: {data.rating}</p>
 							<p>Stock: {data.stock}</p>
 							<p>Brand: {data.brand}</p>
