@@ -32,7 +32,9 @@ function App() {
         if (isLoggedIn) {
             getCart(id)
                 .then((res) => {
-                    onSetCart(res || initialState.cartState);
+                    res.products ?
+                    onSetCart(res) :
+                    onSetCart(initialState.cartState);
                 })
         } else {
             onSetCart(getLocalCart() || initialState.cartState);
