@@ -17,7 +17,7 @@ const StyledImg = styled.img`
 const Header = () => {
     const {
         authUserState: {isLoggedIn},
-        cartState: {products}
+        cartState: {totalQuantity}
     } = useContext(RootContext);
 
     const {onRegister, onLogin, onHide, isShow} = useContext(AuthModalContext);
@@ -39,7 +39,7 @@ const Header = () => {
                               variant='outline-light' className='d-md-none d-block mx-2'>
                         <i className="bi bi-bag me-2"></i>
                         {' '}
-                        Cart {products.length > 0 ? `(${products.length})` : ''}
+                        Cart {totalQuantity > 0 ? `(${totalQuantity})` : ''}
                     </Nav.Link>
                     <Button variant="outline-light" onClick={showBurgerMenu} className="d-md-none d-block me-6">
                         ☰ Menu
@@ -88,7 +88,7 @@ const Header = () => {
                     >
                         <i className="bi bi-bag me-2"></i>
                         {' '}
-                        Cart {products.length > 0 ? `(${products.length})` : ''}
+                        Cart {totalQuantity > 0 ? `(${totalQuantity})` : ''}
                     </Nav.Link>
                     {isLoggedIn ?
                         <Nav.Link as={NavLink} to={`${routes.profile.path}`}>Profile</Nav.Link>
