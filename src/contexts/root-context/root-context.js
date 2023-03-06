@@ -24,9 +24,14 @@ export const RootContextProvider = ({children}) => {
         );
     }
 
-    const loginUser = (serverResponse) => {
-        setCookie(userKey, serverResponse.id, {path: '/', 'max-age': 36000, secure: true, samesite: 'lax'});
-        setCookie(authKey, serverResponse.token, {path: '/', 'max-age': 36000, secure: true, samesite: 'strict'});
+    const loginUser = (serverResponse, forgetSession = false) => {
+        if (forgetSession) {
+            setCookie(userKey, serverResponse.id, {path: '/', secure: true, samesite: 'lax'});
+            setCookie(authKey, serverResponse.token, {path: '/', secure: true, samesite: 'strict'});
+        } else {
+            setCookie(userKey, serverResponse.id, {path: '/', 'max-age': 36000, secure: true, samesite: 'lax'});
+            setCookie(authKey, serverResponse.token, {path: '/', 'max-age': 36000, secure: true, samesite: 'strict'});
+        }
         delete serverResponse.token;
         dispatchAuthUser({type: 'login', payload: serverResponse});
     }

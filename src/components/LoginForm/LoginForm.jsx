@@ -40,7 +40,7 @@ const LoginForm = ({isHaveCloseButton = false}) => {
             actions.setSubmitting(false);
             return ;
         }
-        onLogin(res);
+        onLogin(res, values.forgetSession);
         const cart = await getCart(res.id);
         console.log('cart', cart);
         if (cart === undefined) {
