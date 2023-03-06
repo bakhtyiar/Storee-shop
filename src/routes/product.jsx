@@ -68,7 +68,7 @@ const Product = () => {
 								<Badge bg="warning" text="dark">{data.discountPercentage}%</Badge>
 								<h3 className={'mx-2'}>${Math.round(data.price * (100 - data.discountPercentage) / 100)}</h3>
 							</div>
-							<p>Rating: {data.rating}</p>
+							<p>Rating: <i className="bi bi-star-fill text-warning"></i> {data.rating}</p>
 							<p>Stock: {data.stock}</p>
 							<p>Brand: {data.brand}</p>
 							<p>Category: {data.category}</p>
