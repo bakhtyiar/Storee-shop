@@ -27,7 +27,6 @@ export const RootContextProvider = ({children}) => {
     const loginUser = (serverResponse) => {
         setCookie(userKey, serverResponse.id, {path: '/', 'max-age': 36000, secure: true, samesite: 'lax'});
         setCookie(authKey, serverResponse.token, {path: '/', 'max-age': 36000, secure: true, samesite: 'strict'});
-        // setCookie('jwt-token', serverResponse.token, {path: '/', 'max-age': 36000, secure: true, samesite: 'strict', httpOnly: true});
         delete serverResponse.token;
         dispatchAuthUser({type: 'login', payload: serverResponse});
     }
@@ -41,13 +40,12 @@ export const RootContextProvider = ({children}) => {
     const addToCart = async (productId) => {
         let newCart = getLocalCart() || initialState.cartState;
         let productIndex = newCart.products.findIndex((product) => product.id === productId);
-        if (productIndex !== -1) {
-            newCart.products[productIndex].quantity += 1;
-        } else {
+        if (productIndex === -1) {
             let newProduct = await getProduct(productId);
             newProduct.quantity = 1;
-            console.log('47 newProduct.quantity', newProduct.quantity);
             newCart.products.push(newProduct);
+        } else {
+            newCart.products[productIndex].quantity += 1;
         }
         if (authUser.isLoggedIn) {
             newCart = await updateCart(cart.id, newCart.products);
