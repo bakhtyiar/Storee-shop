@@ -12,7 +12,8 @@ import {getUser} from "./utils/server-api/user/user";
 import {getCart, getLocalCart} from "./utils/server-api/cart/cart";
 import {userKey} from "./utils/constants";
 import {Container} from "react-bootstrap";
-
+//todo: add dark theme and switch controller in header for theme
+//todo: change logo in browser and header
 function ErrorFallback({error, resetErrorBoundary}) {
     return (<div role="alert">
         <p>Something went wrong:</p>

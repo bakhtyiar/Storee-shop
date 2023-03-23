@@ -7,6 +7,8 @@ import skincarePic from '../assets/img/product_categories/skincare.png';
 import furniturePic from '../assets/img/product_categories/furniture.png';
 import sunglassesPic from '../assets/img/product_categories/sunglasses.png';
 // todo add searching logic
+//todo : add random product category 'you may like'
+
 
 export default function Home() {
     const [isLoading, setIsLoading] = useState(true);

@@ -9,7 +9,7 @@ import {authKey, userKey} from "../../utils/constants";
 import {cartCalcCounters} from "../../utils/calcs";
 
 export const RootContext = React.createContext(initialState);
-
+//todo fix bug in case when localstorage cart have only {message: some error text}
 export const RootContextProvider = ({children}) => {
     const [authUser, dispatchAuthUser] = useReducer(authUserReducer, initialState.authUserState);
     const [theme, setTheme] = useState(initialState.themeState);
