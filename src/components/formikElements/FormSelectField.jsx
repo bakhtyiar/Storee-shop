@@ -19,7 +19,7 @@ const FormSelectField = ({
                 const isValid = !form.errors[field.name];
                 const isInvalid = form.touched[field.name] && !isValid;
                 return (
-                    <Form.Group as={as} md={md} controlId={controlId}>
+                    <Form.Group as={as} md={md} controlId={controlId} data-testid="form-select-field">
                         <Form.Label>{label}</Form.Label>
                         <InputGroup>
                             {inputGroupPrepend}

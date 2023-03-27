@@ -18,7 +18,9 @@ const OrderProductCard = ({product, selfIndexInCart}) => {
 
     return (
         <Link to={`${routes.product.path}/${product.id}`}
-              className='px-2 py-3 d-flex flex-row align-items-center text-decoration-none text-black'>
+              className='px-2 py-3 d-flex flex-row align-items-center text-decoration-none text-black'
+              data-testid={"order-product-card"}
+        >
             <div className='w-100 d-flex flex-row'>
                 <div className={'bg-image rounded align-self-center'}
                      style={{

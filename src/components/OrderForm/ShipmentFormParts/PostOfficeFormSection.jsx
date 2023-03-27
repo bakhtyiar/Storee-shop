@@ -6,7 +6,7 @@ import {states} from "../../../utils/constants";
 
 const PostOfficeFormSection = () => {
     return (
-        <Row>
+        <Row data-testid="post-office-form-section">
             <FormTextField
                 as={Col}
                 controlId="formGridCity"

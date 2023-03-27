@@ -25,33 +25,35 @@ const schema = yup.object().shape({
     forgetSession: yup.bool(),
 });
 
-const LoginForm = ({isHaveCloseButton = false}) => {
+const LoginForm = ({isHaveCloseButton = false, handleSubmit = null}) => {
     const {authUserState: {onLogin}, cartState: {onSetCart}} = useContext(RootContext);
     const {onHide: hideBurgerMenu} = useContext(BurgerMenuContext);
     const {onSwitchType, onHide} = useContext(AuthModalContext);
     const navigate = useNavigate();
 
-    const handleSubmit = async (values, actions) => {
-        const {username, password} = values;
-        const res = await loginUser(username, password);
-        //tried to refactor & use .then.catch try{}catch(e){}, but cant get [[PromiseResult]] out from loginUser()
-        if (res.message) { //message appears on 400 error
-            actions.setFieldError('general', res.message);
-            actions.setSubmitting(false);
-            return ;
-        }
-        onLogin(res, values.forgetSession);
-        const cart = await getCart(res.id);
-        console.log('cart', cart);
-        if (cart === undefined) {
-            onSetCart(initialState.cartState);
-        } else {
-            onSetCart(cart);
-        }
-        onHide();
-        hideBurgerMenu();
-        navigate(`${routes.profile.path}`);
-    };
+    if (handleSubmit === null) {
+        handleSubmit = async (values, actions) => {
+            const {username, password} = values;
+            const res = await loginUser(username, password);
+            //tried to refactor & use .then.catch try{}catch(e){}, but cant get [[PromiseResult]] out from loginUser()
+            if (res.message) { //message appears on 400 error
+                actions.setFieldError('general', res.message);
+                actions.setSubmitting(false);
+                return;
+            }
+            onLogin(res, values.forgetSession);
+            const cart = await getCart(res.id);
+            console.log('cart', cart);
+            if (cart === undefined) {
+                onSetCart(initialState.cartState);
+            } else {
+                onSetCart(cart);
+            }
+            onHide();
+            hideBurgerMenu();
+            navigate(`${routes.profile.path}`);
+        };
+    }
 
     return (
         <Formik
@@ -72,7 +74,7 @@ const LoginForm = ({isHaveCloseButton = false}) => {
                   touched,
                   errors,
               }) => (
-                <Form noValidate onSubmit={handleSubmit}>
+                <Form noValidate onSubmit={handleSubmit} data-testid="login-form">
                     <Modal.Header closeButton={isHaveCloseButton}>
                         <Modal.Title id="contained-modal-title-vcenter">
                             Login

@@ -64,7 +64,7 @@ const RegisterForm = ({isHaveCloseButton = false}) => {
                   touched,
                   errors,
               }) => (
-                <Form noValidate onSubmit={handleSubmit}>
+                <Form noValidate onSubmit={handleSubmit} data-testid={"register-form"}>
                     <Modal.Header closeButton={isHaveCloseButton}>
                         <Modal.Title id="contained-modal-title-vcenter">
                             Register

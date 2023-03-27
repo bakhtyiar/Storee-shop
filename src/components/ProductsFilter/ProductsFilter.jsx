@@ -31,7 +31,7 @@ function ProductsFilter({searchParams, setSearchParams}) {
     }
 
     return (
-        <Form className='mb-4'>
+        <Form className='mb-4' data-testid={"products-filter"}>
             <h3>Filter</h3>
             <h4>Categories</h4>
             <StyledSection>

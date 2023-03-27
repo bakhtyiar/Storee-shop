@@ -20,7 +20,7 @@ export const Pagination = ({ pagesAmount }) => {
 	};
 
 	return (
-		<StyledBPagination>
+		<StyledBPagination data-testid={"pagination"}>
 			{(Number(page) > 1) && <>
 				<BPagination.First onClick={() => handleClick(1)} />
 				<BPagination.Prev onClick={() => handleClick(Number(page) - 1)} />

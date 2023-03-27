@@ -18,7 +18,7 @@ const CartProductCard = ({product, selfIndexInCart}) => {
     }, [quantity]);
 
     return (
-        <div className='px-2 py-3 border rounded d-flex flex-row align-items-center text-decoration-none text-black'>
+        <div className='px-2 py-3 border rounded d-flex flex-row align-items-center text-decoration-none text-black' data-testid='cart-product-card'>
             <Link className='w-100 d-flex flex-row text-decoration-none text-black'
                   to={`${routes.product.path}/${product.id}`}>
                 <div className={'bg-image rounded align-self-center'}
@@ -42,6 +42,7 @@ const CartProductCard = ({product, selfIndexInCart}) => {
                         onClick={() => {
                             setQuantity((prevState) => prevState - 1);
                         }}
+                        data-testid={"minus-btn"}
                     >
                         -
                     </Button>
@@ -52,12 +53,14 @@ const CartProductCard = ({product, selfIndexInCart}) => {
                         onChange={(e) => {
                             setQuantity(Number(e.target.value));
                         }}
+                        data-testid={"quantity-field"}
                     />
                     <Button
                         variant="outline-dark"
                         onClick={() => {
                             setQuantity((prevState) => prevState + 1);
                         }}
+                        data-testid={"plus-btn"}
                     >
                         +
                     </Button>
@@ -69,6 +72,7 @@ const CartProductCard = ({product, selfIndexInCart}) => {
                         e.preventDefault();
                         onRemoveFromCart(selfIndexInCart);
                     }}
+                    data-testid="remove-btn"
                 >
                     <i className="bi bi-x"></i>
                     {' '}

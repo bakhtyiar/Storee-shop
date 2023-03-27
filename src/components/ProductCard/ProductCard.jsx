@@ -10,7 +10,7 @@ const ProductCard = ({item}) => {
 
     return (
         <Link className='px-2 py-3 border rounded d-flex flex-column align-items-start text-decoration-none text-black'
-              to={`${routes.product.path}/${item.id}`} key={item.id}>
+              to={`${routes.product.path}/${item.id}`} key={item.id} data-testid={"product-card"}>
             <div className={'bg-image rounded align-self-center'}
                  style={{
                      height: '128px',

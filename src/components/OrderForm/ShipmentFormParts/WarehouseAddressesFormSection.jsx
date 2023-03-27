@@ -5,7 +5,7 @@ import {Field} from "formik";
 
 const WarehouseAddressesFormSection = ({as, name, notInline, type, label}) => {
     return (
-        <Form.Group>
+        <Form.Group data-testid="warehouse-addresses-form-section">
             <h6>{label || 'Warehouse address'}</h6>
             {
                 warehouses.map((warehouse, index) => (

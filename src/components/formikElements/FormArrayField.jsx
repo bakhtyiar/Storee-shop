@@ -2,11 +2,12 @@ import React from "react";
 import { Button, Card, Col, Form } from "react-bootstrap";
 import { FieldArray } from "formik";
 import FormTextField from "./FormTextField";
-
+//todo: complete component, update logic push for arrhelpers, provide value to fields & etc.
 function FormArrayField({ arr }) {
     return (
         <FieldArray
             name="listItems"
+            data-testid={"form-array-field"}
             render={arrayHelpers => (
                 <>
                     {arr && arr.length > 0 ? (
@@ -61,7 +62,7 @@ function FormArrayField({ arr }) {
                             </Card>
                         ))
                     ) : (
-                        <Button type="button" onClick={() => arrayHelpers.push("")}>
+                        <Button type="button" onClick={() => arrayHelpers.push("")} data-testid={"add-item"}>
                             Add item
                         </Button>
                     )}

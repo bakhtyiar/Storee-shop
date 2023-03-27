@@ -15,6 +15,7 @@ const CategoryCard = (props) => {
                 onClick={() => navigate(`${routes.products.path}/1?category=${props.header}`)}
                 bg={'light'}
                 className="mb-2"
+                data-testid="category-card"
             >
                 <Card.Body className={'d-flex flex-column justify-center'}>
                     <Card.Title className='m-0'>{headerFormatted}</Card.Title>
