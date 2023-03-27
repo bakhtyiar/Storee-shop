@@ -13,7 +13,7 @@ const StyledImg = styled.img`
   height: 44px;
   width: 44px;
 `;
-
+//todo: write test, fix router or smth bugs when trying to render
 const Header = () => {
     const {
         authUserState: {isLoggedIn},
@@ -54,23 +54,24 @@ const Header = () => {
                             <Nav.Link as={NavLink} to={routes.home.path} end>Home</Nav.Link>
                             <Nav.Link as={NavLink} to={routes.products.path}>Products</Nav.Link>
                             <Nav.Link as={NavLink} to={routes.news.path}>News</Nav.Link>
-                            {isLoggedIn ?
+                            {isLoggedIn &&
                                 <Nav.Link as={NavLink} to={routes.profile.path}>Profile</Nav.Link>
-                                : (
-                                    <>
-                                        <Button variant='outline-secondary'
-                                                className='my-2'
-                                                onClick={() => onRegister()}
-                                        >
-                                            Register
-                                        </Button>
-                                        <Button
-                                            onClick={() => onLogin()}
-                                        >
-                                            Login
-                                        </Button>
-                                    </>
-                                )}
+                            }
+                            {!isLoggedIn &&
+                                <>
+                                    <Button variant='outline-secondary'
+                                            className='my-2'
+                                            onClick={() => onRegister()}
+                                    >
+                                        Register
+                                    </Button>
+                                    <Button
+                                        onClick={() => onLogin()}
+                                    >
+                                        Login
+                                    </Button>
+                                </>
+                            }
                         </Nav>
                     </Offcanvas.Body>
                 </Offcanvas>
@@ -90,24 +91,25 @@ const Header = () => {
                         {' '}
                         Cart {totalQuantity > 0 ? `(${totalQuantity})` : ''}
                     </Nav.Link>
-                    {isLoggedIn ?
+                    {isLoggedIn &&
                         <Nav.Link as={NavLink} to={`${routes.profile.path}`}>Profile</Nav.Link>
-                        : (
-                            <>
-                                <Button variant='outline-light'
-                                        className='mx-2'
-                                        onClick={() => onRegister()}
-                                >
-                                    Register
-                                </Button>
-                                <Button
-                                    variant='primary'
-                                    onClick={() => onLogin()}
-                                >
-                                    Login
-                                </Button>
-                            </>
-                        )}
+                    }
+                    {!isLoggedIn &&
+                        <>
+                            <Button variant='outline-light'
+                                    className='mx-2'
+                                    onClick={() => onRegister()}
+                            >
+                                Register
+                            </Button>
+                            <Button
+                                variant='primary'
+                                onClick={() => onLogin()}
+                            >
+                                Login
+                            </Button>
+                        </>
+                    }
                 </Nav>
             </Container>
             <AuthModal
