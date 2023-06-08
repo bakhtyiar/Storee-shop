@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CategoryCard test 1 1`] = `
+Array [
+  <div
+    class="mb-2 card bg-light"
+    data-testid="categoryCard"
+  >
+    <div
+      class="d-flex flex-column justify-center card-body"
+    >
+      <div
+        class="m-0 card-title h5"
+      >
+        Smartphones
+      </div>
+      <img
+        alt="No material"
+        class="img-fluid align-self-center"
+        src="smartphones.png"
+        style="max-height: 256px;"
+      />
+    </div>
+  </div>,
+  <div
+    class="mb-2 card bg-light"
+    data-testid="categoryCard"
+  >
+    <div
+      class="d-flex flex-column justify-center card-body"
+    >
+      <div
+        class="m-0 card-title h5"
+      >
+        Skincare
+      </div>
+      <img
+        alt="No material"
+        class="img-fluid align-self-center"
+        src="skincare.png"
+        style="max-height: 256px;"
+      />
+    </div>
+  </div>,
+  <div
+    class="mb-2 card bg-light"
+    data-testid="categoryCard"
+  >
+    <div
+      class="d-flex flex-column justify-center card-body"
+    >
+      <div
+        class="m-0 card-title h5"
+      >
+        Furniture
+      </div>
+      <img
+        alt="No material"
+        class="img-fluid align-self-center"
+        src="furniture.png"
+        style="max-height: 256px;"
+      />
+    </div>
+  </div>,
+  <div
+    class="mb-2 card bg-light"
+    data-testid="categoryCard"
+  >
+    <div
+      class="d-flex flex-column justify-center card-body"
+    >
+      <div
+        class="m-0 card-title h5"
+      >
+        Sunglasses
+      </div>
+      <img
+        alt="No material"
+        class="img-fluid align-self-center"
+        src="sunglasses.png"
+        style="max-height: 256px;"
+      />
+    </div>
+  </div>,
+  <div
+    class="mb-2 card bg-light"
+    data-testid="categoryCard"
+  >
+    <div
+      class="d-flex flex-column justify-center card-body"
+    >
+      <div
+        class="m-0 card-title h5"
+      />
+    </div>
+  </div>,
+]
+`;
+
+exports[`CategoryCard test Match snapshot 1`] = `
+<div
+  class="mb-2 card bg-light"
+  data-testid="category-card"
+>
+  <div
+    class="d-flex flex-column justify-center card-body"
+  >
+    <div
+      class="m-0 card-title h5"
+    />
+  </div>
+</div>
+`;

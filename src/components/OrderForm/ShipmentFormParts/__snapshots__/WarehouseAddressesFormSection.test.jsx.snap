@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Basic tests Match snapshot 1`] = `
+<div
+  data-testid="warehouse-addresses-form-section"
+>
+  <h6>
+    Warehouse address
+  </h6>
+  <div
+    class="form-check form-check-inline"
+  >
+    <input
+      class="form-check-input"
+      id="warehouse-0"
+      name="address"
+      type="radio"
+      value="California Main st. 11"
+    />
+    <label
+      class="form-check-label"
+      for="warehouse-0"
+      title=""
+    >
+      California Main st. 11
+    </label>
+  </div>
+  <div
+    class="form-check form-check-inline"
+  >
+    <input
+      class="form-check-input"
+      id="warehouse-1"
+      name="address"
+      type="radio"
+      value="Kansas Main st. 25"
+    />
+    <label
+      class="form-check-label"
+      for="warehouse-1"
+      title=""
+    >
+      Kansas Main st. 25
+    </label>
+  </div>
+  <div
+    class="form-check form-check-inline"
+  >
+    <input
+      class="form-check-input"
+      id="warehouse-2"
+      name="address"
+      type="radio"
+      value="Ohio Main st. 7"
+    />
+    <label
+      class="form-check-label"
+      for="warehouse-2"
+      title=""
+    >
+      Ohio Main st. 7
+    </label>
+  </div>
+  <div
+    class="form-check form-check-inline"
+  >
+    <input
+      class="form-check-input"
+      id="warehouse-3"
+      name="address"
+      type="radio"
+      value="Washington Main st. 2"
+    />
+    <label
+      class="form-check-label"
+      for="warehouse-3"
+      title=""
+    >
+      Washington Main st. 2
+    </label>
+  </div>
+  <div
+    class="form-check form-check-inline"
+  >
+    <input
+      class="form-check-input"
+      id="warehouse-4"
+      name="address"
+      type="radio"
+      value="Louisiana Main st. 21"
+    />
+    <label
+      class="form-check-label"
+      for="warehouse-4"
+      title=""
+    >
+      Louisiana Main st. 21
+    </label>
+  </div>
+  <div
+    class="form-check form-check-inline"
+  >
+    <input
+      class="form-check-input"
+      id="warehouse-5"
+      name="address"
+      type="radio"
+      value="Hawaii Main st. 6"
+    />
+    <label
+      class="form-check-label"
+      for="warehouse-5"
+      title=""
+    >
+      Hawaii Main st. 6
+    </label>
+  </div>
+</div>
+`;

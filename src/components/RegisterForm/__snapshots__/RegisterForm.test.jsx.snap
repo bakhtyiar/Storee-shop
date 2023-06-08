@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Basic tests Match snapshot 1`] = `
+<form
+  class=""
+  data-testid="register-form"
+  novalidate=""
+>
+  <div
+    class="modal-header"
+  >
+    <div
+      class="modal-title h4"
+      id="contained-modal-title-vcenter"
+    >
+      Register
+    </div>
+  </div>
+  <div
+    class="modal-body"
+  >
+    <div
+      class="mb-3"
+    >
+      <div
+        class="col"
+        data-testid="form-text-field"
+      >
+        <label
+          class="form-label"
+          for="formBasicUsername"
+        >
+          Username
+        </label>
+        <div
+          class="input-group"
+        >
+          <input
+            class="rounded form-control"
+            id="formBasicUsername"
+            name="username"
+            placeholder="Enter username"
+            type="text"
+            value=""
+          />
+          <div
+            class="invalid-feedback"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="mb-3"
+    >
+      <div
+        class="col"
+        data-testid="form-text-field"
+      >
+        <label
+          class="form-label"
+          for="formBasicEmail"
+        >
+          Email
+        </label>
+        <div
+          class="input-group"
+        >
+          <input
+            class="rounded form-control"
+            id="formBasicEmail"
+            name="email"
+            placeholder="Enter email"
+            type="email"
+            value=""
+          />
+          <div
+            class="invalid-feedback"
+          />
+        </div>
+        <small
+          class="text-muted form-text"
+        >
+          We'll never share your confidential data
+        </small>
+      </div>
+    </div>
+    <div
+      class="mb-3"
+    >
+      <div
+        class="col"
+        data-testid="form-text-field"
+      >
+        <label
+          class="form-label"
+          for="formBasicPassword"
+        >
+          Password
+        </label>
+        <div
+          class="input-group"
+        >
+          <input
+            class="rounded form-control"
+            id="formBasicPassword"
+            name="password"
+            placeholder="Enter password"
+            type="password"
+            value=""
+          />
+          <div
+            class="invalid-feedback"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="mb-3"
+    >
+      <div
+        class="form-check"
+      >
+        <input
+          class="form-check-input"
+          id="formBasicCheckbox"
+          name="terms"
+          required=""
+          type="checkbox"
+        />
+        <label
+          class="form-check-label"
+          for="formBasicCheckbox"
+          title=""
+        >
+          Agree to terms and conditions
+        </label>
+      </div>
+    </div>
+  </div>
+  <div
+    class="d-flex justify-content-between modal-footer"
+  >
+    <a
+      as="[object Object]"
+      href="/"
+    >
+      Already have an account?
+    </a>
+    <button
+      class="btn btn-primary"
+      type="submit"
+    >
+      Register
+    </button>
+  </div>
+</form>
+`;

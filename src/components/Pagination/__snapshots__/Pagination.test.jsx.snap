@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Basic tests Match snapshot 1`] = `
+<ul
+  class="sc-bcXHqe enxQNQ pagination"
+  data-testid="pagination"
+>
+  <li
+    class="page-item"
+  >
+    <a
+      class="page-link"
+      href="#"
+      role="button"
+      tabindex="0"
+    >
+      <span
+        aria-hidden="true"
+      >
+        ›
+      </span>
+      <span
+        class="visually-hidden"
+      >
+        Next
+      </span>
+    </a>
+  </li>
+  <li
+    class="page-item"
+  >
+    <a
+      class="page-link"
+      href="#"
+      role="button"
+      tabindex="0"
+    >
+      <span
+        aria-hidden="true"
+      >
+        »
+      </span>
+      <span
+        class="visually-hidden"
+      >
+        Last
+      </span>
+    </a>
+  </li>
+</ul>
+`;

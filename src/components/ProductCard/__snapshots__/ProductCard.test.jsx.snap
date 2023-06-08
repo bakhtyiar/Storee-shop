@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Basic tests Match snapshot 1`] = `
+<a
+  class="px-2 py-3 border rounded d-flex flex-column align-items-start text-decoration-none text-black"
+  data-testid="product-card"
+  href="/product/123"
+>
+  <div
+    class="bg-image rounded align-self-center"
+    style="height: 128px; width: 100%; background-image: url(icons8-image-48.png); background-position: center; background-size: contain; background-repeat: no-repeat;"
+  />
+  <p
+    class="mb-0"
+  >
+    <i
+      class="bi bi-star-fill text-warning"
+    />
+     
+    <small />
+  </p>
+  <p
+    class="mb-0"
+  >
+    <b />
+  </p>
+  <div>
+    <small>
+      <strike>
+        $
+      </strike>
+    </small>
+    <br />
+    <p
+      class="d-flex"
+    >
+      <big>
+        <b>
+          $
+          NaN
+        </b>
+      </big>
+       
+      <span
+        class="align-self-start ms-1 badge text-dark bg-warning"
+      >
+        %
+      </span>
+    </p>
+  </div>
+  <button
+    class="w-100 btn btn-dark"
+    type="button"
+  >
+    <i
+      class="bi bi-bag-plus"
+    />
+     
+    Add to cart
+  </button>
+</a>
+`;

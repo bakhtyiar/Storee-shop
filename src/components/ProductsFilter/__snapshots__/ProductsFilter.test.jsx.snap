@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Basic tests Match snapshot 1`] = `
+<form
+  class="mb-4"
+  data-testid="products-filter"
+>
+  <h3>
+    Filter
+  </h3>
+  <h4>
+    Categories
+  </h4>
+  <section
+    class="sc-gswNZR dKDtuy"
+  />
+</form>
+`;

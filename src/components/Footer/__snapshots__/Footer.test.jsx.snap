@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Basic tests Match snapshot 1`] = `
+<div
+  class="bg-dark text-light mt-3 py-3 px-0 d-flex flex-grow-0 flex-shrink-0  container-fluid"
+  data-testid="footer"
+>
+  <div
+    class="d-flex justify-content-center container"
+  >
+    Copyrighasdt © 3000, All Rights Reserved
+  </div>
+</div>
+`;

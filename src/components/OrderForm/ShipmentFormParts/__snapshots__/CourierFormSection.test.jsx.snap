@@ -1,0 +1,426 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Basic tests Match snapshot 1`] = `
+<div
+  data-testid="courier-form-section"
+>
+  <div
+    class="mb-3 row"
+  >
+    <div
+      class="col"
+      data-testid="form-text-field"
+    >
+      <label
+        class="form-label"
+        for="formGridAddress1"
+      >
+        House and street
+      </label>
+      <div
+        class="input-group"
+      >
+        <input
+          class="rounded form-control"
+          id="formGridAddress1"
+          name="address"
+          placeholder="1234 Main St"
+          type="text"
+          value=""
+        />
+        <div
+          class="invalid-feedback"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    class="row"
+  >
+    <div
+      class="col"
+      data-testid="form-text-field"
+    >
+      <label
+        class="form-label"
+        for="formGridCity"
+      >
+        City
+      </label>
+      <div
+        class="input-group"
+      >
+        <input
+          class="rounded form-control"
+          id="formGridCity"
+          name="city"
+          placeholder="New York"
+          type="text"
+          value=""
+        />
+        <div
+          class="invalid-feedback"
+        />
+      </div>
+    </div>
+    <div
+      class="col"
+      data-testid="form-select-field"
+    >
+      <label
+        class="form-label"
+        for="formGridState"
+      >
+        State
+      </label>
+      <div
+        class="input-group"
+      >
+        <select
+          as="select"
+          class="rounded form-select"
+          id="formGridState"
+          name="state"
+          type="text"
+        >
+          <option
+            disabled=""
+            value=""
+          >
+            Choose...
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="AL"
+          >
+            Alabama (AL)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="AK"
+          >
+            Alaska (AK)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="AZ"
+          >
+            Arizona (AZ)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="AR"
+          >
+            Arkansas (AR)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="CA"
+          >
+            California (CA)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="CO"
+          >
+            Colorado (CO)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="CT"
+          >
+            Connecticut (CT)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="DE"
+          >
+            Delaware (DE)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="FL"
+          >
+            Florida (FL)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="GA"
+          >
+            Georgia (GA)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="HI"
+          >
+            Hawaii (HI)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="ID"
+          >
+            Idaho (ID)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="IL"
+          >
+            Illinois (IL)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="IN"
+          >
+            Indiana (IN)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="IA"
+          >
+            Iowa (IA)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="KS"
+          >
+            Kansas (KS)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="KY"
+          >
+            Kentucky (KY)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="LA"
+          >
+            Louisiana (LA)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="ME"
+          >
+            Maine (ME)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="MD"
+          >
+            Maryland (MD)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="MA"
+          >
+            Massachusetts (MA)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="MI"
+          >
+            Michigan (MI)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="MN"
+          >
+            Minnesota (MN)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="MS"
+          >
+            Mississippi (MS)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="MO"
+          >
+            Missouri (MO)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="MT"
+          >
+            Montana (MT)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="NE"
+          >
+            Nebraska (NE)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="NV"
+          >
+            Nevada (NV)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="NH"
+          >
+            New Hampshire (NH)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="NJ"
+          >
+            New Jersey (NJ)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="NM"
+          >
+            New Mexico (NM)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="NY"
+          >
+            New York (NY)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="NC"
+          >
+            North Carolina (NC)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="ND"
+          >
+            North Dakota (ND)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="OH"
+          >
+            Ohio (OH)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="OK"
+          >
+            Oklahoma (OK)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="OR"
+          >
+            Oregon (OR)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="PA"
+          >
+            Pennsylvania (PA)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="RI"
+          >
+            Rhode Island (RI)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="SC"
+          >
+            South Carolina (SC)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="SD"
+          >
+            South Dakota (SD)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="TN"
+          >
+            Tennessee (TN)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="TX"
+          >
+            Texas (TX)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="UT"
+          >
+            Utah (UT)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="VT"
+          >
+            Vermont (VT)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="VA"
+          >
+            Virginia (VA)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="WA"
+          >
+            Washington (WA)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="WV"
+          >
+            West Virginia (WV)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="WI"
+          >
+            Wisconsin (WI)
+          </option>
+          <option
+            data-testid="active-state-option"
+            value="WY"
+          >
+            Wyoming (WY)
+          </option>
+        </select>
+        <div
+          class="invalid-feedback"
+        />
+      </div>
+    </div>
+    <div
+      class="col"
+      data-testid="form-text-field"
+    >
+      <label
+        class="form-label"
+        for="formGridZip"
+      >
+        Zip
+      </label>
+      <div
+        class="input-group"
+      >
+        <input
+          class="rounded form-control"
+          id="formGridZip"
+          name="postalCode"
+          placeholder="10000"
+          type="text"
+          value=""
+        />
+        <div
+          class="invalid-feedback"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

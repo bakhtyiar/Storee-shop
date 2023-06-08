@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Basic tests Match snapshot 1`] = `
+<div
+  data-testid="form-select-field"
+>
+  <label
+    class="form-label"
+  />
+  <div
+    class="input-group"
+  >
+    <select
+      as="select"
+      class="rounded form-select"
+      type="select"
+    />
+    <div
+      class="invalid-feedback"
+    />
+  </div>
+</div>
+`;
