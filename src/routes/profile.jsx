@@ -9,6 +9,7 @@ import {Formik} from "formik";
 import {updateUser} from "../utils/server-api/user/user";
 import FormTextField from "../components/formikElements/FormTextField";
 import FormSelectField from "../components/formikElements/FormSelectField";
+import {AuthModalContext} from "../contexts/authModal-context/authModal-context";
 
 const schema = yup.object().shape({
     avatar: yup.string(),
@@ -48,6 +49,7 @@ const schema = yup.object().shape({
 
 const Profile = () => {
     const {authUserState} = useContext(RootContext);
+    const {onRegister, onLogin} = useContext(AuthModalContext);
     const navigate = useNavigate();
     const [isEditing, setIsEditing] = useState(false);
     const [show, setShow] = useState(false);
@@ -105,7 +107,27 @@ const Profile = () => {
 
     return (
         <>
-            <Formik
+            {!authUserState.isLoggedIn && <div className='d-flex align-content-center h-100 justify-content-center pb-4 mb-4 flex-column' data-testid="error-no-personal-profile-page">
+                <h1 className='align-self-center text-center'>You are not logged in</h1>
+                <p className='align-self-center text-center'>Login to your account or create one to get access to this page</p>
+                <div className='d-flex justify-content-center mb-4 pb-4'>
+                    <Button variant='outline-dark'
+                            className='mx-2'
+                            onClick={() => onRegister()}
+                            data-testid='register-btn-desktop'
+                    >
+                        Register
+                    </Button>
+                    <Button
+                        variant='primary'
+                        onClick={() => onLogin()}
+                        data-testid='login-btn-desktop'
+                    >
+                        Login
+                    </Button>
+                </div>
+            </div>}
+            {authUserState.isLoggedIn && <Formik
                 validationSchema={schema}
                 validateOnBlur
                 onSubmit={handleSubmitChanges}
@@ -300,7 +322,7 @@ const Profile = () => {
                         </Card>
                     </Form>
                 </>)}
-            </Formik>
+            </Formik>}
         </>);
 };
 
