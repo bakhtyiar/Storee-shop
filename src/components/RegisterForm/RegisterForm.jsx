@@ -114,12 +114,13 @@ const RegisterForm = ({isHaveCloseButton = false}) => {
                                 onBlur={handleBlur}
                                 isValid={touched.terms && !errors.terms}
                                 isInvalid={touched.terms && !!errors.terms}
+                                data-testid="checkbox-agree-terms-and-conditions"
                             />
                         </Form.Group>
                     </Modal.Body>
                     <Modal.Footer className='d-flex justify-content-between'>
                         <Link as={Button} onClick={onSwitchType}>Already have an account?</Link>
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" type="submit" data-testid='submit-button'>
                             Register
                         </Button>
                     </Modal.Footer>

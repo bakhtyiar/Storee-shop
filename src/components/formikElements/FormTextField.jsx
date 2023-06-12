@@ -33,7 +33,7 @@ const FormTextField = ({
                                 placeholder={placeholder}
                             />
 
-                            <Form.Control.Feedback type="invalid">
+                            <Form.Control.Feedback type="invalid" data-testid="error-feedback">
                                 {form.errors[field.name]}
                             </Form.Control.Feedback>
                         </InputGroup>

@@ -62,11 +62,13 @@ const Header = () => {
                                     <Button variant='outline-secondary'
                                             className='my-2'
                                             onClick={() => onRegister()}
+                                            data-testid='register-btn-mobile'
                                     >
                                         Register
                                     </Button>
                                     <Button
                                         onClick={() => onLogin()}
+                                        data-testid='login-btn-mobile'
                                     >
                                         Login
                                     </Button>
@@ -99,12 +101,14 @@ const Header = () => {
                             <Button variant='outline-light'
                                     className='mx-2'
                                     onClick={() => onRegister()}
+                                    data-testid='register-btn-desktop'
                             >
                                 Register
                             </Button>
                             <Button
                                 variant='primary'
                                 onClick={() => onLogin()}
+                                data-testid='login-btn-desktop'
                             >
                                 Login
                             </Button>

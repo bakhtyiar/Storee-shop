@@ -54,7 +54,6 @@ const Profile = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [show, setShow] = useState(false);
     const [bufferedPersonalData, setBufferedPersonalData] = useState({});
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -137,14 +136,14 @@ const Profile = () => {
                 {({
                       handleSubmit, handleChange, handleBlur, values, touched, errors,
                   }) => (<>
-                    <Form noValidate>
+                    <Form noValidate data-testid='profile-form'>
                         <div className='d-flex justify-content-between'>
                             <h2 className={'mb-4'}>Profile</h2>
                             <div>
                                 {!isEditing && <Button variant="outline-primary" onClick={handleEditProfile}
-                                                       className={'mx-2 px-4'}>Edit</Button>
+                                                       className={'mx-2 px-4'} data-testid='edit-profile-btn'>Edit</Button>
                                 }
-                                <Button variant="outline-danger" onClick={handleLogout}>Logout</Button>
+                                <Button variant="outline-danger" onClick={handleLogout} data-testid='btn-logout-profile'>Logout</Button>
                             </div>
                         </div>
                         <Card body>
@@ -181,7 +180,7 @@ const Profile = () => {
                                                 type='text'
                                             />
                                             :
-                                            <Col>Name <br/>{authUserState.firstName}</Col>
+                                            <Col>Name <br/><span data-testid='firstname-data'>{authUserState.firstName}</span></Col>
                                         }
                                         {isEditing ?
                                             <FormTextField
@@ -193,7 +192,7 @@ const Profile = () => {
                                                 type='text'
                                             />
                                             :
-                                            <Col>Surname <br/>{authUserState.lastName}</Col>}
+                                            <Col>Surname <br/><span data-testid='surname-data'>{authUserState.lastName}</span></Col>}
                                     </Row>
                                     <Row>
                                         {isEditing ?
@@ -298,10 +297,10 @@ const Profile = () => {
 
                             {isEditing && <div className={'d-flex justify-content-end mt-3'}>
                                 <Button variant="outline-secondary" onClick={handleCancelEditProfile}
-                                        className={'mx-2 px-3'}>Cancel editing</Button>
+                                        className={'mx-2 px-3'} data-testid='cancel-editing-btn'>Cancel editing</Button>
                                 <Button variant="primary" className={'px-4'}
                                         disabled={Object.keys(touched).length === 0}
-                                        onClick={() => handleSaveChanges(values, touched)}>Save
+                                        onClick={() => handleSaveChanges(values, touched)} data-testid="save-changes-btn">Save
                                     changes</Button>
                             </div>}
                             <Modal show={show} onHide={handleClose}>
@@ -314,7 +313,7 @@ const Profile = () => {
                                     <Button variant="secondary" onClick={handleClose}>
                                         Close
                                     </Button>
-                                    <Button variant="primary" onClick={handleSubmitChanges}>
+                                    <Button variant="primary" onClick={handleSubmitChanges} data-testid="confirm-changes-btn">
                                         Save Changes
                                     </Button>
                                 </Modal.Footer>

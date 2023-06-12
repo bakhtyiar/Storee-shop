@@ -114,13 +114,13 @@ const LoginForm = ({isHaveCloseButton = false, handleSubmit = null}) => {
                                 isInvalid={touched.forgetSession && !!errors.forgetSession}
                             />
                         </Form.Group>
-                        <h6 className='text-danger'>
+                        <h6 className='text-danger' data-testid="auth-error-feedback">
                             {errors.general}
                         </h6>
                     </Modal.Body>
                     <Modal.Footer className='d-flex justify-content-between'>
                         <Link as={Button} onClick={onSwitchType}>Doesn't have an account?</Link>
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" type="submit" data-testid='submit-button'>
                             Login
                         </Button>
                     </Modal.Footer>
