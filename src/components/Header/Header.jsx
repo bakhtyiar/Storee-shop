@@ -36,7 +36,7 @@ const Header = () => {
                 </Navbar.Brand>
                 <Nav>
                     <Nav.Link as={NavLink} to={`${routes.cart.path}`}
-                              variant='outline-light' className='d-md-none d-block mx-2'>
+                              variant='outline-light' className='d-md-none d-block mx-2 text-center'>
                         <i className="bi bi-bag me-2"></i>
                         {' '}
                         Cart {totalQuantity > 0 ? `(${totalQuantity})` : ''}
