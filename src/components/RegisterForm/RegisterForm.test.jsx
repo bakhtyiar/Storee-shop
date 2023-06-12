@@ -1,5 +1,5 @@
 import {screen} from "@testing-library/react";
-import {renderWithRouter} from "../../tests/helpers/renderWithRouter";
+import {renderWithRouter} from "../../../tests/integration-helpers/renderWithRouter";
 import RegisterForm from "./RegisterForm";
 //todo: write interactive tests as for LoginForm component
 describe("Basic tests", () => {

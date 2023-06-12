@@ -1,5 +1,5 @@
 import {screen} from "@testing-library/react";
-import {renderWithFormikContext} from "../../tests/helpers/renderWithFormikContext";
+import {renderWithFormikContext} from "../../../tests/integration-helpers/renderWithFormikContext";
 import FormSelectField from "./FormSelectField";
 
 describe("Basic tests", () => {

@@ -1,6 +1,6 @@
 import {screen} from "@testing-library/react";
 import OrderProductCard from "./OrderProductCard";
-import {renderWithRouter} from "../../tests/helpers/renderWithRouter";
+import {renderWithRouter} from "../../../tests/integration-helpers/renderWithRouter";
 
 describe("Basic tests", () => {
     test("Match snapshot", () => {

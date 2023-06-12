@@ -1,5 +1,5 @@
 import {screen} from "@testing-library/react";
-import {renderWithRouter} from "../../tests/helpers/renderWithRouter";
+import {renderWithRouter} from "../../../tests/integration-helpers/renderWithRouter";
 import {Pagination} from "./Pagination";
 //todo: write interactive tests
 describe("Basic tests", () => {

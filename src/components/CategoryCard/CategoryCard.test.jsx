@@ -1,6 +1,6 @@
 import CategoryCard from "./CategoryCard";
 import {screen} from "@testing-library/react";
-import {renderWithRouter} from "../../tests/helpers/renderWithRouter";
+import {renderWithRouter} from "../../../tests/integration-helpers/renderWithRouter";
 import {routes} from "../../utils/constants";
 
 describe('CategoryCard test', () => {

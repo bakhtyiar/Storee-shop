@@ -1,7 +1,7 @@
 import CartProductCard from "./CartProductCard";
 import {screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import {renderWithRouter} from "../../tests/helpers/renderWithRouter";
+import {renderWithRouter} from "../../../tests/integration-helpers/renderWithRouter";
 
 describe("CartProductCard tests", () => {
     test("Match snapshot", () => {

@@ -1,5 +1,5 @@
 import {render} from "@testing-library/react";
-import {AuthModalContextProvider} from "../../contexts/authModal-context/authModal-context";
+import {AuthModalContextProvider} from "../../src/contexts/authModal-context/authModal-context";
 
 export const renderWithAuthModalContext = (component) => {
 
