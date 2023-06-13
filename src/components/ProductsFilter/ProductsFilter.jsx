@@ -34,13 +34,14 @@ function ProductsFilter({searchParams, setSearchParams}) {
         <Form className='mb-4' data-testid={"products-filter"}>
             <h3>Filter</h3>
             <h4>Categories</h4>
-            <StyledSection>
+            <StyledSection data-testid="categories-filter">
                 {!isLoading &&
                     categories.map((item, index) => (<Button
                         variant={item === searchParams.get('category') ? "primary" : "outline-primary"}
                         id={`category-btn-${item}`}
                         key={`category-btn-${index}`}
                         onClick={() => handleClick(item)}
+                        data-testid={`category-${item}`}
                     >
                         {replaceDashToSpace(item.toUpperCase())}
                     </Button>))

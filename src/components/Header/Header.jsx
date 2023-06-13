@@ -39,7 +39,7 @@ const Header = () => {
                               variant='outline-light' className='d-md-none d-block mx-2 text-center'>
                         <i className="bi bi-bag me-2"></i>
                         {' '}
-                        Cart {totalQuantity > 0 ? `(${totalQuantity})` : ''}
+                        Cart <span data-testid='cart-products-count'>{totalQuantity > 0 ? totalQuantity : ''}</span>
                     </Nav.Link>
                     <Button variant="outline-light" onClick={showBurgerMenu} className="d-md-none d-block me-6">
                         ☰ Menu
@@ -91,7 +91,7 @@ const Header = () => {
                     >
                         <i className="bi bi-bag me-2"></i>
                         {' '}
-                        Cart {totalQuantity > 0 ? `(${totalQuantity})` : ''}
+                        Cart <span data-testid='cart-products-count'>{totalQuantity > 0 ? totalQuantity : ''}</span>
                     </Nav.Link>
                     {isLoggedIn &&
                         <Nav.Link as={NavLink} to={`${routes.profile.path}`}>Profile</Nav.Link>

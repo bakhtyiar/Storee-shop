@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Badge, Breadcrumb, Button, Carousel, Col, Row, Spinner} from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { routes } from '../utils/constants';
 import {getProduct} from "../utils/server-api/products/products";
+import {RootContext} from "../contexts/root-context/root-context";
 
 const StyledCarousel = styled(Carousel)`
 	max-width: 640px;
@@ -24,6 +25,7 @@ const StyledImg = styled.img`
 `;
 
 const Product = () => {
+	const {cartState: {onAddToCart}} = useContext(RootContext);
 	const [isLoading, setIsLoading] = useState(true);
 	const [data, setData] = useState(null);
 	const { id } = useParams();
@@ -37,10 +39,10 @@ const Product = () => {
 
 	return (
 		<>
-			<Breadcrumb>
-				<Breadcrumb.Item ><Link to={routes.home.path}>Home</Link></Breadcrumb.Item>
-				<Breadcrumb.Item><Link to={routes.products.path}>Products</Link></Breadcrumb.Item>
-				<Breadcrumb.Item active>{isLoading && (data === null) ? (<>...</>) : (<>{data.title}</>)}</Breadcrumb.Item>
+			<Breadcrumb data-testid='breadcrumbs'>
+				<Breadcrumb.Item data-testid='breadcrumb-home'><Link to={routes.home.path}>Home</Link></Breadcrumb.Item>
+				<Breadcrumb.Item data-testid='breadcrumb-products'><Link to={routes.products.path}>Products</Link></Breadcrumb.Item>
+				<Breadcrumb.Item active data-testid='breadcrumb-current-product'>{isLoading && (data === null) ? (<>...</>) : (<>{data.title}</>)}</Breadcrumb.Item>
 			</Breadcrumb>
 			{
 				isLoading && data === null ? (
@@ -72,8 +74,18 @@ const Product = () => {
 							<p>Stock: {data.stock}</p>
 							<p>Brand: {data.brand}</p>
 							<p>Category: {data.category}</p>
-							<Button variant="dark" className='me-3'>Add to cart</Button>
-							<Button variant="outline-dark">Buy now</Button>
+							<Button variant="dark"
+									className='me-3'
+									data-testid='add-to-cart-button'
+									onClick={(e) => {
+								e.preventDefault();
+								onAddToCart(data.id);
+							}}>Add to cart</Button>
+							{/*<Button variant="outline-dark"*/}
+							{/*		data-testid='buy-now-button'*/}
+							{/*		onClick={(e) => {*/}
+							{/*			e.preventDefault();*/}
+							{/*		}}>Buy now</Button>*/}
 						</Col>
 					</Row>
 				)

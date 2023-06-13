@@ -55,7 +55,7 @@ const Products = () => {
                         </>
                     ) : (
                         <>
-                            <Row xs={1} sm={3} lg={6}>
+                            <Row xs={1} sm={3} lg={6} data-testid='products'>
                                 {data.products.map(item => (
                                     <Col className='mb-4' key={item.id}>
                                         <ProductCard item={item}/>

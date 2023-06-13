@@ -34,6 +34,7 @@ const ProductCard = ({item}) => {
                     e.preventDefault();
                     onAddToCart(item.id);
                 }}
+                data-testid="add-to-card-button"
             >
                 <i className="bi bi-bag-plus"></i>
                 {' '}

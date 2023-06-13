@@ -191,10 +191,10 @@ const OrderMaking = () => {
                                     <Accordion.Item eventKey="0">
                                         <Accordion.Header><h5>Order products</h5></Accordion.Header>
                                         <Accordion.Body>
-                                            <ListGroup variant="flush">
+                                            <ListGroup variant="flush" data-testid='order-products-list'>
                                                 {
                                                     products.map((product, index) => (
-                                                        <ListGroup.Item key={product.id} className='px-3'>
+                                                        <ListGroup.Item key={product.id} className='px-3' data-testid='order-products-list-item'>
                                                             <OrderProductCard product={product} selfIndexInCart={index}
                                                                               key={product.id}/>
                                                         </ListGroup.Item>
@@ -236,7 +236,7 @@ const OrderMaking = () => {
                                     <p className='d-flex justify-content-between'>
                                         <span>Total: </span> <b><span className='d-inline'>${discountedTotal}</span></b>
                                     </p>
-                                    <Button variant="primary" type="submit" className='w-100'>
+                                    <Button variant="primary" type="submit" className='w-100' data-testid="confirm-order-button">
                                         Confirm order
                                     </Button>
                                 </Card>
