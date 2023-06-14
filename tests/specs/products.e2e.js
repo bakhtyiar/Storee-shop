@@ -3,7 +3,7 @@ describe("Products page", () => {
     beforeEach(async () => {
         await browser.setWindowSize(935, 730);
         await ProductsPage.open();
-        await expect(browser).toHaveUrl("http://localhost:3000/products/1")
+        expect(browser).toHaveUrl("http://localhost:3000/products/1")
     })
     it(" Adds to cart product", async () => {
         let countBefore = await ProductsPage.productsInCartCount;
