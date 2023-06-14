@@ -50,9 +50,6 @@ class ProductsPage extends Page {
 
     #isHaveTextDeep(node, regex) {
         let nodes = [];
-        console.log('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL')
-        console.log(node)
-        console.log('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL')
         let recursiveSearch = (currentNode, regex) => {
             let matched = currentNode.innerText.match(regex);
             if (matched) {
