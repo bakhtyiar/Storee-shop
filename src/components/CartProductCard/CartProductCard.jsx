@@ -35,7 +35,7 @@ const CartProductCard = ({product, selfIndexInCart}) => {
                     <p className='my-0'>Price: {product.price}</p>
                 </div>
             </Link>
-            <div className='ml-3 d-flex gap-2'>
+            <div className='ml-3 d-flex gap-2 flex-column flex-lg-row'>
                 <div className='d-flex'>
                     <Button
                         variant="outline-dark"
@@ -67,7 +67,7 @@ const CartProductCard = ({product, selfIndexInCart}) => {
                 </div>
                 <Button
                     variant='outline-dark'
-                    className='d-flex rounded'
+                    className='d-flex rounded justify-content-center'
                     onClick={(e) => {
                         e.preventDefault();
                         onRemoveFromCart(selfIndexInCart);
