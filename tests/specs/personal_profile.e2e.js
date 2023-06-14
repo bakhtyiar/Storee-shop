@@ -1,7 +1,7 @@
 const ProfilePage = require( '../pageobjects/profile.page');
 const AuthPage = require( '../pageobjects/auth.page');
 
-describe("personal profile page interactions", () => {
+describe("Personal profile page interactions", () => {
   beforeEach(async () => {
     await browser.setWindowSize(935, 730);
     await AuthPage.open();
@@ -12,13 +12,13 @@ describe("personal profile page interactions", () => {
     await browser.deleteAllCookies();
   })
 
-  it("logout", async () => {
+  it(" Logout", async () => {
     await ProfilePage.logout();
     await expect(browser).toHaveUrl("http://localhost:3000/")
     await expect(browser.getCookies('userKey')).not.toBe();
     await expect(browser.getCookies('authKey')).not.toBe();
   });
-  it("edit profile data", async () => {
+  it(" Edit profile data", async () => {
     let firstNameBeforeEdit = await ProfilePage.spanFirstName.getText();
     await ProfilePage.startEditingProfile();
     await ProfilePage.inputFirstName.addValue("123");
@@ -27,7 +27,7 @@ describe("personal profile page interactions", () => {
     await expect(await ProfilePage.spanFirstName.getText()).toEqual(firstNameBeforeEdit + '123');
     await expect(browser).toHaveUrl("http://localhost:3000/profile");
   })
-  it("cancel editing", async () => {
+  it(" Cancel editing", async () => {
     let firstNameBeforeEdit = await ProfilePage.spanFirstName.getText();
     let surNameBeforeEdit = await ProfilePage.spanSurName.getText();
     await ProfilePage.startEditingProfile();
