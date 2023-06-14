@@ -15,7 +15,7 @@ const Cart = () => {
                 <Col xs={12} md={8}>
                     {products.length > 0 ? (
                         <>
-                            <Col className='d-flex flex-column gap-2'>
+                            <Col className='d-flex flex-column gap-2' data-testid='products-section'>
                                 {products.map((product, index) => (
                                     <CartProductCard product={product} selfIndexInCart={index} key={product.id}/>
                                 ))}
@@ -39,7 +39,8 @@ const Cart = () => {
                             <span>Total: </span> <b><span className='d-inline'>${discountedTotal}</span></b>
                         </p>
                         <Button disabled={products.length < 1} as={Link} to={routes.orderMaking.path}
-                                className={`w-100 ${products.length < 1 && 'disabled'}`}>Make order</Button>
+                                className={`w-100 ${products.length < 1 && 'disabled'}`}
+                                data-testid='make-order-btn'>Make order</Button>
                     </Card>
                 </Col>
             </Row>

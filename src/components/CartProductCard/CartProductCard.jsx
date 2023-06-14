@@ -20,7 +20,9 @@ const CartProductCard = ({product, selfIndexInCart}) => {
     return (
         <div className='px-2 py-3 border rounded d-flex flex-row align-items-center text-decoration-none text-black' data-testid='cart-product-card'>
             <Link className='w-100 d-flex flex-row text-decoration-none text-black'
-                  to={`${routes.product.path}/${product.id}`}>
+                  to={`${routes.product.path}/${product.id}`}
+                  data-testid='product-link'
+            >
                 <div className={'bg-image rounded align-self-center'}
                      style={{
                          height: '64px',
@@ -42,7 +44,7 @@ const CartProductCard = ({product, selfIndexInCart}) => {
                         onClick={() => {
                             setQuantity((prevState) => prevState - 1);
                         }}
-                        data-testid={"minus-btn"}
+                        data-testid="minus-btn"
                     >
                         -
                     </Button>
@@ -60,7 +62,7 @@ const CartProductCard = ({product, selfIndexInCart}) => {
                         onClick={() => {
                             setQuantity((prevState) => prevState + 1);
                         }}
-                        data-testid={"plus-btn"}
+                        data-testid="plus-btn"
                     >
                         +
                     </Button>
