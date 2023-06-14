@@ -38,7 +38,8 @@ const Cart = () => {
                         <p className='d-flex justify-content-between'>
                             <span>Total: </span> <b><span className='d-inline'>${discountedTotal}</span></b>
                         </p>
-                        <Button as={Link} to={routes.orderMaking.path} className='w-100'>Make order</Button>
+                        <Button disabled={products.length < 1} as={Link} to={routes.orderMaking.path}
+                                className={`w-100 ${products.length < 1 && 'disabled'}`}>Make order</Button>
                     </Card>
                 </Col>
             </Row>
