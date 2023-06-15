@@ -19,7 +19,7 @@ function AppRoutes() {
             <Route path={routes.home.path} element={<Home/>}/>
             <Route path={routes.products.path} element={<Navigate to={routes.products.path + "/1"} replace={true}/>}/>
             <Route path={routes.products.path + "/:page"} element={<Products/>}/>
-            <Route path={routes.product.path} element={<Navigate to=""/>}/>
+            <Route path={routes.product.path} element={<Navigate to={routes.products.path}/>}/>
             <Route path={routes.product.path + "/:id"} element={<Product/>}/>
             <Route path={routes.news.path} element={<News/>}/>
             <Route path={routes.register.path} element={<Register/>}/>
