@@ -12,6 +12,7 @@ import Login from "./routes/login";
 import Cart from "./routes/cart";
 import OrderMaking from "./routes/orderMaking";
 import OrderCompleted from "./routes/orderCompleted";
+import NewsPost from "./components/NewsPost/NewsPost";
 
 function AppRoutes() {
     return (
@@ -22,6 +23,8 @@ function AppRoutes() {
             <Route path={routes.product.path} element={<Navigate to={routes.products.path}/>}/>
             <Route path={routes.product.path + "/:id"} element={<Product/>}/>
             <Route path={routes.news.path} element={<News/>}/>
+            <Route path={routes.newsPost.path} element={<Navigate to={routes.news.path}/>}/>
+            <Route path={routes.newsPost.path + "/:id"} element={<NewsPost/>}/>
             <Route path={routes.register.path} element={<Register/>}/>
             <Route path={routes.login.path} element={<Login/>}/>
             <Route path={routes.profile.path} element={<Profile/>}/>
