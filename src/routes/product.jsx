@@ -1,10 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Badge, Breadcrumb, Button, Carousel, Col, Row, Spinner} from 'react-bootstrap';
+import {Badge, Breadcrumb, Button, Carousel, Col, Row} from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { routes } from '../utils/constants';
 import {getProduct} from "../utils/server-api/products/products";
 import {RootContext} from "../contexts/root-context/root-context";
+import LoaderIndicatorCentral from "../components/LoaderIndicator/LoaderIndicatorCental";
 
 const StyledCarousel = styled(Carousel)`
 	max-width: 640px;
@@ -47,9 +48,7 @@ const Product = () => {
 			{
 				isLoading && data === null ? (
 					<>
-						<Spinner animation="border" role="status">
-							<span className="visually-hidden">Loading...</span>
-						</Spinner>
+						<LoaderIndicatorCentral/>
 					</>
 				) : (
 					<Row>

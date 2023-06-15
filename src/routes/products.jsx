@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useParams, useSearchParams} from 'react-router-dom';
 import {pageLimit, routes} from '../utils/constants';
-import {Breadcrumb, Col, Placeholder, Row, Spinner} from 'react-bootstrap';
+import {Breadcrumb, Col, Row} from 'react-bootstrap';
 import ProductCard from '../components/ProductCard/ProductCard';
 import {Pagination} from '../components/Pagination/Pagination';
 import ProductsFilter from "../components/ProductsFilter/ProductsFilter";
 import {getProducts} from "../utils/server-api/products/products";
+import LoaderIndicatorCentral from "../components/LoaderIndicator/LoaderIndicatorCental";
 
 const Products = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -44,14 +45,7 @@ const Products = () => {
                 {
                     isLoading && (data === null) ? (
                         <>
-                            {[...Array(6)].map((_, index) => (
-                                <Placeholder as="p" animation="wave" key={`placeholder-${index}`}>
-                                    <Placeholder xs={12}/>
-                                </Placeholder>
-                            ))}
-                            <Spinner animation="border" role="status">
-                                <span className="visually-hidden">Loading...</span>
-                            </Spinner>
+                            <LoaderIndicatorCentral/>
                         </>
                     ) : (
                         <>
