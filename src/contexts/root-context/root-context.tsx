@@ -6,11 +6,14 @@ import {deleteCookie, setCookie} from "../../utils/cookies/cookies";
 import {getProduct} from "../../utils/server-api/products/products";
 import {getLocalCart, setLocalCart, updateCart} from "../../utils/server-api/cart/cart";
 import {authKey, userKey} from "../../utils/constants";
-import {cartCalcCounters} from "../../utils/calcs";
+import {cartRecalcCounters} from "../../utils/calcs";
+import {IRootContext} from "./initialState.types";
 
 export const RootContext = React.createContext(initialState);
 //todo fix bug in case when localstorage cart have only {message: some error text}
-export const RootContextProvider = ({children}) => {
+export const RootContextProvider = ({
+    children
+}: any) => {
     const [authUser, dispatchAuthUser] = useReducer(authUserReducer, initialState.authUserState);
     const [theme, setTheme] = useState(initialState.themeState);
     const [cart, dispatchCart] = useReducer(cartReducer, initialState.cartState);
@@ -24,7 +27,7 @@ export const RootContextProvider = ({children}) => {
         );
     }
 
-    const loginUser = (serverResponse, forgetSession = false) => {
+    const loginUser = (serverResponse: any, forgetSession = false) => {
         if (forgetSession) {
             setCookie(userKey, serverResponse.id, {path: '/', secure: true, samesite: 'lax'});
             setCookie(authKey, serverResponse.token, {path: '/', secure: true, samesite: 'strict'});
@@ -42,45 +45,45 @@ export const RootContextProvider = ({children}) => {
         dispatchAuthUser({type: 'logout'});
     }
 
-    const addToCart = async (productId) => {
+    const addToCart = async (productId: any) => {
         let newCart = getLocalCart() || initialState.cartState;
-        let productIndex = newCart.products.findIndex((product) => product.id === productId);
+        let productIndex = newCart.products.findIndex((product: any) => product.id === productId);
         if (productIndex === -1) {
             let newProduct = await getProduct(productId);
             newProduct.quantity = 1;
             newCart.products.push(newProduct);
         } else {
-            newCart.products[productIndex].quantity += 1;
+            newCart.products[productIndex].quantity! += 1;
         }
         if (authUser.isLoggedIn) {
             newCart = await updateCart(cart.id, newCart.products);
         } else {
-            newCart = cartCalcCounters(newCart);
+            newCart = cartRecalcCounters(newCart);
         }
         dispatchCart({type: 'set', payload: newCart});
         setLocalCart(newCart);
     }
 
-    const updateProductQuantity = async (productId, quantity) => {
+    const updateProductQuantity = async (productId: any, quantity: any) => {
         let newCart = getLocalCart() || initialState.cartState;
-        let productIndex = newCart.products.findIndex( (product) => product.id === productId);
+        let productIndex = newCart.products.findIndex( (product: any) => product.id === productId);
         newCart.products[productIndex].quantity = quantity;
         if (authUser.isLoggedIn) {
             newCart = await updateCart(cart.id, newCart.products);
         } else {
-            newCart = cartCalcCounters(newCart);
+            newCart = cartRecalcCounters(newCart);
         }
         dispatchCart({type: 'set', payload: newCart});
         setLocalCart(newCart);
     }
 
-    const removeFromCart = async (indexInCart) => {
+    const removeFromCart = async (indexInCart: any) => {
         let newCart = getLocalCart() || initialState.cartState;
-        newCart.products = newCart.products.filter((product, index) => index !== indexInCart);
+        newCart.products = newCart.products.filter((product: any, index: any) => index !== indexInCart);
         if (authUser.isLoggedIn) {
             newCart = await updateCart(cart.id, newCart.products);
         } else {
-            newCart = cartCalcCounters(newCart);
+            newCart = cartRecalcCounters(newCart);
         }
         dispatchCart({type: 'set', payload: newCart});
         setLocalCart(newCart);
@@ -94,7 +97,7 @@ export const RootContextProvider = ({children}) => {
         setLocalCart(initialState.cartState);
     }
 
-    const setCart = async (newCart) => {
+    const setCart = async (newCart: any) => {
         if (authUser.isLoggedIn) {
             await updateCart(cart.id, newCart.products);
         }
@@ -102,12 +105,13 @@ export const RootContextProvider = ({children}) => {
         setLocalCart(newCart);
     }
 
-    const state = {
+    const state: IRootContext = {
         authUserState: {
             isLoggedIn: authUser.isLoggedIn,
             id: authUser.id,
             username: authUser.username,
             email: authUser.email,
+            password: authUser.password,
             firstName: authUser.firstName,
             lastName: authUser.lastName,
             gender: authUser.gender,
@@ -188,6 +192,7 @@ export const RootContextProvider = ({children}) => {
     };
 
     return (
+        
         <RootContext.Provider value={state}>
             {children}
         </RootContext.Provider>

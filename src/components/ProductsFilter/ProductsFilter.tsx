@@ -3,6 +3,7 @@ import {Button, Form} from "react-bootstrap";
 import styled from "styled-components";
 import {getCategories} from "../../utils/server-api/products/products";
 import {replaceDashToSpace} from "../../utils/str/str";
+import {ICategories} from "../../utils/server-api/products/products.types";
 
 const StyledSection = styled.section`
   display: flex;
@@ -11,9 +12,12 @@ const StyledSection = styled.section`
   margin: 8px 0;
 `;
 
-function ProductsFilter({searchParams, setSearchParams}) {
+function ProductsFilter({
+    searchParams,
+    setSearchParams
+}: any) {
     const [isLoading, setIsLoading] = useState(true);
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState<ICategories>([]);
 
     useEffect(() => {
         setIsLoading(true);
@@ -22,7 +26,7 @@ function ProductsFilter({searchParams, setSearchParams}) {
             .finally(() => setIsLoading(false));
     }, []);
 
-    const handleClick = (clickedCategory) => {
+    const handleClick = (clickedCategory: any) => {
         if (searchParams.get('category') === clickedCategory) {
             searchParams.delete('category');
             setSearchParams({...searchParams});
@@ -32,8 +36,11 @@ function ProductsFilter({searchParams, setSearchParams}) {
 
     return (
         <Form className='mb-4' data-testid={"products-filter"}>
+            
             <h3>Filter</h3>
+            
             <h4>Categories</h4>
+            
             <StyledSection data-testid="categories-filter">
                 {!isLoading &&
                     categories.map((item, index) => (<Button

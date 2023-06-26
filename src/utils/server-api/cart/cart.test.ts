@@ -1,6 +1,7 @@
 import {getCart, getLocalCart, setLocalCart, updateCart} from "./cart";
 
 class LocalStorageMock {
+    store: any;
     constructor() {
         this.store = {};
     }
@@ -9,20 +10,20 @@ class LocalStorageMock {
         this.store = {};
     }
 
-    getItem(key) {
+    getItem(key: any) {
         return this.store[key] || null;
     }
 
-    setItem(key, value) {
+    setItem(key: any, value: any) {
         this.store[key] = String(value);
     }
 
-    removeItem(key) {
+    removeItem(key: any) {
         delete this.store[key];
     }
 }
 
-global.localStorage = new LocalStorageMock;
+const nativeLocalStorage = global.localStorage;
 
 const mockData = {
     "id": 19,
@@ -75,6 +76,16 @@ const mockData = {
 };
 
 describe('Get single cart', () => {
+    beforeAll(() => {
+        Object.defineProperty(global, 'localStorage', {
+            value: new LocalStorageMock()
+        });
+    });
+    afterAll(() => {
+        Object.defineProperty(global, 'localStorage', {
+            value: nativeLocalStorage
+        });
+    });
     test('Valid data', async () => {
         const result = await getCart(1);
         expect(result).toEqual(expect.any(Object))
@@ -91,8 +102,18 @@ describe('Get single cart', () => {
 })
 
 describe('Update single cart', () => {
+    beforeAll(() => {
+        Object.defineProperty(global, 'localStorage', {
+            value: new LocalStorageMock()
+        });
+    });
+    afterAll(() => {
+        Object.defineProperty(global, 'localStorage', {
+            value: nativeLocalStorage
+        });
+    });
     test('Valid data', async () => {
-        const result = await updateCart(1, [{}]);
+        const result = await updateCart(1, []);
         expect(result).toMatchObject({
             "id": expect.any(Number),
             "products": expect.any(Array),
@@ -104,7 +125,7 @@ describe('Update single cart', () => {
         })
     })
     test('Invalid data', async () => {
-        const result = await updateCart(-1, [{}]);
+        const result = await updateCart(-1, []);
         expect(result).toMatchObject({
             "message": expect.any(String),
         })
@@ -112,6 +133,16 @@ describe('Update single cart', () => {
 })
 
 describe('Get & Set local cart', () => {
+    beforeAll(() => {
+        Object.defineProperty(global, 'localStorage', {
+            value: new LocalStorageMock()
+        });
+    });
+    afterAll(() => {
+        Object.defineProperty(global, 'localStorage', {
+            value: nativeLocalStorage
+        });
+    });
     beforeEach(() => {
         localStorage.clear()
     })

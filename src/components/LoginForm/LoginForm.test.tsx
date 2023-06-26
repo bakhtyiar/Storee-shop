@@ -1,3 +1,4 @@
+import React from "react";
 import {act, screen, waitFor} from "@testing-library/react";
 import LoginForm from "./LoginForm";
 import {renderWithRouter} from "../../../tests/integration-helpers/renderWithRouter";
@@ -5,6 +6,7 @@ import userEvent from "@testing-library/user-event";
 
 describe("Basic tests", () => {
     test("Match snapshot", () => {
+        
         renderWithRouter(<LoginForm/>);
         expect(screen.getByTestId("login-form")).toMatchSnapshot();
     })
@@ -13,6 +15,7 @@ describe("Basic tests", () => {
 describe("formik tests", () => {
     test("valid data", async () => {
         const handleSubmit = jest.fn(x => x);
+        
         renderWithRouter(<LoginForm handleSubmit={handleSubmit}/>, "/someRandomRoute123");
         let loginField = screen.getByRole("textbox", {name: /name/i});
         await userEvent.type(loginField, "kminchelle");
@@ -33,6 +36,7 @@ describe("formik tests", () => {
     })
     test("no data", async () => {
         const handleSubmit = jest.fn(x => x);
+        
         renderWithRouter(<LoginForm handleSubmit={handleSubmit}/>, "/someRandomRoute123");
         let submitButton = screen.getByRole("button", {name: /login/i});
         // eslint-disable-next-line testing-library/no-unnecessary-act
@@ -45,6 +49,7 @@ describe("formik tests", () => {
     })
     test("invalid data", async () => {
         const handleSubmit = jest.fn(x => x);
+        
         renderWithRouter(<LoginForm handleSubmit={handleSubmit}/>, "/someRandomRoute123");
         let loginField = screen.getByRole("textbox", {name: /name/i});
         await userEvent.type(loginField, "k");

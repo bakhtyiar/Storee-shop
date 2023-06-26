@@ -1,6 +1,6 @@
 import {initialState} from "./initialState";
 
-export const cartReducer = (state, action) => {
+export const cartReducer = (state: any, action: any) => {
     switch (action.type) {
         case 'set':
             return {

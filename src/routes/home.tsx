@@ -6,13 +6,14 @@ import smartphonePic from '../assets/img/product_categories/smartphones.png';
 import skincarePic from '../assets/img/product_categories/skincare.png';
 import furniturePic from '../assets/img/product_categories/furniture.png';
 import sunglassesPic from '../assets/img/product_categories/sunglasses.png';
+import {ICategories} from "../utils/server-api/products/products.types";
 // todo add searching logic
 //todo : add random product category 'you may like'
 
 
 export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState<ICategories>([]);
     const [searchValue, setSearchValue] = useState("");
     const [searchHints, setSearchHints] = useState(["harry potter", "chess", "physics", "tolstoy"]);
 
@@ -35,9 +36,13 @@ export default function Home() {
 
     return (
         <>
+            
             <Row>
+                
                 <h3>Home</h3>
+                
                 <InputGroup className="mb-3">
+                    
                     <Form.Control
                         placeholder="Recipient's username"
                         id="searchInput"
@@ -47,6 +52,7 @@ export default function Home() {
                         aria-label="Recipient's username"
                         aria-describedby="basic-addon2"
                     />
+                    
                     <datalist id="searchHints">
                         {
                             searchHints.map((value => (
@@ -54,34 +60,41 @@ export default function Home() {
                             )))
                         }
                     </datalist>
+                    
                     <Button variant="outline-secondary" id="button-addon2" onClick={handleFind}>
                         Find
                     </Button>
                 </InputGroup>
             </Row>
+            
             <div className={'mt-3'}>
+                
                 <h3>Popular</h3>
+                
                 <Row className={'d-flex'}>
-                    {(categories.includes('smartphones') !== -1) &&
-                        <Col xxs={6} md={3}><CategoryCard header={'smartphones'} key={'smartphones' + 'Pictured'}
+                    {categories.includes('smartphones')  &&
+                        <Col xxs={6} md={3}><CategoryCard header={'smartphones'} key={'smartphones'}
                                                          picture={smartphonePic}/></Col>
                     }
-                    {(categories.includes('skincare') !== -1) &&
-                        <Col xxs={6} md={3}><CategoryCard header={'skincare'} key={'skincare' + 'Pictured'}
+                    {categories.includes('skincare') &&
+                        <Col xxs={6} md={3}><CategoryCard header={'skincare'} key={'skincare'}
                                                          picture={skincarePic}/></Col>
                     }
-                    {(categories.includes('furniture') !== -1) &&
-                        <Col xxs={6} md={3}><CategoryCard header={'furniture'} key={'furniture' + 'Pictured'}
+                    {categories.includes('furniture') &&
+                        <Col xxs={6} md={3}><CategoryCard header={'furniture'} key={'furniture'}
                                                          picture={furniturePic}/></Col>
                     }
-                    {(categories.includes('sunglasses') !== -1) &&
-                        <Col xxs={6} md={3}><CategoryCard header={'sunglasses'} key={'sunglasses' + 'Pictured'}
+                    {categories.includes('sunglasses') &&
+                        <Col xxs={6} md={3}><CategoryCard header={'sunglasses'} key={'sunglasses'}
                                                          picture={sunglassesPic}/></Col>
                     }
                 </Row>
             </div>
+            
             <div className={'mt-3'}>
+                
                 <h3>Categories</h3>
+                
                 <Row>
                     {!isLoading &&
                         <div

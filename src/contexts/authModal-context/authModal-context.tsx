@@ -18,7 +18,9 @@ const initialState = {
 
 export const AuthModalContext = React.createContext(initialState);
 
-export const AuthModalContextProvider = ({children}) => {
+export const AuthModalContextProvider = ({
+    children
+}: any) => {
     const [authModal, dispatchAuthModal] = useReducer(authModalReducer, initialState);
 
     const authRegHandler = () => {

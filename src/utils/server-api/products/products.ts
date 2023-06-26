@@ -1,22 +1,50 @@
 import {dummyjsonURL, pageLimit} from "../../constants";
+import {ICategories, IProduct, IProducts} from "./products.types";
 
-export const getProducts = async (skip = 0, limit = pageLimit, category = 'tops', url = dummyjsonURL) => {
+export const getProducts = async (skip: number = 0, limit: number = pageLimit, category: string = 'tops', url: string = dummyjsonURL): Promise<IProducts> => {
     if (category !== '') {
         category = `/category/${category}`;
     }
-    return (fetch(`${url}/products${category}?skip=${skip}&limit=${limit}`)
-        .catch(e => console.log(e))
-        .then(response => response.json()))
+    let res;
+    try {
+        res = await fetch(`${url}/products${category}?skip=${skip}&limit=${limit}`);
+        res = await res.json();
+    } catch (e) {
+        if (typeof e === "string") {
+            throw new Error(e);
+        } else if (e instanceof Error) {
+            throw e;
+        }
+    }
+    return res;
 };
 
-export const getProduct = async (id, url = dummyjsonURL) => {
-    return (fetch(`${url}/products/${id}`)
-        .catch(e => console.log(e))
-        .then(response => response.json()))
+export const getProduct = async (id: any, url = dummyjsonURL): Promise<IProduct> => {
+    let res;
+    try {
+        res = await fetch(`${url}/products/${id}`);
+        res = await res.json();
+    } catch (e) {
+        if (typeof e === "string") {
+            throw new Error(e);
+        } else if (e instanceof Error) {
+            throw e;
+        }
+    }
+    return res;
 };
 
-export const getCategories = async (url = dummyjsonURL) => {
-    return (fetch(`${url}/products/categories`)
-        .catch(e => console.log(e))
-        .then(response => response.json()))
-}
+export const getCategories = async (url: string = dummyjsonURL): Promise<ICategories> => {
+    let res;
+    try {
+        res = await fetch(`${url}/products/categories`);
+        res = await res.json();
+    } catch (e) {
+        if (typeof e === "string") {
+            throw new Error(e);
+        } else if (e instanceof Error) {
+            throw e;
+        }
+    }
+    return res;
+};

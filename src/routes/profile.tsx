@@ -34,12 +34,12 @@ const schema = yup.object().shape({
         .min(6, 'Address is too short. Required minimum 6 symbols'),
     city: yup.string()
         .when('shipmentMethod', {
-            is: (value) => ([shipmentMethods.courier.value, shipmentMethods.airDrone.value, shipmentMethods.postOffice.value].includes(value)),
+            is: (value: any) => [shipmentMethods.courier.value, shipmentMethods.airDrone.value, shipmentMethods.postOffice.value].includes(value),
             then: yup.string().required('Required').min(3, 'City\'s name is too short. Required minimum 3 symbols'),
         }),
     state: yup.string()
         .when('shipmentMethod', {
-            is: (value) => ([shipmentMethods.courier.value, shipmentMethods.airDrone.value, shipmentMethods.postOffice.value].includes(value)),
+            is: (value: any) => [shipmentMethods.courier.value, shipmentMethods.airDrone.value, shipmentMethods.postOffice.value].includes(value),
             then: yup.string().required('Required').min(2, 'State\'s name is too short. Required minimum 2 symbols'),
         }),
     postalCode: yup.string().required('Required')
@@ -67,11 +67,11 @@ const Profile = () => {
     };
 
     const handleCancelEditProfile = async () => {
-        setIsEditing(false);
+        await setIsEditing(false);
     };
 
-    const handleSaveChanges = (values, touched) => {
-        let editedPersonalData = {};
+    const handleSaveChanges = (values: any, touched: any) => {
+        let editedPersonalData: Partial<yup.InferType<typeof schema>> = {};
         for (let property in values) {
             if (property in touched)
                 editedPersonalData[property] = values[property];
@@ -88,7 +88,7 @@ const Profile = () => {
         authUserState.onLogout();
         authUserState.onLogin(res);
         handleClose();
-        handleCancelEditProfile();
+        await handleCancelEditProfile();
     };
 
     let initialValues = {
@@ -98,18 +98,23 @@ const Profile = () => {
         username: authUserState.username,
         email: authUserState.email,
         newPassword: '',
-        address: authUserState.address.address,
-        city: authUserState.address.city,
-        state: authUserState.address.state,
-        postalCode: authUserState.address.postalCode,
+        address: authUserState.address!.address,
+        city: authUserState.address!.city,
+        state: authUserState.address!.state,
+        postalCode: authUserState.address!.postalCode,
     };
 
     return (
         <>
+            
             {!authUserState.isLoggedIn && <div className='d-flex align-content-center h-100 justify-content-center pb-4 mb-4 flex-column' data-testid="error-no-personal-profile-page">
+                
                 <h1 className='align-self-center text-center'>You are not logged in</h1>
+                
                 <p className='align-self-center text-center'>Login to your account or create one to get access to this page</p>
+                
                 <div className='d-flex justify-content-center mb-4 pb-4'>
+                    
                     <Button variant='outline-dark'
                             className='mx-2'
                             onClick={() => onRegister()}
@@ -117,6 +122,7 @@ const Profile = () => {
                     >
                         Register
                     </Button>
+                    
                     <Button
                         variant='primary'
                         onClick={() => onLogin()}
@@ -126,6 +132,7 @@ const Profile = () => {
                     </Button>
                 </div>
             </div>}
+            
             {authUserState.isLoggedIn && <Formik
                 validationSchema={schema}
                 validateOnBlur
@@ -134,23 +141,35 @@ const Profile = () => {
                 enableReinitialize={true}
             >
                 {({
-                      handleSubmit, handleChange, handleBlur, values, touched, errors,
+                       values, touched
                   }) => (<>
+                    
                     <Form noValidate data-testid='profile-form'>
+                        
                         <div className='d-flex justify-content-between'>
+                            
                             <h2 className={'mb-4'}>Profile</h2>
+                            
                             <div>
+                                
                                 {!isEditing && <Button variant="outline-primary" onClick={handleEditProfile}
                                                        className={'mx-2 px-4'} data-testid='edit-profile-btn'>Edit</Button>
                                 }
+                                
                                 <Button variant="outline-danger" onClick={handleLogout} data-testid='btn-logout-profile'>Logout</Button>
                             </div>
                         </div>
+                        
                         <Card body>
+                            
                             <Row>
+                                
                                 <Col className='mb-4' md={4}>
+                                    
                                     <Row>
+                                        
                                         <div className='d-flex justify-content-center mt-4'>
+                                            
                                             <Image
                                                 src={values.avatar}
                                                 alt="Profile's avatar"
@@ -162,13 +181,18 @@ const Profile = () => {
                                                 className='mb-3'
                                             />
                                         </div>
+                                        
                                         {isEditing && <Form.Group controlId="formFile" className="mb-3">
+                                            
                                             <Form.Label>Load file to update avatar</Form.Label>
+                                            
                                             <Form.Control type="file"/>
                                         </Form.Group>}
                                     </Row>
                                 </Col>
+                                
                                 <Col className='d-flex flex-column gap-3 my-3' md={8}>
+                                    
                                     <Row>
                                         {isEditing ?
                                             <FormTextField
@@ -194,6 +218,7 @@ const Profile = () => {
                                             :
                                             <Col>Surname <br/><span data-testid='surname-data'>{authUserState.lastName}</span></Col>}
                                     </Row>
+                                    
                                     <Row>
                                         {isEditing ?
                                             <FormTextField
@@ -219,6 +244,7 @@ const Profile = () => {
                                             :
                                             <Col>Username <br/>{authUserState.username} </Col>}
                                     </Row>
+                                    
                                     <Row>
                                         {isEditing ?
                                             <FormTextField
@@ -232,7 +258,9 @@ const Profile = () => {
                                             :
                                             <Col>Password <br/>****** </Col>}
                                     </Row>
+                                    
                                     <hr className={'mx-2'}/>
+                                    
                                     <Row>
                                         {isEditing ?
                                             <FormTextField
@@ -244,7 +272,7 @@ const Profile = () => {
                                                 type='text'
                                             />
                                             :
-                                            <Col>Address <br/>{authUserState.address.address}
+                                            <Col>Address <br/>{authUserState.address?.address ?? 'not specified'}
                                             </Col>}
                                         {isEditing ?
                                             <FormTextField
@@ -256,8 +284,9 @@ const Profile = () => {
                                                 type='text'
                                             />
                                             :
-                                            <Col>City <br/>{authUserState.address.city} </Col>}
+                                            <Col>City <br/>{authUserState.address!.city} </Col>}
                                     </Row>
+                                    
                                     <Row>
                                         {isEditing ?
                                             <FormSelectField
@@ -268,7 +297,9 @@ const Profile = () => {
                                                 name='state'
                                                 type='text'
                                             >
+                                                
                                                 <>
+                                                    
                                                     <option value={''} disabled>Choose...</option>
                                                     {states.map((state) => (
                                                         <option key={state.value}
@@ -277,7 +308,7 @@ const Profile = () => {
                                                 </>
                                             </FormSelectField>
                                             :
-                                            <Col>State <br/>{authUserState.address.state}
+                                            <Col>State <br/>{authUserState.address?.state ?? 'not specified'}
                                             </Col>}
                                         {isEditing ?
                                             <FormTextField
@@ -289,30 +320,40 @@ const Profile = () => {
                                                 type='text'
                                             />
                                             :
-                                            <Col>Postal code <br/>{authUserState.address.postalCode}</Col>}
+                                            <Col>Postal code <br/>{authUserState.address?.postalCode ?? 'not specified'}</Col>}
                                     </Row>
                                 </Col>
                             </Row>
 
 
+                            
                             {isEditing && <div className={'d-flex justify-content-end mt-3'}>
+                                
                                 <Button variant="outline-secondary" onClick={handleCancelEditProfile}
                                         className={'mx-2 px-3'} data-testid='cancel-editing-btn'>Cancel editing</Button>
+                                
                                 <Button variant="primary" className={'px-4'}
                                         disabled={Object.keys(touched).length === 0}
                                         onClick={() => handleSaveChanges(values, touched)} data-testid="save-changes-btn">Save
                                     changes</Button>
                             </div>}
+                            
                             <Modal show={show} onHide={handleClose}>
+                                
                                 <Modal.Header closeButton>
+                                    
                                     <Modal.Title>Are you sure to save changes?</Modal.Title>
                                 </Modal.Header>
+                                
                                 <Modal.Body>Press submit to save changes to your profile, otherwise press
                                     close</Modal.Body>
+                                
                                 <Modal.Footer>
+                                    
                                     <Button variant="secondary" onClick={handleClose}>
                                         Close
                                     </Button>
+                                    
                                     <Button variant="primary" onClick={handleSubmitChanges} data-testid="confirm-changes-btn">
                                         Save Changes
                                     </Button>

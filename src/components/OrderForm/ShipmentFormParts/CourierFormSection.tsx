@@ -7,7 +7,9 @@ import {states} from "../../../utils/constants";
 const CourierFormSection = () => {
     return (
         <div data-testid={"courier-form-section"}>
+            
             <Row className="mb-3">
+                
                 <FormTextField
                     as={Col}
                     controlId="formGridAddress1"
@@ -17,7 +19,9 @@ const CourierFormSection = () => {
                     type='text'
                 />
             </Row>
+            
             <Row>
+                
                 <FormTextField
                     as={Col}
                     controlId="formGridCity"
@@ -26,6 +30,7 @@ const CourierFormSection = () => {
                     name='city'
                     type='text'
                 />
+                
                 <FormSelectField
                     as={Col}
                     controlId="formGridState"
@@ -35,7 +40,9 @@ const CourierFormSection = () => {
                     type='text'
                     data-testid="select-list"
                 >
+                    
                     <>
+                        
                         <option value={''} disabled>Choose...</option>
                         {states.map((state) => (
                             <option key={state.value}
@@ -43,6 +50,7 @@ const CourierFormSection = () => {
                         ))}
                     </>
                 </FormSelectField>
+                
                 <FormTextField
                     as={Col}
                     controlId="formGridZip"

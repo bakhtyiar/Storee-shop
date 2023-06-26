@@ -1,13 +1,18 @@
 Object.defineProperty(window, 'matchMedia', {
     writable: true,
-    value: jest.fn().mockImplementation((query) => ({
+    value: jest.fn().mockImplementation((query: any) => ({
         matches: false,
         media: query,
         onchange: null,
-        addListener: jest.fn(), // Deprecated
-        removeListener: jest.fn(), // Deprecated
+
+        // Deprecated
+        addListener: jest.fn(),
+
+        // Deprecated
+        removeListener: jest.fn(),
+
         addEventListener: jest.fn(),
         removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
+        dispatchEvent: jest.fn()
     })),
 });

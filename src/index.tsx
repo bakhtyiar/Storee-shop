@@ -9,14 +9,17 @@ import {RootContextProvider} from "./contexts/root-context/root-context";
 import {ThemeProvider} from "react-bootstrap";
 // import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
     <RootContextProvider>
+        
         <ThemeProvider
             breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
             minBreakpoint="xxs"
         >
+            
             <BrowserRouter>
+                
                 <App/>
             </BrowserRouter>
         </ThemeProvider>

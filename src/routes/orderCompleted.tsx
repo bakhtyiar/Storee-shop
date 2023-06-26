@@ -25,10 +25,15 @@ const OrderCompleted = () => {
 
     return (
         <>
+            
             <Row className='d-flex justify-content-center align-content-center h-100'>
+                
                 <Col md={6} className=''>
+                    
                     <Alert key='success' variant='success' className='mb-5'>
+                        
                         <h1 className=''>Order is successfully completed</h1>
+                        
                         <p>You will be redirected in {remain} seconds</p>
                     </Alert>
                 </Col>
