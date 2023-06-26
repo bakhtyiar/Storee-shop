@@ -6,6 +6,7 @@ import { routes } from '../utils/constants';
 import {getProduct} from "../utils/server-api/products/products";
 import {RootContext} from "../contexts/root-context/root-context";
 import LoaderIndicatorCentral from "../components/LoaderIndicator/LoaderIndicatorCental";
+import {IProduct} from "../utils/server-api/products/products.types";
 
 const StyledCarousel = styled(Carousel)`
 	max-width: 640px;
@@ -28,7 +29,7 @@ const StyledImg = styled.img`
 const Product = () => {
 	const {cartState: {onAddToCart}} = useContext(RootContext);
 	const [isLoading, setIsLoading] = useState(true);
-	const [data, setData] = useState(null);
+	const [data, setData] = useState<IProduct | null>(null);
 	const { id } = useParams();
 
 	useEffect(() => {
@@ -40,45 +41,65 @@ const Product = () => {
 
 	return (
 		<>
+
 			<Breadcrumb data-testid='breadcrumbs'>
+
 				<Breadcrumb.Item data-testid='breadcrumb-home'><Link to={routes.home.path}>Home</Link></Breadcrumb.Item>
+
 				<Breadcrumb.Item data-testid='breadcrumb-products'><Link to={routes.products.path}>Products</Link></Breadcrumb.Item>
-				<Breadcrumb.Item active data-testid='breadcrumb-current-product'>{isLoading && (data === null) ? (<>...</>) : (<>{data.title}</>)}</Breadcrumb.Item>
+
+				<Breadcrumb.Item active data-testid='breadcrumb-current-product'>{isLoading && (data == null) ? (<>...</>) : (<>{data!.title}</>)}</Breadcrumb.Item>
 			</Breadcrumb>
 			{
 				isLoading && data === null ? (
 					<>
+
 						<LoaderIndicatorCentral/>
 					</>
 				) : (
 					<Row>
+
 						<Col sm={12} md={6}>
+
 							<StyledCarousel fade="true" variant="dark">
-								{data.images.map((item, index) => (
+								{data!.images.map((item, index) => (
 									<StyledCarouselItem key={item}>
+
 										<StyledImg src={item} alt={`Carousel item ${index} slide`} />
 									</StyledCarouselItem>
 								))}
 							</StyledCarousel>
 						</Col>
+
 						<Col>
-							<h1>{data.title}</h1>
-							<h2>{data.description}</h2>
+
+							<h1>{data!.title}</h1>
+
+							<h2>{data!.description}</h2>
+
 							<div className={'d-flex align-items-start gap-1'}>
-								<h3>Price: <strike>${data.price}</strike> </h3>
-								<Badge bg="warning" text="dark">{data.discountPercentage}%</Badge>
-								<h3 className={'mx-2'}>${Math.round(data.price * (100 - data.discountPercentage) / 100)}</h3>
+
+								<h3>Price: <del>${data?.price}</del> </h3>
+
+								<Badge bg="warning" text="dark">{data!.discountPercentage}%</Badge>
+
+								<h3 className={'mx-2'}>${Math.round(data!.price * (100 - data!.discountPercentage) / 100)}</h3>
 							</div>
-							<p>Rating: <i className="bi bi-star-fill text-warning"></i> {data.rating}</p>
-							<p>Stock: {data.stock}</p>
-							<p>Brand: {data.brand}</p>
-							<p>Category: {data.category}</p>
+
+							<p>Rating: <i className="bi bi-star-fill text-warning"></i> {data!.rating}</p>
+
+							<p>Stock: {data!.stock}</p>
+
+							<p>Brand: {data!.brand}</p>
+
+							<p>Category: {data!.category}</p>
+
 							<Button variant="dark"
 									className='me-3'
 									data-testid='add-to-cart-button'
 									onClick={(e) => {
 								e.preventDefault();
-								onAddToCart(data.id);
+								onAddToCart(id);
 							}}>Add to cart</Button>
 							{/*<Button variant="outline-dark"*/}
 							{/*		data-testid='buy-now-button'*/}

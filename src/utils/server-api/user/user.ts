@@ -1,30 +1,39 @@
 import {dummyjsonURL} from "../../constants";
 import authHeader from "../server-api";
 import deepmerge from "deepmerge";
+import {IErrorResponse, IUser, IUserAuth, IUserRegister, IUsers} from "./user.types";
 
-export const getUsers = async (query, url = dummyjsonURL) => {
+export const getUsers = async (query: string = '', url:string = dummyjsonURL): Promise<IUsers> => {
     let res;
     try {
         res = await fetch(`${url}/users/search?q=${query}`);
         res = await res.json();
-    } catch (error) {
-        throw new Error(error);
+    } catch (e: any) {
+        if (typeof e === "string") {
+            throw new Error(e);
+        } else if (e instanceof Error) {
+            throw e;
+        }
     }
     return res;
 }
 
-export const getUser = async (id, url = dummyjsonURL) => {
+export const getUser = async (id: string|number, url: string = dummyjsonURL): Promise<IUser> => {
     let res;
     try {
         res = await fetch(`${url}/users/${id}`);
         res = await res.json();
-    } catch (error) {
-        throw new Error(error);
+    } catch (e: any) {
+        if (typeof e === "string") {
+            throw new Error(e);
+        } else if (e instanceof Error) {
+            throw e;
+        }
     }
     return res;
 }
 
-export const registerUser = async (username, email, password, url = dummyjsonURL) => {
+export const registerUser = async (username: string, email: string, password: string, url: string = dummyjsonURL): Promise<IUserRegister|IErrorResponse> => {
     let res;
     try {
         res = await fetch(`${url}/users/add`, {
@@ -38,13 +47,20 @@ export const registerUser = async (username, email, password, url = dummyjsonURL
             })
         })
         res = await res.json();
-    } catch (error) {
-        throw new Error(error);
+        if ('message' in res) {
+            throw new Error(res.message)
+        }
+    } catch (e) {
+        if (typeof e === "string") {
+            throw new Error(e);
+        } else if (e instanceof Error) {
+            throw e;
+        }
     }
     return (res);
 }
 
-export const loginUser = async (username, password, url = dummyjsonURL) => {
+export const loginUser = async (username: string, password: string, url: string = dummyjsonURL): Promise<IUserAuth & IUser> => {
     let auth;
     try {
         auth = await fetch(`${url}/auth/login`, {
@@ -58,34 +74,52 @@ export const loginUser = async (username, password, url = dummyjsonURL) => {
             })
         });
         auth = await auth.json();
-    } catch (error) {
-        throw new Error(error);
+        if ('message' in auth) {
+            throw new Error(auth.message)
+        }
+    } catch (e) {
+        if (typeof e === "string") {
+            throw new Error(e);
+        } else if (e instanceof Error) {
+            throw e;
+        }
     }
     let personalData;
     try {
         personalData = await fetch(`${url}/users/${auth.id}`);
         personalData = await personalData.json();
-    } catch (error) {
-        throw new Error(error);
+        if ('message' in personalData) {
+            throw new Error(personalData.message)
+        }
+    } catch (e) {
+        if (typeof e === "string") {
+            throw new Error(e);
+        } else if (e instanceof Error) {
+            throw e;
+        }
     }
 
-    const data = deepmerge(auth, personalData);
+    const data: IUserAuth & IUser = deepmerge(auth, personalData);
     return (data);
 }
 
-export const updateUser = async (userId, data, url = dummyjsonURL) => {
-    let response;
+export const updateUser = async (userId: string|number, data: Partial<IUser>, url: string = dummyjsonURL): Promise<IUser> => {
+    let res;
     try {
-        response = await fetch(`${url}/users/${userId}`, {
+        res = await fetch(`${url}/users/${userId}`, {
             method: 'PUT', /* or PATCH */
             headers: authHeader(),
             body: JSON.stringify({
                 ...data,
             })
         })
-        response = await response.json();
-    } catch (error) {
-        throw new Error(error);
+        res = await res.json();
+    } catch (e) {
+        if (typeof e === "string") {
+            throw new Error(e);
+        } else if (e instanceof Error) {
+            throw e;
+        }
     }
-    return (response);
+    return (res);
 }

@@ -4,7 +4,7 @@ import LoginForm from "../LoginForm/LoginForm";
 import RegisterForm from "../RegisterForm/RegisterForm";
 import {AuthModalContext} from "../../contexts/authModal-context/authModal-context";
 
-const AuthModal = (props) => {
+const AuthModal = (props: any) => {
     const { authType } = useContext(AuthModalContext);
 
     return (
@@ -14,7 +14,9 @@ const AuthModal = (props) => {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-            {authType === 'login' && <LoginForm isHaveCloseButton={true}/>}
+            
+            {authType === 'login' && <LoginForm isHaveCloseButton={true} />}
+            
             {authType === 'register' && <RegisterForm isHaveCloseButton={true}/>}
         </Modal>
     );

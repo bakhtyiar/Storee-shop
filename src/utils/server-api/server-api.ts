@@ -2,7 +2,7 @@ import {getCookie} from "../cookies/cookies";
 import {authKey} from "../constants";
 // import {userKey} from "../constants";
 
-export default function authHeader() {
+export default function authHeader(): HeadersInit {
     // const { token } = JSON.parse(localStorage.getItem(userKey));
     const token = getCookie(authKey);
 

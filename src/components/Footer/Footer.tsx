@@ -8,6 +8,7 @@ const Footer = () => {
             className='bg-dark text-light mt-3 py-3 px-0 d-flex flex-grow-0 flex-shrink-0 '
             data-testid='footer'
         >
+            
             <Container className='d-flex justify-content-center'>
                 Copyright © 3000, All Rights Reserved
             </Container>

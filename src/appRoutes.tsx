@@ -1,3 +1,4 @@
+import React from 'react'
 import {Navigate, Route, Routes} from "react-router-dom";
 import {routes} from "./utils/constants";
 import Home from "./routes/home";

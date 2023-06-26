@@ -7,6 +7,7 @@ import {states} from "../../../utils/constants";
 const PostOfficeFormSection = () => {
     return (
         <Row data-testid="post-office-form-section">
+            
             <FormTextField
                 as={Col}
                 controlId="formGridCity"
@@ -15,6 +16,7 @@ const PostOfficeFormSection = () => {
                 name='city'
                 type='text'
             />
+            
             <FormSelectField
                 as={Col}
                 controlId="formGridState"
@@ -23,7 +25,9 @@ const PostOfficeFormSection = () => {
                 name='state'
                 type='text'
             >
+                
                 <>
+                    
                     <option value={''} disabled>Choose...</option>
                     {states.map((state) => (
                         <option key={state.value}
@@ -31,6 +35,7 @@ const PostOfficeFormSection = () => {
                     ))}
                 </>
             </FormSelectField>
+            
             <FormTextField
                 as={Col}
                 controlId="formGridZip"

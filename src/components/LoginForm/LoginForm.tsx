@@ -1,9 +1,9 @@
 import React, {useContext} from 'react';
 import {Button, Col, Form, Modal} from "react-bootstrap";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {RootContext} from "../../contexts/root-context/root-context";
 import * as yup from "yup";
-import {Formik} from "formik";
+import {Formik, FormikHelpers} from "formik";
 import {AuthModalContext} from "../../contexts/authModal-context/authModal-context";
 import {BurgerMenuContext} from "../../contexts/burgerMenu-context/burgerMenu-context";
 import {getCart} from "../../utils/server-api/cart/cart";
@@ -11,8 +11,6 @@ import {loginUser} from "../../utils/server-api/user/user";
 import {routes} from "../../utils/constants";
 import {initialState} from "../../contexts/root-context/initialState";
 import FormTextField from "../formikElements/FormTextField";
-
-//todo : remake login and register logic
 
 const schema = yup.object().shape({
     username: yup.string()
@@ -25,34 +23,51 @@ const schema = yup.object().shape({
     forgetSession: yup.bool(),
 });
 
-const LoginForm = ({isHaveCloseButton = false, handleSubmit = null}) => {
+interface Props {
+    isHaveCloseButton?: boolean,
+    handleSubmit?: ((values: {
+        general: string;
+        username: string;
+        password: string;
+        forgetSession: boolean;
+    }, formikHelpers: FormikHelpers<{
+        general: string;
+        username: string;
+        password: string;
+        forgetSession: boolean;
+    }>) => void | Promise<any>) | null,
+}
+
+const LoginForm = ({isHaveCloseButton = false, handleSubmit = null}: Props) => {
     const {authUserState: {onLogin}, cartState: {onSetCart}} = useContext(RootContext);
     const {onHide: hideBurgerMenu} = useContext(BurgerMenuContext);
     const {onSwitchType, onHide} = useContext(AuthModalContext);
     const navigate = useNavigate();
 
-    if (handleSubmit === null) {
-        handleSubmit = async (values, actions) => {
+    if (handleSubmit == null) {
+        handleSubmit = async (values: any, actions: any) => {
             const {username, password} = values;
-            const res = await loginUser(username, password);
-            //tried to refactor & use .then.catch try{}catch(e){}, but cant get [[PromiseResult]] out from loginUser()
-            if (res.message) { //message appears on 400 error
-                actions.setFieldError('general', res.message);
-                actions.setSubmitting(false);
-                return;
+            let res;
+            let cart;
+            try {
+                res = await loginUser(username, password);
+                onLogin(res, values.forgetSession);
+                cart = await getCart(res!.id);
+                if (cart === undefined) {
+                    onSetCart(initialState.cartState);
+                } else {
+                    onSetCart(cart);
+                }
+                onHide();
+                hideBurgerMenu();
+                navigate(`${routes.profile.path}`);
+            } catch (e) {
+                if (e instanceof Error) {
+                    actions.setFieldError('general', e.message);
+                    actions.setSubmitting(false);
+                }
             }
-            onLogin(res, values.forgetSession);
-            const cart = await getCart(res.id);
-            console.log('cart', cart);
-            if (cart === undefined) {
-                onSetCart(initialState.cartState);
-            } else {
-                onSetCart(cart);
-            }
-            onHide();
-            hideBurgerMenu();
-            navigate(`${routes.profile.path}`);
-        };
+        }
     }
 
     return (
@@ -61,6 +76,7 @@ const LoginForm = ({isHaveCloseButton = false, handleSubmit = null}) => {
             validateOnBlur
             onSubmit={handleSubmit}
             initialValues={{
+                general: '',
                 username: '',
                 password: '',
                 forgetSession: false,
@@ -70,18 +86,22 @@ const LoginForm = ({isHaveCloseButton = false, handleSubmit = null}) => {
                   handleSubmit,
                   handleChange,
                   handleBlur,
-                  values,
                   touched,
-                  errors,
+                  errors
               }) => (
                 <Form noValidate onSubmit={handleSubmit} data-testid="login-form">
+
                     <Modal.Header closeButton={isHaveCloseButton}>
+
                         <Modal.Title id="contained-modal-title-vcenter">
                             Login
                         </Modal.Title>
                     </Modal.Header>
+
                     <Modal.Body>
+
                         <div className={'mb-3'}>
+
                             <FormTextField
                                 as={Col}
                                 controlId="formBasicUsername"
@@ -91,7 +111,9 @@ const LoginForm = ({isHaveCloseButton = false, handleSubmit = null}) => {
                                 type='text'
                             />
                         </div>
+
                         <div className={'mb-3'}>
+
                             <FormTextField
                                 as={Col}
                                 controlId="formBasicPassword"
@@ -101,7 +123,9 @@ const LoginForm = ({isHaveCloseButton = false, handleSubmit = null}) => {
                                 type='password'
                             />
                         </div>
+
                         <Form.Group className="mb-3" controlId="formBasicCheckbox">
+
                             <Form.Check
                                 type="checkbox"
                                 label="Do not remember session on this computer"
@@ -114,12 +138,16 @@ const LoginForm = ({isHaveCloseButton = false, handleSubmit = null}) => {
                                 isInvalid={touched.forgetSession && !!errors.forgetSession}
                             />
                         </Form.Group>
+
                         <h6 className='text-danger' data-testid="auth-error-feedback">
                             {errors.general}
                         </h6>
                     </Modal.Body>
+
                     <Modal.Footer className='d-flex justify-content-between'>
-                        <Link as={Button} onClick={onSwitchType}>Doesn't have an account?</Link>
+
+                        <Button variant="link" onClick={onSwitchType}>Doesn't have an account?</Button>
+
                         <Button variant="primary" type="submit" data-testid='submit-button'>
                             Login
                         </Button>

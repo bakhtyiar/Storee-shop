@@ -4,7 +4,10 @@ import {Link} from "react-router-dom";
 import {routes} from "../../utils/constants";
 import imageIcon from "../../assets/img/icons/image/icons8-image-48.png";
 
-const OrderProductCard = ({product, selfIndexInCart}) => {
+const OrderProductCard = ({
+    product,
+    selfIndexInCart
+}: any) => {
     const {cartState: {onRemoveFromCart, onUpdateQuantity}} = useContext(RootContext);
     const [quantity, setQuantity] = useState(product.quantity);
 
@@ -21,7 +24,9 @@ const OrderProductCard = ({product, selfIndexInCart}) => {
               className='px-2 py-3 d-flex flex-row align-items-center text-decoration-none text-black'
               data-testid={"order-product-card"}
         >
+            
             <div className='w-100 d-flex flex-row'>
+                
                 <div className={'bg-image rounded align-self-center'}
                      style={{
                          height: '128px',
@@ -31,15 +36,23 @@ const OrderProductCard = ({product, selfIndexInCart}) => {
                          backgroundSize: 'contain',
                          backgroundRepeat: 'no-repeat'
                      }}/>
+                
                 <div className='flex-column align-self-center ms-2'>
+                    
                     <h6 className='my-0'>{product.title}</h6>
+                    
                     {product.quantity && <p className='my-0'>Quantity: {product.quantity}</p>}
+                    
                     {product.category && <p className='my-0'>Brand: {product.category}</p>}
+                    
                     {product.brand && <p className='my-0'>Brand: {product.brand}</p>}
+                    
                     {product.rating && <p className='my-0'>Rating: {product.rating}</p>}
                 </div>
             </div>
+            
             <div className='ml-3 d-flex gap-2'>
+                
                 <h6>Price: ${product.price}</h6>
             </div>
         </Link>

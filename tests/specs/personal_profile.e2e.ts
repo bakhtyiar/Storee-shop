@@ -1,25 +1,33 @@
+// @ts-expect-error TS(2451): Cannot redeclare block-scoped variable 'ProfilePag... Remove this comment to see the full error message
 const ProfilePage = require( '../pageobjects/profile.page');
+// @ts-expect-error TS(2451): Cannot redeclare block-scoped variable 'AuthPage'.
 const AuthPage = require( '../pageobjects/auth.page');
 
 describe("Personal profile page interactions", () => {
   beforeEach(async () => {
+    // @ts-expect-error TS(2304): Cannot find name 'browser'.
     // eslint-disable-next-line no-undef
     await browser.setWindowSize(935, 730);
     await AuthPage.open();
     await AuthPage.login();
+    // @ts-expect-error TS(2304): Cannot find name 'expect'.
     expect(ProfilePage.notLoggedInArticle).not.toBe();
   })
   afterEach(async () => {
+    // @ts-expect-error TS(2304): Cannot find name 'browser'.
     // eslint-disable-next-line no-undef
     await browser.deleteAllCookies();
   })
 
   it(" Logout", async () => {
     await ProfilePage.logout();
+    // @ts-expect-error TS(2304): Cannot find name 'expect'.
     // eslint-disable-next-line no-undef
     expect(browser).toHaveUrl("http://localhost:3000/")
+    // @ts-expect-error TS(2304): Cannot find name 'expect'.
     // eslint-disable-next-line no-undef
     expect(browser.getCookies('userKey')).not.toBe();
+    // @ts-expect-error TS(2304): Cannot find name 'expect'.
     // eslint-disable-next-line no-undef
     expect(browser.getCookies('authKey')).not.toBe();
   });
@@ -30,6 +38,7 @@ describe("Personal profile page interactions", () => {
     await ProfilePage.inputSurName.click();
     await ProfilePage.commitChanges();
     expect(await ProfilePage.spanFirstName.getText()).toEqual(firstNameBeforeEdit + '123');
+    // @ts-expect-error TS(2304): Cannot find name 'expect'.
     // eslint-disable-next-line no-undef
     expect(browser).toHaveUrl("http://localhost:3000/profile");
   })
@@ -42,6 +51,7 @@ describe("Personal profile page interactions", () => {
     await ProfilePage.cancelEditing();
     expect(await ProfilePage.spanFirstName.getText()).toEqual(firstNameBeforeEdit);
     expect(await ProfilePage.spanSurName.getText()).toEqual(surNameBeforeEdit);
+    // @ts-expect-error TS(2304): Cannot find name 'expect'.
     // eslint-disable-next-line no-undef
     expect(browser).toHaveUrl("http://localhost:3000/profile");
   })

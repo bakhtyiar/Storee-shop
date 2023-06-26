@@ -4,6 +4,7 @@ export const cartKey = 'cart';
 export const userKey = 'user';
 export const authKey = 'auth-token';
 export const routes = {
+	disabledRoute: { path: "#" },
 	home: { path: "/" },
 	products: { path: "/products" },
 	product: { path: "/product" },

@@ -10,7 +10,9 @@ const initialState = {
 
 export const BurgerMenuContext = React.createContext(initialState);
 
-export const BurgerMenuContextProvider = ({children}) => {
+export const BurgerMenuContextProvider = ({
+    children
+}: any) => {
     const [burgerMenu, setBurgerMenu] = useState(initialState);
 
     const showMenu = () => {

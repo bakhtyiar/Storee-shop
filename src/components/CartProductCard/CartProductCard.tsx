@@ -5,7 +5,10 @@ import {routes} from "../../utils/constants";
 import imageIcon from "../../assets/img/icons/image/icons8-image-48.png";
 import {Button, Form} from "react-bootstrap";
 
-const CartProductCard = ({product, selfIndexInCart}) => {
+const CartProductCard = ({
+    product,
+    selfIndexInCart
+}: any) => {
     const {cartState: {onRemoveFromCart, onUpdateQuantity}} = useContext(RootContext);
     const [quantity, setQuantity] = useState(product.quantity);
 
@@ -19,10 +22,12 @@ const CartProductCard = ({product, selfIndexInCart}) => {
 
     return (
         <div className='px-2 py-3 border rounded d-flex flex-row align-items-center text-decoration-none text-black' data-testid='cart-product-card'>
+            
             <Link className='w-100 d-flex flex-row text-decoration-none text-black'
                   to={`${routes.product.path}/${product.id}`}
                   data-testid='product-link'
             >
+                
                 <div className={'bg-image rounded align-self-center'}
                      style={{
                          height: '64px',
@@ -32,22 +37,29 @@ const CartProductCard = ({product, selfIndexInCart}) => {
                          backgroundSize: 'contain',
                          backgroundRepeat: 'no-repeat'
                      }}/>
+                
                 <div className='flex-column ms-2'>
+                    
                     <h6 className='mt-2'>{product.title}</h6>
+                    
                     <p className='my-0'>Price: {product.price}</p>
                 </div>
             </Link>
+            
             <div className='ml-3 d-flex gap-2 flex-column flex-lg-row'>
+                
                 <div className='d-flex'>
+                    
                     <Button
                         variant="outline-dark"
                         onClick={() => {
-                            setQuantity((prevState) => prevState - 1);
+                            setQuantity((prevState: any) => prevState - 1);
                         }}
                         data-testid="minus-btn"
                     >
                         -
                     </Button>
+                    
                     <Form.Control
                         type="number"
                         value={quantity}
@@ -57,16 +69,18 @@ const CartProductCard = ({product, selfIndexInCart}) => {
                         }}
                         data-testid={"quantity-field"}
                     />
+                    
                     <Button
                         variant="outline-dark"
                         onClick={() => {
-                            setQuantity((prevState) => prevState + 1);
+                            setQuantity((prevState: any) => prevState + 1);
                         }}
                         data-testid="plus-btn"
                     >
                         +
                     </Button>
                 </div>
+                
                 <Button
                     variant='outline-dark'
                     className='d-flex rounded justify-content-center'
@@ -76,6 +90,7 @@ const CartProductCard = ({product, selfIndexInCart}) => {
                     }}
                     data-testid="remove-btn"
                 >
+                    
                     <i className="bi bi-x"></i>
                     {' '}
                     Remove

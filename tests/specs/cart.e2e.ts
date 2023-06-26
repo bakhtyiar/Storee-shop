@@ -1,20 +1,26 @@
+// @ts-expect-error TS(2451): Cannot redeclare block-scoped variable 'CartPage'.
 const CartPage = require("../pageobjects/cart.page");
+// @ts-expect-error TS(2451): Cannot redeclare block-scoped variable 'ProductPag... Remove this comment to see the full error message
 const ProductPage = require("../pageobjects/product.page");
-describe("Cart interactions", () => {
+describe("ICart interactions", () => {
     beforeEach(async () => {
+        // @ts-expect-error TS(2304): Cannot find name 'browser'.
         // eslint-disable-next-line no-undef
         await browser.setWindowSize(935, 730);
         await ProductPage.open();
         await ProductPage.addToCart();
+        // @ts-expect-error TS(2304): Cannot find name 'browser'.
         // eslint-disable-next-line no-undef
         await browser.pause(500);
         await CartPage.open();
+        // @ts-expect-error TS(2304): Cannot find name 'expect'.
         // eslint-disable-next-line no-undef
         expect(browser).toHaveUrl("http://localhost:3000/cart")
     })
     it(" Goes to product's page", async () => {
         await (await CartPage.productsSection).waitForDisplayed();
         await CartPage.productsLinks[0].click();
+        // @ts-expect-error TS(2304): Cannot find name 'expect'.
         // eslint-disable-next-line no-undef
         expect(browser).toHaveUrl("http://localhost:3000/product/1")
     })
@@ -48,6 +54,7 @@ describe("Cart interactions", () => {
     it(" Makes order", async () => {
         await (await CartPage.productsSection).waitForDisplayed();
         await CartPage.makeOrderButton.click();
+        // @ts-expect-error TS(2304): Cannot find name 'expect'.
         // eslint-disable-next-line no-undef
         expect(browser).toHaveUrl("http://localhost:3000/orderMaking")
     })
@@ -56,6 +63,7 @@ describe("Cart interactions", () => {
         await CartPage.removeButtons[0].click();
         expect(await CartPage.productsSection.isExisting()).toBeFalsy();
         expect(await CartPage.makeOrderButton).toHaveAttribute('disabled');
+        // @ts-expect-error TS(2304): Cannot find name 'expect'.
         // eslint-disable-next-line no-undef
         expect(browser).toHaveUrl("http://localhost:3000/cart")
     })

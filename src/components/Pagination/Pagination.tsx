@@ -10,19 +10,28 @@ const StyledBPagination = styled(BPagination)`
 	margin: 16px 0 24px 0;
 `;
 
-export const Pagination = ({ pagesAmount }) => {
+interface Props {
+	pagesAmount: number
+}
+
+export const Pagination = ({ pagesAmount }: Props) => {
 	const { page } = useParams();
 	const navigate = useNavigate();
 	const location = useLocation();
 
-	const handleClick = (number) => {
+	const handleClick = (number: number | string) => {
+		if (typeof number === "number")
+			number = number.toString();
 		navigate(`${location.pathname.replace(/[^/]*$/, number)}`);
 	};
 
 	return (
 		<StyledBPagination data-testid={"pagination"}>
+
 			{(Number(page) > 1) && <>
+
 				<BPagination.First onClick={() => handleClick(1)} />
+
 				<BPagination.Prev onClick={() => handleClick(Number(page) - 1)} />
 			</>}
 			{pagesAmount && [...Array(pagesAmount)]
@@ -36,8 +45,11 @@ export const Pagination = ({ pagesAmount }) => {
 						{number}
 					</BPagination.Item>
 				))}
+
 			{(Number(page) !== Number(pagesAmount)) && <>
+
 				<BPagination.Next onClick={() => handleClick(Number(page) + 1)} />
+
 				<BPagination.Last onClick={() => handleClick(pagesAmount)} />
 			</>}
 		</StyledBPagination>

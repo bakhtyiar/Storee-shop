@@ -4,6 +4,7 @@ import {RootContext} from "../contexts/root-context/root-context";
 import CartProductCard from "../components/CartProductCard/CartProductCard";
 import {Link} from "react-router-dom";
 import {routes} from "../utils/constants";
+import {IProduct} from "../utils/server-api/products/products.types";
 
 const Cart = () => {
     const {cartState: {products, total, discountedTotal, totalProducts, totalQuantity}} = useContext(RootContext);
@@ -16,7 +17,7 @@ const Cart = () => {
                     {products.length > 0 ? (
                         <>
                             <Col className='d-flex flex-column gap-2' data-testid='products-section'>
-                                {products.map((product, index) => (
+                                {products.map((product: IProduct, index: number) => (
                                     <CartProductCard product={product} selfIndexInCart={index} key={product.id}/>
                                 ))}
                             </Col>
@@ -38,9 +39,11 @@ const Cart = () => {
                         <p className='d-flex justify-content-between'>
                             <span>Total: </span> <b><span className='d-inline'>${discountedTotal}</span></b>
                         </p>
-                        <Button disabled={products.length < 1} as={Link} to={routes.orderMaking.path}
+                        <Link to={products.length < 1 ? routes.orderMaking.path : routes.disabledRoute.path}>
+                        <Button disabled={products.length < 1}
                                 className={`w-100 ${products.length < 1 && 'disabled'}`}
                                 data-testid='make-order-btn'>Make order</Button>
+                        </Link>
                     </Card>
                 </Col>
             </Row>

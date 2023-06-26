@@ -1,3 +1,4 @@
+import React from "react";
 import {screen} from "@testing-library/react";
 import {renderWithFormikContext} from "../../../../tests/integration-helpers/renderWithFormikContext";
 import WarehouseAddressesFormSection from "./WarehouseAddressesFormSection";

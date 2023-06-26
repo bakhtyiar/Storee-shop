@@ -1,10 +1,7 @@
-export const capitalizeStr = (str) => {
-    if (typeof str !== 'string') {
-        throw new TypeError('Passed argument must be a string');
-    }
+export const capitalizeStr = (str: string): string => {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export const replaceDashToSpace = (str) => {
+export const replaceDashToSpace = (str: string): string => {
     return str.replace(/-+/g, ' ');
 }

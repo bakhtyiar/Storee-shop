@@ -1,6 +1,6 @@
 import {initialState} from "../root-context/initialState";
 
-export const authModalReducer = (state, action) => {
+export const authModalReducer = (state: any, action: any) => {
     switch (action.type) {
         case 'setShow':
             return {...state, isShow: action.payload};

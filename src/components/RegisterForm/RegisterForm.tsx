@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {Button, Col, Form, Modal} from "react-bootstrap";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {RootContext} from "../../contexts/root-context/root-context";
 import * as yup from 'yup';
 import {Formik} from 'formik';
@@ -30,13 +30,16 @@ const RegisterForm = ({isHaveCloseButton = false}) => {
     const {onSwitchType, onHide} = useContext(AuthModalContext);
     const navigate = useNavigate();
 
-    const handleSubmit = async (values, actions) => {
+    const handleSubmit = async (values: any, actions: any) => {
         const {username, email, password} = values;
-        const res = await registerUser(username, email, password);
-        if (res.message) {
-            actions.setFieldError('general', res.message);
-            actions.setSubmitting(false);
-            return ;
+        let res;
+        try {
+            res = await registerUser(username, email, password);
+        } catch (e) {
+            if (e instanceof Error) {
+                actions.setFieldError('general', e.message);
+                actions.setSubmitting(false);
+            }
         }
         onLogin(res);
         onHide();
@@ -60,7 +63,6 @@ const RegisterForm = ({isHaveCloseButton = false}) => {
                   handleSubmit,
                   handleChange,
                   handleBlur,
-                  values,
                   touched,
                   errors,
               }) => (
@@ -119,7 +121,7 @@ const RegisterForm = ({isHaveCloseButton = false}) => {
                         </Form.Group>
                     </Modal.Body>
                     <Modal.Footer className='d-flex justify-content-between'>
-                        <Link as={Button} onClick={onSwitchType}>Already have an account?</Link>
+                        <Button variant="link" onClick={onSwitchType}>Already have an account?</Button>
                         <Button variant="primary" type="submit" data-testid='submit-button'>
                             Register
                         </Button>
@@ -127,8 +129,7 @@ const RegisterForm = ({isHaveCloseButton = false}) => {
                 </Form>
             )}
         </Formik>
-    );
+    )
 };
 
 export default RegisterForm;
-

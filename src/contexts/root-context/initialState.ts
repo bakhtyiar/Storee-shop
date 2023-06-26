@@ -1,4 +1,6 @@
-export const initialState = {
+import {IRootContext} from "./initialState.types";
+
+export const initialState: IRootContext = {
     authUserState: {
         isLoggedIn: false,
         id: -1,
