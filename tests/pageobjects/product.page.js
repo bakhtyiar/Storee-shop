@@ -3,13 +3,16 @@ const Page = require('./page');
 class ProductPage extends Page {
 
     get homeBreadCrumb() {
+        // eslint-disable-next-line no-undef
         return $("li[data-testid='breadcrumb-home']")
     }
     get productsBreadCrumb() {
+        // eslint-disable-next-line no-undef
         return $("li[data-testid='breadcrumb-products']")
     }
 
     get addToCardButton() {
+        // eslint-disable-next-line no-undef
         return $("button[data-testid='add-to-cart-button']")
     }
 

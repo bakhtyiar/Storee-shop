@@ -8,41 +8,51 @@ class ProfilePage extends Page {
      * define selectors using getter methods
      */
     get notLoggedInArticle () {
+        // eslint-disable-next-line no-undef
         return $("div[data-testid=\"error-no-personal-profile-page\"]");
     }
 
     get buttonEditProfile () {
+        // eslint-disable-next-line no-undef
         return $("button[ data-testid='edit-profile-btn']");
     }
 
     get inputFirstName () {
+        // eslint-disable-next-line no-undef
         return $("input#formBasicName");
     }
 
     get spanFirstName () {
+        // eslint-disable-next-line no-undef
         return $("span[data-testid='firstname-data']");
     }
 
     get inputSurName () {
+        // eslint-disable-next-line no-undef
         return $("input#formBasicSurname");
     }
 
     get spanSurName () {
+        // eslint-disable-next-line no-undef
         return $("span[data-testid='surname-data']");
     }
 
     get logoutButton () {
+        // eslint-disable-next-line no-undef
         return $("button[data-testid='btn-logout-profile']");
     }
 
     get cancelEditingButton () {
+        // eslint-disable-next-line no-undef
         return $("button[ data-testid='cancel-editing-btn']");
     }
 
     get saveChangesButton () {
+        // eslint-disable-next-line no-undef
         return $("button[data-testid=\"save-changes-btn\"]");
     }
     get confirmChangesButton () {
+        // eslint-disable-next-line no-undef
         return $("button[data-testid=\"confirm-changes-btn\"]");
     }
 
@@ -71,6 +81,7 @@ class ProfilePage extends Page {
     }
 
     async clearCookies () {
+        // eslint-disable-next-line no-undef
         await browser.deleteAllCookies();
     }
 

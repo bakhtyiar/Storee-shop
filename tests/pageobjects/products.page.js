@@ -3,29 +3,36 @@ const Page = require('./page');
 class ProductsPage extends Page {
 
     get productsInCartCount() {
+        // eslint-disable-next-line no-undef
         return $("span[data-testid='cart-products-count']")
     }
 
     get categoryButtons() {
+        // eslint-disable-next-line no-undef
         return $$("section[data-testid=\"categories-filter\"] > button")
     }
 
     get productsSection() {
+        // eslint-disable-next-line no-undef
         return $("div[data-testid='products']")
     }
 
     get pageItems() {
+        // eslint-disable-next-line no-undef
         return $$("ul[data-testid=\"pagination\"] > li");
     }
     get pageButtons() {
+        // eslint-disable-next-line no-undef
         return $$("ul[data-testid=\"pagination\"] > li a");
     }
 
     get productsCards() {
+        // eslint-disable-next-line no-undef
         return $$("a[data-testid=\"product-card\"]")
     }
 
     get addToCartButtons() {
+        // eslint-disable-next-line no-undef
         return $$("button[data-testid=\"add-to-card-button\"]")
     }
 

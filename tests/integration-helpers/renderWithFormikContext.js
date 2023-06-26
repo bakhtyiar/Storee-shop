@@ -1,7 +1,7 @@
 import {render} from "@testing-library/react";
 import {Formik} from "formik";
 
-export const renderWithFormikContext = (component) => {
+export const renderWithFormikContext: React.FC<React.ComponentType> = (component) => {
 
     return (
         render(

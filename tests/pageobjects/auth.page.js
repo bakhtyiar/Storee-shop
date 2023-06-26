@@ -9,38 +9,47 @@ class AuthPage extends Page {
      * define selectors using getter methods
      */
     get loginButtonDesktop () {
+        // eslint-disable-next-line no-undef
         return $("button[data-testid='login-btn-desktop']");
     }
 
     get registerButtonDesktop () {
+        // eslint-disable-next-line no-undef
         return $("button[data-testid='register-btn-desktop']");
     }
 
     get loginForm () {
+        // eslint-disable-next-line no-undef
         return $("form[data-testid=\"login-form\"]");
     }
 
     get registerForm () {
+        // eslint-disable-next-line no-undef
         return $("form[data-testid='register-form']");
     }
 
     get inputUsername () {
+        // eslint-disable-next-line no-undef
         return $("#formBasicUsername");
     }
 
     get inputEmail () {
+        // eslint-disable-next-line no-undef
         return $("#formBasicEmail");
     }
 
     get inputPassword () {
+        // eslint-disable-next-line no-undef
         return $("#formBasicPassword");
     }
 
     get checkboxAgreeTermsAndConditions () {
+        // eslint-disable-next-line no-undef
         return $("input[data-testid=\"checkbox-agree-terms-and-conditions\"]");
     }
 
     get submitButton () {
+        // eslint-disable-next-line no-undef
         return $("button[data-testid='submit-button']");
     }
 
