@@ -7,9 +7,16 @@ import skincarePic from '../assets/img/product_categories/skincare.webp';
 import furniturePic from '../assets/img/product_categories/furniture.webp';
 import sunglassesPic from '../assets/img/product_categories/sunglasses.webp';
 import {ICategories} from "../utils/server-api/products/products.types";
+import styled from "styled-components";
 // todo add searching logic
 //todo : add random product category 'you may like'
 
+
+const StyledBtn = styled(Button)`
+    border-color: var(--bs-gray-400);
+    &:hover {
+    }
+`;
 
 export default function Home() {
     const [isLoading, setIsLoading] = useState(true);
