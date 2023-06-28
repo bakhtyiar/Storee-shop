@@ -4,6 +4,7 @@ import {capitalizeStr} from "../../utils/str/str";
 import {routes} from "../../utils/constants";
 import {Link} from "react-router-dom";
 import {IAuthorsData} from "../NewsPost/NewsPost.types";
+import LoadingErrorSection from "../LoadingErrorSection/LoadingErrorSection";
 
 const NewsCard = ({
                       post
@@ -37,17 +38,13 @@ const NewsCard = ({
     return (
         <Link to={routes.newsPost.path + '/' + post.id} className="card h-100 text-decoration-none text-black">
 
-            {isLoading && authorsData !== null && authorsData !== undefined
+            {!isLoading && (authorsData!.name !== null || authorsData!.name !== undefined)
                 ?
-                <LoaderIndicatorSM/>
+                <div className="card-header">
+                    {authorsData!.name}
+                </div>
                 :
-                authorsData!.name !== null || authorsData!.name !== undefined
-                    ?
-                    <div className="card-header">
-                        {authorsData!.name}
-                    </div>
-                    :
-                    <></>
+                <></>
             }
 
             <div className="card-body">
