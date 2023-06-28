@@ -3,7 +3,7 @@ import {Button, Container, Nav, Navbar, Offcanvas} from 'react-bootstrap';
 import {Link, NavLink} from 'react-router-dom';
 import {routes} from '../../utils/constants';
 import styled from 'styled-components';
-import logo from '../../assets/img/logotype/icons8-icons8.svg'
+import logo from '../../assets/img/logotype/letter-s64.png'
 import AuthModal from "../AuthModal/AuthModal";
 import {RootContext} from "../../contexts/root-context/root-context";
 import {AuthModalContext} from "../../contexts/authModal-context/authModal-context";

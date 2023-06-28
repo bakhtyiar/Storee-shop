@@ -2,10 +2,10 @@ import {Button, InputGroup, Form, Row, Col} from 'react-bootstrap';
 import React, {useEffect, useState} from 'react'
 import CategoryCard from "../components/CategoryCard/CategoryCard";
 import {getCategories} from "../utils/server-api/products/products";
-import smartphonePic from '../assets/img/product_categories/smartphones.png';
-import skincarePic from '../assets/img/product_categories/skincare.png';
-import furniturePic from '../assets/img/product_categories/furniture.png';
-import sunglassesPic from '../assets/img/product_categories/sunglasses.png';
+import smartphonePic from '../assets/img/product_categories/smartphones.webp';
+import skincarePic from '../assets/img/product_categories/skincare.webp';
+import furniturePic from '../assets/img/product_categories/furniture.webp';
+import sunglassesPic from '../assets/img/product_categories/sunglasses.webp';
 import {ICategories} from "../utils/server-api/products/products.types";
 // todo add searching logic
 //todo : add random product category 'you may like'
@@ -61,9 +61,15 @@ export default function Home() {
                         }
                     </datalist>
                     
-                    <Button variant="outline-secondary" id="button-addon2" onClick={handleFind}>
-                        Find
-                    </Button>
+                    <StyledBtn
+                        variant="outline-dark"
+                        id="button-addon2"
+                        onClick={handleFind}
+                    >
+                        <i className="bi bi-search"></i>
+                        {' '}
+                        <span className='d-sm-inline d-none'>Find</span>
+                    </StyledBtn>
                 </InputGroup>
             </Row>
             
