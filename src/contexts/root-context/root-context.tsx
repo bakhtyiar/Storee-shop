@@ -45,9 +45,9 @@ export const RootContextProvider = ({
         dispatchAuthUser({type: 'logout'});
     }
 
-    const addToCart = async (productId: any) => {
+    const addToCart = async (productId: string | number) => {
         let newCart = getLocalCart() || initialState.cartState;
-        let productIndex = newCart.products.findIndex((product: any) => product.id === productId);
+        let productIndex = newCart.products.findIndex((product: any) => product.id == productId);
         if (productIndex === -1) {
             let newProduct = await getProduct(productId);
             newProduct.quantity = 1;
