@@ -17,6 +17,9 @@ describe("ICart interactions", () => {
         // eslint-disable-next-line no-undef
         expect(browser).toHaveUrl("http://localhost:3000/cart")
     })
+    afterEach(() => {
+        browser.execute('window.localStorage.removeItem("cart")');
+    });
     it(" Goes to product's page", async () => {
         await (await CartPage.productsSection).waitForDisplayed();
         await CartPage.productsLinks[0].click();
@@ -43,12 +46,16 @@ describe("ICart interactions", () => {
     })
     it(" Deletes product on 0 quantity", async () => {
         await (await CartPage.productsSection).waitForDisplayed();
+        await CartPage.minusQuantButtons[0].waitForExist();
         await CartPage.minusQuantButtons[0].click();
+        await CartPage.productsSection.waitForExist({ reverse: true });
         expect(await CartPage.productsSection.isExisting()).toBeFalsy();
     })
     it(" Deletes product on click", async () => {
         await (await CartPage.productsSection).waitForDisplayed();
+        await CartPage.removeButtons[0].waitForExist();
         await CartPage.removeButtons[0].click();
+        await CartPage.productsSection.waitForExist({ reverse: true });
         expect(await CartPage.productsSection.isExisting()).toBeFalsy();
     })
     it(" Makes order", async () => {
@@ -60,7 +67,9 @@ describe("ICart interactions", () => {
     })
     it(" Should be disabled 'make order' button on empty cart", async () => {
         await (await CartPage.productsSection).waitForDisplayed();
+        await CartPage.removeButtons[0].waitForExist();
         await CartPage.removeButtons[0].click();
+        await CartPage.productsSection.waitForExist({ reverse: true });
         expect(await CartPage.productsSection.isExisting()).toBeFalsy();
         expect(await CartPage.makeOrderButton).toHaveAttribute('disabled');
         // @ts-expect-error TS(2304): Cannot find name 'expect'.

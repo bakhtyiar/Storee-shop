@@ -43,7 +43,7 @@ class CartPage extends Page {
     get makeOrderButton() {
         // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
         // eslint-disable-next-line no-undef
-        return $("a[data-testid='make-order-btn']")
+        return $("button[data-testid='make-order-btn']")
     }
 
 
