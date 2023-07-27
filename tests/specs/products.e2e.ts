@@ -1,5 +1,5 @@
 // @ts-expect-error TS(2451): Cannot redeclare block-scoped variable 'ProductsPa... Remove this comment to see the full error message
-const ProductsPage = require("../pageobjects/products.page.js");
+const ProductsPage = require("../pageobjects/products.page");
 describe("IProducts page", () => {
     beforeEach(async () => {
         // @ts-expect-error TS(2304): Cannot find name 'browser'.
