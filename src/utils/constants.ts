@@ -3,7 +3,7 @@ export const pageLimit = 30;
 export const cartKey = 'cart';
 export const userKey = 'user';
 export const authKey = 'auth-token';
-export const routes = {
+export const routes: {[index: string]: { path: string }} = {
 	disabledRoute: { path: "#" },
 	home: { path: "/" },
 	products: { path: "/products" },
