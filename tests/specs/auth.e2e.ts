@@ -14,6 +14,7 @@ describe("Login process", () => {
     // @ts-expect-error TS(2304): Cannot find name 'expect'.
     // eslint-disable-next-line no-undef
     expect(browser).toHaveUrl("http://localhost:3000/")
+    await AuthPage.loginButtonDesktop.waitForDisplayed();
     await AuthPage.showLoginForm();
   })
   it(" Correct login desktop", async () => {
