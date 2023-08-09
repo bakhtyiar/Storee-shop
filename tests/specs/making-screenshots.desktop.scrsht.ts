@@ -1,12 +1,12 @@
 import {routes} from "../../src/utils/constants";
 import {browser} from "@wdio/globals";
+import {setDesktopScreenSize, setMobilePortraitScreenSize} from "../integration-helpers/screenSetters";
 
 const AuthPage = require('../pageobjects/auth.page');
 //todo : захардкодить все страницы с тестами, забить на автоматизацию
 describe('Making screenshots', () => {
     beforeEach(async () => {
-        // @ts-ignore
-        await browser.setWindowSize(935, 730);
+        await setDesktopScreenSize();
     })
 
     it(` home's full-page and tabbable-page`, async () => {
@@ -23,6 +23,9 @@ describe('Making screenshots', () => {
     })
 
     it(` products' full-page and tabbable-page`, async () => {
+        await browser.setTimeout({
+            'script': 300000
+        });
         // @ts-ignore
         await browser.url(`http://localhost:3000${routes['products']['path']}`);
         // @ts-ignore
@@ -36,6 +39,9 @@ describe('Making screenshots', () => {
     })
 
     it(` product's full-page and tabbable-page`, async () => {
+        await browser.setTimeout({
+            'script': 300000
+        });
         // @ts-ignore
         await browser.url(`http://localhost:3000${routes['product']['path']}/1`);
         // @ts-ignore
@@ -49,12 +55,13 @@ describe('Making screenshots', () => {
     })
 
     it(` news' full-page and tabbable-page`, async function() {
-        // @ts-ignore
-        this.timeout(120000);
+        await browser.setTimeout({
+            'script': 300000
+        });
         // @ts-ignore
         await browser.url(`http://localhost:3000${routes['news']['path']}`);
         // @ts-ignore
-        await browser.saveFullPageScreen(`news-fullPage`, {
+        await browser.saveScreen(`news-screen`, {
             /* some options */
         })
         // @ts-ignore
@@ -169,7 +176,7 @@ describe('Making screenshots', () => {
 
     it(` authed profile full-page and tabbable-page`, async () => {
         await AuthPage.open();
-        await AuthPage.showLoginForm();
+        await AuthPage.showLoginFormDesktop();
         // await AuthPage.inputUsername.waitForDisplayed();
         await AuthPage.completeLoginForm("kminchelle", "0lelplR");
         await browser.waitUntil(async () => {
