@@ -40,7 +40,7 @@ const Header = () => {
                         {' '}
                         Cart <span data-testid='cart-products-count'>{totalQuantity > 0 ? totalQuantity : ''}</span>
                     </Nav.Link>
-                    <Button variant="outline-light" onClick={showBurgerMenu} className="d-md-none d-block me-6">
+                    <Button variant="outline-light" onClick={showBurgerMenu} className="d-md-none d-block me-6" data-testid='menu-btn-mobile'>
                         ☰ Menu
                     </Button>
                 </Nav>

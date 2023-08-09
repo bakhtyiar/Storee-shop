@@ -10,6 +10,24 @@ class AuthPage extends Page {
     /**
      * define selectors using getter methods
      */
+    get menuButtonMobile () {
+        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
+        // eslint-disable-next-line no-undef
+        return $("button[data-testid='menu-btn-mobile']");
+    }
+
+    get loginButtonMobile () {
+        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
+        // eslint-disable-next-line no-undef
+        return $("button[data-testid='login-btn-mobile']");
+    }
+
+    get registerButtonMobile () {
+        // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
+        // eslint-disable-next-line no-undef
+        return $("button[data-testid='register-btn-mobile']");
+    }
+
     get loginButtonDesktop () {
         // @ts-expect-error TS(2581): Cannot find name '$'. Do you need to install type ... Remove this comment to see the full error message
         // eslint-disable-next-line no-undef
@@ -68,11 +86,23 @@ class AuthPage extends Page {
      * a method to encapsule automation code to interact with the page
      * e.g. to login using username and password
      */
-    async showLoginForm () {
+    async showMenuMobile () {
+        await this.menuButtonMobile.click();
+    }
+
+    async showLoginFormMobile () {
+        await this.loginButtonMobile.click();
+    }
+
+    async showLoginFormDesktop () {
         await this.loginButtonDesktop.click();
     }
 
-    async showRegisterForm () {
+    async showRegisterFormMobile () {
+        await this.registerButtonMobile.click();
+    }
+
+    async showRegisterFormDesktop () {
         await this.registerButtonDesktop.click();
     }
 
