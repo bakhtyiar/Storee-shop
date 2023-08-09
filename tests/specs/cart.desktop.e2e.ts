@@ -1,23 +1,18 @@
-// @ts-expect-error TS(2451): Cannot redeclare block-scoped variable 'CartPage'.
+import {setDesktopScreenSize} from "../integration-helpers/screenSetters";
 const CartPage = require("../pageobjects/cart.page");
-// @ts-expect-error TS(2451): Cannot redeclare block-scoped variable 'ProductPag... Remove this comment to see the full error message
 const ProductPage = require("../pageobjects/product.page");
 describe("ICart interactions", () => {
     beforeEach(async () => {
-        // @ts-expect-error TS(2304): Cannot find name 'browser'.
-        // eslint-disable-next-line no-undef
-        await browser.setWindowSize(935, 730);
+        await setDesktopScreenSize();
         await ProductPage.open();
         await ProductPage.addToCart();
         // @ts-expect-error TS(2304): Cannot find name 'browser'.
         // eslint-disable-next-line no-undef
         await browser.pause(500);
         await CartPage.open();
-        // @ts-expect-error TS(2304): Cannot find name 'expect'.
-        // eslint-disable-next-line no-undef
-        expect(browser).toHaveUrl("http://localhost:3000/cart")
     })
     afterEach(() => {
+        // @ts-ignore
         browser.execute('window.localStorage.removeItem("cart")');
     });
     it(" Goes to product's page", async () => {

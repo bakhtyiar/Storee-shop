@@ -1,10 +1,9 @@
-// @ts-expect-error TS(2451): Cannot redeclare block-scoped variable 'ProductsPa... Remove this comment to see the full error message
+import {setMobilePortraitScreenSize} from "../integration-helpers/screenSetters";
+
 const ProductsPage = require("../pageobjects/products.page");
 describe("IProducts page", () => {
     beforeEach(async () => {
-        // @ts-expect-error TS(2304): Cannot find name 'browser'.
-        // eslint-disable-next-line no-undef
-        await browser.setWindowSize(935, 730);
+        await setMobilePortraitScreenSize();
         await ProductsPage.open();
         // @ts-expect-error TS(2304): Cannot find name 'expect'.
         // eslint-disable-next-line no-undef
@@ -33,3 +32,4 @@ describe("IProducts page", () => {
         expect(browser).not.toHaveUrl("http://localhost:3000/products/2");
     })
 })
+

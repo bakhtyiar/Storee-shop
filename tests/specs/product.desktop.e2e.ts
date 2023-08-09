@@ -1,12 +1,9 @@
-// @ts-expect-error TS(2451): Cannot redeclare block-scoped variable 'ProductPag... Remove this comment to see the full error message
+import {setDesktopScreenSize} from "../integration-helpers/screenSetters";
 const ProductPage = require("../pageobjects/product.page");
-// @ts-expect-error TS(2451): Cannot redeclare block-scoped variable 'ProductsPa... Remove this comment to see the full error message
 const ProductsPage = require("../pageobjects/products.page");
 describe("Single product page", () => {
     beforeEach(async () => {
-        // @ts-expect-error TS(2304): Cannot find name 'browser'.
-        // eslint-disable-next-line no-undef
-        await browser.setWindowSize(935, 730);
+        await setDesktopScreenSize();
         await ProductPage.open();
         // @ts-expect-error TS(2304): Cannot find name 'expect'.
         // eslint-disable-next-line no-undef
