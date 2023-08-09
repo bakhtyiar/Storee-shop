@@ -33,11 +33,20 @@ exports.config = {
     ],
 
     suites: {
-        end2end: [
+        e2e: [
             './tests/specs/**/*.e2e.ts',
         ],
-        screenshots: [
-            './tests/specs/*.scrsht.ts'
+        e2e_mobile: [
+            './tests/specs/**/*.mobile*.e2e.ts'
+        ],
+        e2e_desktop: [
+            './tests/specs/**/*.desktop*.e2e.ts'
+        ],
+        make_screenshots: [
+            './tests/specs/*making-screen*.scrsht.ts'
+        ],
+        compare_screenshots: [
+            './tests/specs/*image-comparisons*.scrsht.ts'
         ]
     },
 
