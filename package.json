@@ -34,7 +34,10 @@
     "test": "react-scripts tests",
     "testJest": "jest",
     "eject": "react-scripts eject",
-    "wdio": "wdio run ./wdio.conf.js"
+    "wdio": "wdio run ./wdio.conf.js",
+    "test_e2e": "wdio ./wdio.conf.js --suite e2e",
+    "makescrshot": "wdio ./wdio.conf.js --suite make_screenshots",
+    "comparescrshot": "wdio ./wdio.conf.js --suite compare_screenshots"
   },
   "eslintConfig": {
     "extends": [
