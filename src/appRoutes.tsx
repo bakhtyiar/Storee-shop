@@ -14,6 +14,7 @@ import Cart from "./routes/cart";
 import OrderMaking from "./routes/orderMaking";
 import OrderCompleted from "./routes/orderCompleted";
 import NewsPost from "./components/NewsPost/NewsPost";
+import {AuthModalContextProvider} from "./contexts/authModal-context/authModal-context";
 
 function AppRoutes() {
     return (
@@ -28,7 +29,7 @@ function AppRoutes() {
             <Route path={routes.newsPost.path + "/:id"} element={<NewsPost/>}/>
             <Route path={routes.register.path} element={<Register/>}/>
             <Route path={routes.login.path} element={<Login/>}/>
-            <Route path={routes.profile.path} element={<Profile/>}/>
+            <Route path={routes.profile.path} element={<AuthModalContextProvider><Profile/></AuthModalContextProvider>}/>
             <Route path={routes.cart.path} element={<Cart/>}/>
             <Route path={routes.orderMaking.path} element={<OrderMaking/>}/>
             <Route path={routes.orderCompleted.path} element={<OrderCompleted/>}/>

@@ -10,6 +10,9 @@ import {updateUser} from "../utils/server-api/user/user";
 import FormTextField from "../components/formikElements/FormTextField";
 import FormSelectField from "../components/formikElements/FormSelectField";
 import {AuthModalContext} from "../contexts/authModal-context/authModal-context";
+import AuthModal from "../components/AuthModal/AuthModal";
+
+//todo : not showing auth form when you not logged in and clicking register or login button
 
 const schema = yup.object().shape({
     avatar: yup.string(),
@@ -49,7 +52,7 @@ const schema = yup.object().shape({
 
 const Profile = () => {
     const {authUserState} = useContext(RootContext);
-    const {onRegister, onLogin} = useContext(AuthModalContext);
+    const {onRegister, onLogin, isShow, onHide} = useContext(AuthModalContext);
     const navigate = useNavigate();
     const [isEditing, setIsEditing] = useState(false);
     const [show, setShow] = useState(false);
@@ -131,6 +134,10 @@ const Profile = () => {
                         Login
                     </Button>
                 </div>
+                <AuthModal
+                    show={isShow}
+                    onHide={onHide}
+                />
             </div>}
             
             {authUserState.isLoggedIn && <Formik
