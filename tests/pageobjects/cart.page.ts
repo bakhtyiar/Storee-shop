@@ -1,7 +1,6 @@
 // @ts-expect-error TS(2451): Cannot redeclare block-scoped variable 'Page'.
 const Page = require("./page");
 
-// @ts-expect-error TS(2451): Cannot redeclare block-scoped variable 'CartPage'.
 class CartPage extends Page {
 
     get productsSection() {
