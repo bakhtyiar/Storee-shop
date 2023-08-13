@@ -213,25 +213,27 @@ runsData.forEach((run: TestIteration) => {
             ).toEqual(0)
         })
 
-    // it(` authed profile full-page and tabbable-page`, async () => {
-    //     await AuthPage.open();
-    //     await AuthPage.showLoginForm();
-    //     // await AuthPage.inputUsername.waitForDisplayed();
-    //     await AuthPage.completeLoginForm("kminchelle", "0lelplR");
-    //     await browser.waitUntil(async () => {
-    //         let pageUrl: string = await browser.getUrl();
-    //         return pageUrl.includes(`${routes['profile']['path']}`);
-    //     }, 5000)
-    //     // @ts-ignore
-    //     await browser.url(`http://localhost:3000${routes['profile']['path']}`);
-    //     // @ts-ignore
-    //     await browser.checkFullPageScreen(`profile-authed-fullPage`, {
-    //         /* some options */
-    //     })
-    //     // @ts-ignore
-    //     await browser.checkTabbablePage(`profile-authed-save-tabbable`, {
-    //         /* some options, use the same options as for checkFullPageScreen */
-    //     })
-    //
-    // })
+        it(` authed profile full-page and tabbable-page`, async () => {
+            await AuthPage.open();
+            await AuthPage.showBurgerMenu(false);
+            await AuthPage.showLoginForm();
+            // await AuthPage.inputUsername.waitForDisplayed();
+            await AuthPage.completeLoginForm("kminchelle", "0lelplR");
+            await browser.waitUntil(async () => {
+                let pageUrl: string = await browser.getUrl();
+                return pageUrl.includes(`${routes['profile']['path']}`);
+            }, 5000)
+            // @ts-ignore
+            await browser.url(`http://localhost:3000${routes['profile']['path']}`);
+            // @ts-ignore
+            await browser.checkFullPageScreen(`profile-authed-fullPage`, {
+                /* some options */
+            })
+            // @ts-ignore
+            await browser.checkTabbablePage(`profile-authed-save-tabbable`, {
+                /* some options, use the same options as for checkFullPageScreen */
+            })
+
+        })
+    })
 })
