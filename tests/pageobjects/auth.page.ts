@@ -5,7 +5,6 @@ const Page = require('./page');
 /**
  * sub-page containing specific selectors and methods for a specific page
  */
-// @ts-expect-error TS(2451): Cannot redeclare block-scoped variable 'AuthPage'.
 class AuthPage extends Page {
     /**
      * define selectors using getter methods
@@ -86,24 +85,34 @@ class AuthPage extends Page {
      * a method to encapsule automation code to interact with the page
      * e.g. to login using username and password
      */
-    async showMenuMobile () {
-        await this.menuButtonMobile.click();
+    async showBurgerMenu (isStrict = true) {
+        if (await this.menuButtonMobile.isDisplayed()) {
+            await this.menuButtonMobile.click();
+        } else if (isStrict && !await this.menuButtonMobile.isDisplayed()) {
+            throw  Error('No clickable menu button');
+        } else {
+            console.log('No any clickable burger menu')
+        }
     }
 
-    async showLoginFormMobile () {
-        await this.loginButtonMobile.click();
+    async showLoginForm () {
+        if (await this.loginButtonMobile.isDisplayed()) {
+            await this.loginButtonMobile.click();
+        } else if (await this.loginButtonDesktop.isDisplayed()){
+            await this.loginButtonDesktop.click();
+        } else {
+            throw Error('No any clickable login button');
+        }
     }
 
-    async showLoginFormDesktop () {
-        await this.loginButtonDesktop.click();
-    }
-
-    async showRegisterFormMobile () {
-        await this.registerButtonMobile.click();
-    }
-
-    async showRegisterFormDesktop () {
-        await this.registerButtonDesktop.click();
+    async showRegisterForm() {
+        if (await this.registerButtonMobile.isDisplayed()) {
+            await this.registerButtonMobile.click();
+        } else if (await this.registerButtonDesktop.isDisplayed()) {
+            await this.registerButtonDesktop.click();
+        } else {
+            throw new Error('No any clickable register button')
+        }
     }
 
     async fillDataLogin(username: any, password: any) {
@@ -124,6 +133,7 @@ class AuthPage extends Page {
     }
 
     async login (username = "kminchelle", password = "0lelplR") {
+        await this.showBurgerMenu(false);
         await this.showLoginForm();
         await this.completeLoginForm(username, password);
     }
