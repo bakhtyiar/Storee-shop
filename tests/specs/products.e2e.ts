@@ -1,4 +1,4 @@
-import {setDesktopScreenSize, setRelevantScreen} from "../integration-helpers/screenSetters";
+import {setRelevantScreen} from "../integration-helpers/screenSetters";
 import {runsData, TestIteration} from "../runs";
 
 const ProductsPage = require("../pageobjects/products.page");
