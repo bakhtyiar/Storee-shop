@@ -22,7 +22,7 @@ export const RootContextProvider = ({
         setTheme((prevState) => (
             {
                 ...prevState,
-                isDark: !prevState.isDark
+                theme: prevState.theme === 'light' ? 'dark' : 'light',
             })
         );
     }
@@ -172,7 +172,7 @@ export const RootContextProvider = ({
             onLogout: logoutUser,
         },
         themeState: {
-            isDark: theme.isDark,
+            theme: theme.theme,
             onSwitchTheme: switchTheme,
         },
         cartState: {
