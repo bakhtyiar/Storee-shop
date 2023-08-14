@@ -9,7 +9,7 @@ const CartProductCard = ({
     product,
     selfIndexInCart
 }: any) => {
-    const {cartState: {onRemoveFromCart, onUpdateQuantity}} = useContext(RootContext);
+    const {cartState: {onRemoveFromCart, onUpdateQuantity}, themeState: {theme}} = useContext(RootContext);
     const [quantity, setQuantity] = useState(product.quantity);
 
     useEffect(() => {
@@ -21,9 +21,10 @@ const CartProductCard = ({
     }, [quantity]);
 
     return (
-        <div className='px-2 py-3 border rounded d-flex flex-row align-items-center text-decoration-none text-black' data-testid='cart-product-card'>
+        <div className='px-2 py-3 border rounded d-flex flex-sm-row flex-column align-items-center text-decoration-none' style={{'color': 'inherit'}} data-testid='cart-product-card'>
             
-            <Link className='w-100 d-flex flex-row text-decoration-none text-black'
+            <Link className='w-100 d-flex flex-row text-decoration-none'
+                  style={{'color': 'inherit'}}
                   to={`${routes.product.path}/${product.id}`}
                   data-testid='product-link'
             >
@@ -46,12 +47,12 @@ const CartProductCard = ({
                 </div>
             </Link>
             
-            <div className='ml-3 d-flex gap-2 flex-column flex-lg-row'>
+            <div className='ml-3 d-flex gap-3 flex-row flex-sm-column flex-lg-row align-self-end align-self-sm-center'>
                 
-                <div className='d-flex'>
+                <div className='d-flex gap-1'>
                     
                     <Button
-                        variant="outline-dark"
+                        variant={theme === 'dark' ? 'outline-light' : 'outline-dark'}
                         onClick={() => {
                             setQuantity((prevState: any) => prevState - 1);
                         }}
@@ -62,6 +63,10 @@ const CartProductCard = ({
                     
                     <Form.Control
                         type="number"
+                        style={{
+                            'maxWidth': '100px',
+                            'width': 'fit-content'
+                        }}
                         value={quantity}
                         placeholder="Quantity"
                         onChange={(e) => {
@@ -71,7 +76,7 @@ const CartProductCard = ({
                     />
                     
                     <Button
-                        variant="outline-dark"
+                        variant={theme === 'dark' ? 'outline-light' : 'outline-dark'}
                         onClick={() => {
                             setQuantity((prevState: any) => prevState + 1);
                         }}
@@ -82,7 +87,7 @@ const CartProductCard = ({
                 </div>
                 
                 <Button
-                    variant='outline-dark'
+                    variant={theme === 'dark' ? 'outline-light' : 'outline-dark'}
                     className='d-flex rounded justify-content-center'
                     onClick={(e) => {
                         e.preventDefault();

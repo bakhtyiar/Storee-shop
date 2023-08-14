@@ -51,7 +51,7 @@ const schema = yup.object().shape({
 });
 
 const Profile = () => {
-    const {authUserState} = useContext(RootContext);
+    const {authUserState, themeState: {theme}} = useContext(RootContext);
     const {onRegister, onLogin, isShow, onHide} = useContext(AuthModalContext);
     const navigate = useNavigate();
     const [isEditing, setIsEditing] = useState(false);
@@ -118,7 +118,8 @@ const Profile = () => {
                 
                 <div className='d-flex justify-content-center mb-4 pb-4'>
                     
-                    <Button variant='outline-dark'
+                    <Button
+                            variant={theme === 'dark' ? 'outline-light' : 'outline-dark'}
                             className='mx-2'
                             onClick={() => onRegister()}
                             data-testid='register-btn-desktop'

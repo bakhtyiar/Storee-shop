@@ -36,7 +36,7 @@ const NewsCard = ({
     }
 
     return (
-        <Link to={routes.newsPost.path + '/' + post.id} className="card h-100 text-decoration-none text-black">
+        <Link to={routes.newsPost.path + '/' + post.id} className="card h-100 text-decoration-none" style={{'color': 'inherit'}}>
 
             {!isLoading && (authorsData!.name !== null || authorsData!.name !== undefined)
                 ?

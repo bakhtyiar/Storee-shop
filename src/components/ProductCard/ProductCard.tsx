@@ -8,10 +8,11 @@ import {RootContext} from "../../contexts/root-context/root-context";
 const ProductCard = ({
     item
 }: any) => {
-    const {cartState: {onAddToCart}} = useContext(RootContext);
+    const {cartState: {onAddToCart}, themeState: {theme}} = useContext(RootContext);
 
     return (
-        <Link className='px-2 py-3 border rounded d-flex flex-column align-items-start text-decoration-none text-black'
+        <Link className='px-2 py-3 border rounded d-flex flex-column align-items-start text-decoration-none'
+              style={{'color': 'inherit'}}
               to={`${routes.product.path}/${item.id}`} key={item.id} data-testid={"product-card"}>
             
             <div className={'bg-image rounded align-self-center'}
@@ -38,7 +39,7 @@ const ProductCard = ({
             </div>
             
             <Button
-                variant='dark'
+                variant={theme === 'dark' ? 'light' : 'dark'}
                 className='w-100'
                 onClick={(e) => {
                     e.preventDefault();
