@@ -1,4 +1,5 @@
 import {IRootContext} from "./initialState.types";
+import {getPreferredColorScheme} from "../../utils/theming";
 
 export const initialState: IRootContext = {
     authUserState: {
@@ -69,7 +70,7 @@ export const initialState: IRootContext = {
         },
     },
     themeState: {
-        isDark: false,
+        theme: getPreferredColorScheme() || 'light',
         onSwitchTheme: () => {
         },
     },

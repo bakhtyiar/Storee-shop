@@ -15,7 +15,7 @@ export interface IAuthUserState extends IUser{
 }
 
 export interface IThemeState {
-    isDark: boolean,
+    theme: 'dark' | 'light',
     onSwitchTheme: Function,
 }
 
