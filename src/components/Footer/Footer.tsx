@@ -1,7 +1,11 @@
-import React from 'react';
-import {Container} from "react-bootstrap";
+import React, {useContext} from 'react';
+import {Container, Form} from "react-bootstrap";
+import {RootContext} from "../../contexts/root-context/root-context";
+import {capitalizeStr} from "../../utils/str/str";
 
 const Footer = () => {
+    const {themeState: {theme, onSwitchTheme}} = useContext(RootContext);
+
     return (
         <Container
             fluid
@@ -9,8 +13,15 @@ const Footer = () => {
             data-testid='footer'
         >
             
-            <Container className='d-flex justify-content-center'>
-                Copyright © 3000, All Rights Reserved
+            <Container className='d-flex justify-content-between'>
+                <span>Copyright © 3000, All Rights Reserved</span>
+                <Form.Check
+                    reverse
+                    type="switch"
+                    id="theme-switch"
+                    label={`${capitalizeStr(theme)} theme`}
+                    onChange={onSwitchTheme}
+                />
             </Container>
         </Container>
     );
