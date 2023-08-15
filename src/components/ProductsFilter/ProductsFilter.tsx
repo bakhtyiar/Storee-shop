@@ -13,15 +13,13 @@ const StyledSection = styled.section`
 `;
 
 const StyledCategoryBtn = styled(Button)`
-  borderRadius: 32px;
-  paddingBottom: '8px';
+  border-radius: 32px;
+  padding-bottom: 8px;
   color: ${props =>
     props.variant === 'primary' ? 'white': 'inherit'
   };
   &:hover {
-    color: ${ props =>
-      props.variant === 'outline-primary' ? 'white' : 'inherit'
-    };
+    color: white;
   }
 `;
 
