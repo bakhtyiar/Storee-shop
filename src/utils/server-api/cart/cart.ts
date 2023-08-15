@@ -15,6 +15,7 @@ export const getCart = async (userId: string | number, url: string = dummyjsonUR
             throw e;
         }
     }
+    res = res.carts ? res.carts[0] : res;
     return res;
 }
 
