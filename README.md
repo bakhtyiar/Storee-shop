@@ -10,7 +10,7 @@ Webstore. SPA on react, formik, bootstrap. API based on dummyjson.
 - Bootstrap
 - jest
 - react-testing-library
-- webdriverio
+- webdriverio w/ e2e and visual regression testing
 
 ## How to try
 You need any cli (cmd, iterm, ...), npm, git on your pc.
