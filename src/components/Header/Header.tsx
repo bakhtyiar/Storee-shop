@@ -17,14 +17,18 @@ const StyledImg = styled.img`
 const Header = () => {
     const {
         authUserState: {isLoggedIn},
-        cartState: {totalQuantity}
+        cartState: {totalQuantity},
+        themeState: {theme}
     } = useContext(RootContext);
 
     const {onRegister, onLogin, onHide, isShow} = useContext(AuthModalContext);
     const {isShow: isShowBurgerMenu, onShow: showBurgerMenu, onHide: hideBurgerMenu} = useContext(BurgerMenuContext);
 
     return (
-        <Navbar bg="dark" variant="dark" sticky="top">
+        <Navbar sticky="top" style={{
+            'backdropFilter': 'blur(2px)',
+            'backgroundColor': theme === 'dark' ? 'rgba(0, 0, 0, 0.9)' : 'rgba(255, 255, 255, 0.9)'
+        }}>
             <Container>
                 <Navbar.Brand as={Link} to={routes.home.path} className='d-flex align-items-center'>
                     <StyledImg
@@ -96,7 +100,7 @@ const Header = () => {
                     }
                     {!isLoggedIn &&
                         <>
-                            <Button variant='outline-light'
+                            <Button variant={theme === 'dark' ? 'outline-light' : 'outline-dark'}
                                     className='mx-2'
                                     onClick={() => onRegister()}
                                     data-testid='register-btn-desktop'

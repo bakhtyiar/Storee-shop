@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Button, Form} from "react-bootstrap";
 import styled from "styled-components";
 import {getCategories} from "../../utils/server-api/products/products";
-import {replaceDashToSpace} from "../../utils/str/str";
+import {capitalizeStr, replaceDashToSpace} from "../../utils/str/str";
 import {ICategories} from "../../utils/server-api/products/products.types";
 
 const StyledSection = styled.section`
@@ -10,6 +10,19 @@ const StyledSection = styled.section`
   flex-wrap: wrap;
   gap: 8px;
   margin: 8px 0;
+`;
+
+const StyledCategoryBtn = styled(Button)`
+  borderRadius: 32px;
+  paddingBottom: '8px';
+  color: ${props =>
+    props.variant === 'primary' ? 'white': 'inherit'
+  };
+  &:hover {
+    color: ${ props =>
+      props.variant === 'outline-primary' ? 'white' : 'inherit'
+    };
+  }
 `;
 
 function ProductsFilter({
@@ -43,20 +56,17 @@ function ProductsFilter({
             
             <StyledSection data-testid="categories-filter">
                 {!isLoading &&
-                    categories.map((item, index) => (<Button
+                    categories.map((item, index) => (<StyledCategoryBtn
                         variant={item === searchParams.get('category') ? "primary" : "outline-primary"}
                         id={`category-btn-${item}`}
                         key={`category-btn-${index}`}
                         onClick={() => handleClick(item)}
                         data-testid={`category-${item}`}
                     >
-                        {replaceDashToSpace(item.toUpperCase())}
-                    </Button>))
+                        {capitalizeStr(replaceDashToSpace(item))}
+                    </StyledCategoryBtn>))
                 }
             </StyledSection>
-            {/*<Button variant="primary" type="submit">*/}
-            {/*    Filter*/}
-            {/*</Button>*/}
         </Form>
     );
 }
